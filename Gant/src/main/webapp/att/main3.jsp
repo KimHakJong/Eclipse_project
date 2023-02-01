@@ -12,8 +12,6 @@
   <link rel="stylesheet" href="att_css/main.css">
 <title>근태관리</title>
 <script>
-	let time = 0; 
-	let starFlag = true; // start클릭시 false
 	let work_today = "#work_today";
 	let work_week = "#work_week";
 	$(document).ready(function(){
@@ -26,6 +24,8 @@
 	}
 	
 	function buttonEvt(id){
+		let time = 0; 
+		let starFlag = true; // start클릭시 false
 		let hour = 0; //시
 		let min = 0;  //분
 		let sec = 0;  //초
@@ -69,9 +69,25 @@
 	      }, 1000);
 	    }
 	  });
+	
 		
-
-	  // 멈출때
+		//퇴근버튼 
+	  $(".btn.btn-outline-primary").click(function(){
+		  if(time != 0){
+		  if(id == "#work_today"){ // 하루근무시간 퇴근하기 
+			  clearInterval(timer);
+			  $('input[name=work_today]').val($('#work_today]').text()); // hiddend에 값저장
+			  starFlag = true;
+			  time = 0;
+		      init();
+		  }
+		  
+		  }
+		  
+	  });
+		
+		
+		//멈출때
 	  $("#pausebtn").click(function(){
 	    if(time != 0){
 	      clearInterval(timer);
@@ -87,13 +103,15 @@
 	      time = 0;
 	      init();
 	    }
-	  });
+	  });	
+		
+
 	}
 </script>
 </head>
 <body>
 <div class="container mt-3">
-          
+          <form action="main.att"  method="post">
                 <div id="swa_header">
                     <div class="row">                    
                             <h2>근태관리</h2>               
@@ -104,28 +122,35 @@
   
                             <span class="swa_dial">
                                 <span class="watch_name">주간<br>총 근무시간</span><br>
-                                <span id="work_week"> 00:00:00</span>
+                                <span id="work_week">00:00:00</span>
+                                <input type="hidden" name="work_week">
                             </span> 
 
                             <span class="swa_dial">
                                  <span class="watch_name">오늘<br>총 근무시간</span><br>
                                  <span id="work_today"> 00:00:00</span>
+                                 <input type="hidden" name="work_today">
                             </span>
 
                             <span class="swa_dial">
                               <span class="watch_name">초과<br>총 근무시간</span><br>
                               <span id="overtime"> 00:00:00</span>
+                              <input type="hidden" name="watch_name">
                             </span>
-                </div>  
+                </div> 
+                
+          
                                
                <div id="workbutton">
                       <div id="gotowork">                 
                      <button  type="button" class="btn btn-outline-primary">출근</button>
                      </div>
                      <div id="leavework">
-                     <button type="button" class="btn btn-outline-primary">퇴근</button>
+                     <button type="submit" class="btn btn-outline-primary">퇴근</button>
                      </div>
                </div>       
+           </form> 
+          
           
            <div id="work">  
            <button  type="button" class="btn btn-success" id="overtime">근태신청</button>
@@ -149,7 +174,7 @@
             </div>
           </div>
      
-     
+
      
      </div>
 
