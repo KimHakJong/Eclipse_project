@@ -66,7 +66,7 @@ $(document).ready(function(){
 		<div id="check1">
 			<label for="remember">
 				<input type="checkbox" name="remember" id="remember" value="store"> ID 저장</label>
-			<a href="findid">아이디/비밀번호 찾기</a>
+			<a href="findid.net">아이디/비밀번호 찾기</a>
 		</div>
 		<div id="check2">
 			<label for="auto">

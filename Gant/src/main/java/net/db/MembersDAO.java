@@ -143,5 +143,96 @@ public class MembersDAO {
 		}
 		return result;
 	}
+
+	public String findIdCheck(String name, String email) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String id = ""; //해당 이름이 존재X
+		try {
+			conn = ds.getConnection();
+			String sql = "select id,name,email from members where name = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, name);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				if(rs.getString("email").equals(email)) {
+					id = rs.getString("id");
+					break;
+				}else {
+					id = "noemail"; //이름에 해당하는 이메일이 존재X
+				}
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null)
+					rs.close();
+			}catch(SQLException se) {
+				se.printStackTrace();
+			}try {
+				if(pstmt!=null)
+					pstmt.close();
+			}catch(SQLException se) {
+				se.printStackTrace();
+			}try {
+				if(conn!=null)
+					conn.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return id;
+	}
+
+	public String findPassCheck(String id, String name, String email) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String pass = ""; //해당아이디X
+		try {
+			conn = ds.getConnection();
+			String sql = "select id,password,name,email from members "
+					   + "where id = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				if(rs.getString("name").equals(name) 
+						&& rs.getString("email").equals(email)) {
+					pass = rs.getString("password");
+				}else if (rs.getString("name").equals(name)
+						&& !rs.getString("email").equals(email)) {
+					pass = "noemail";
+				}else {
+					pass = "noname";
+				}
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null)
+					rs.close();
+			}catch(SQLException se) {
+				se.printStackTrace();
+			}try {
+				if(pstmt!=null)
+					pstmt.close();
+			}catch(SQLException se) {
+				se.printStackTrace();
+			}try {
+				if(conn!=null)
+					conn.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return pass;
+	}
 	
 }

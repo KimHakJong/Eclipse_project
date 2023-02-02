@@ -230,7 +230,7 @@ $(document).ready(function(){
 			
 		}else{
 			checkcert = false;
-			alert("인증번호가 일치하지 않습니다.");
+			alert("인증번호가 틀렸습니다.");
 		}
 	});
 	
@@ -381,6 +381,18 @@ $('#spost').click(function(){
 		if(!checkaddress){
 			alert("주소를 입력하세요");
 			$('#address').focus();
+			return false;
+		}
+		
+		if(!$("#department").val()){
+			alert("부서명을 선택해주세요");
+			$('#department').focus();
+			return false;
+		}
+		
+		if(!$("#position").val()){
+			alert("직급을 선택해주세요");
+			$('#position').focus();
 			return false;
 		}
 	});
