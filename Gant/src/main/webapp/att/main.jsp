@@ -49,7 +49,7 @@
                </div>       
           
            <div id="work">  
-           <button  type="button" class="btn btn-success" id="overtime">근태신청</button>
+           <button  type="button" class="btn btn-success" id="overtimes">근태신청</button>
             <h5>나의 근무 현황</h5>
 		      <div class="progress">
 		       <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="50"
