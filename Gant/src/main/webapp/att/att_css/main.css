@@ -36,7 +36,7 @@ font-size: 15px;
 top:100%;
 
 }
-#overtime,#work_today,#work_week{
+#overtimes,#work_today,#work_week{
  position : absolute;
 font-size: 15px;
 bottom: 100%
@@ -130,7 +130,7 @@ margin: auto;
 width: 80%;
 }
 
-#overtime,#vacation{
+#overtimes,#vacation{
 display: block;
 float: right;
 width: 80px;

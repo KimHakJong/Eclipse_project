@@ -14,16 +14,37 @@
 <script>
 	let work_today = "#work_today";
 	let work_week = "#work_week";
+	let overtime = "#overtime";
 	$(document).ready(function(){
-		 buttonEvt(work_week);
-		 buttonEvt(work_today);
+		work_today_Fun(work_today);//출근버튼 클릭시 주간총근무시간 타이머가 돌아간다.
+		work_week_Fun(work_week);// 출근버튼 클릭시 오늘 총 근무시간 타이머가 돌아간다.
+        
+		setTimeout(function() {
+		overtime_Fun(overtime);
+		}, 32400000); //밀리세컨드로 9시간은 32400000 이다. 9시간이 지나도 퇴근을찍지 않는다면 실행된다. 
+		
 	});
+
+
 	
 	function init(){
 		$("#time").text("00:00:00");
 	}
 	
-	function buttonEvt(id){
+	function end(name){ // 퇴근버튼 이벤트 함수 
+		$("#end").click(function(){
+			  if(time != 0){
+				  clearInterval(timer); // setInterval stop
+				  $('input[name='+id+']').val($('#'+id).text()); // hiddend에 값저장 // DB에 넣을꺼다.
+				  starFlag = true;
+				  time = 0; 
+			  }
+		  });
+	}
+	
+	
+	// 하루 총 근무 타이머 함수
+	function work_today_Fun(id){
 		let time = 0; 
 		let starFlag = true; // start클릭시 false
 		let hour = 0; //시
@@ -32,8 +53,7 @@
 		let timer; // setInterval()
 	
 	  // 출근버튼 
-	  $(".btn.btn-outline-primary").click(function(){
-		  
+	  $("#start").click(function(){
 	    if(starFlag){
 	      starFlag = false;
 	      if(time == 0){ //time이 0이면 시간 초기화
@@ -72,41 +92,135 @@
 	
 		
 		//퇴근버튼 
-	  $(".btn.btn-outline-primary").click(function(){
-		  if(time != 0){
-		  if(id == "#work_today"){ // 하루근무시간 퇴근하기 
-			  clearInterval(timer);
-			  $('input[name=work_today]').val($('#work_today]').text()); // hiddend에 값저장
-			  starFlag = true;
-			  time = 0;
-		      init();
-		  }
-		  
-		  }
-		  
-	  });
+	  end("work_today");
 		
-		
-		//멈출때
-	  $("#pausebtn").click(function(){
-	    if(time != 0){
-	      clearInterval(timer);
-	      starFlag = true;
+	}//work_today_Fun
+
+	
+	
+	
+	// 주간 총 근무타이머 함수
+	function work_week_Fun(id){
+	   let time = 0; //시간을 숫자로 나타낸 변수 
+	   let now = new Date(); // 현재 날짜 및 시간
+       const week_array = ['일', '월', '화', '수', '목', '금', '토'];
+	   let datOfweek = week_array[now.getDay()]; //오늘 요일을 숫자로 반환 일요일 = 0 ,월요일 = 1 ...
+	   console.log("오늘의 요일은 :"+datOfweek); //오늘 요일을 표시 	
+	   
+		if(datOfweek == '월'){// 요일이 월요일이면 time을 0으로지정 : 주간 총 근무시간이기때문에 월요일이면 00:00:00으로 다시시작
+		 time = 0; 
+		}else{ // 월요일이 아니면 기존에 근무타임을 이어나간다. time 변수는 초를 나타낸다
+		let worktimes = $("#work_week").text().split(":"); //기존에 근무 타임을 초로 바꾸는 과정이다.
+		//문자열을 숫자로 
+		let h = parseInt(worktimes[0]); 
+		let m = parseInt(worktimes[1]); 
+		let s = parseInt(worktimes[2]);
+		console.log("시간:"+h+",분:"+m+",초:"+s);
+		//시 분 초 를 초로 변환하는 과정 //시간*60*60 , 분*60 , 초 
+		 time = (h*60*60)+(m*60)+s ;
+		console.log("누적 근무시간 :"+time); //누적 근무시간
+		}
+		let starFlag = true; // start클릭시 false 
+		let hour = 0; //시
+		let min = 0;  //분
+		let sec = 0;  //초
+		let timer; // setInterval()
+	
+	  // 출근버튼 
+	  $("#start").click(function(){
+	    if(starFlag){
+	      starFlag = false;
+	      timer = setInterval(function(){
+	      time++;
+	        
+	      //Math.floor()항상 내림하고 주어진 숫자보다 작거나 같은 가장 큰 정수를 반환합니다.
+	                                   //time = 1(1초)  60(1분)   3600(1시간)
+	        min = Math.floor(time/60); //       0         1       60
+	        hour = Math.floor(min/60);//        0         0        1
+	        sec = time%60;            //        1         0        0
+	        min = min%60;             //        0         1        0
+	
+	        
+	        // 시 분 초 가 1의 자리일때 두번째자리는 0 이 붙는다. 01 : 02 : 13
+	        let th = hour;
+	        let tm = min;
+	        let ts = sec;
+	        if(th<10){
+	        th = "0" + hour;
+	        }
+	        if(tm < 10){
+	        tm = "0" + min;
+	        }
+	        if(ts < 10){
+	        ts = "0" + sec;
+	        }
+	       
+	        $(id).text(th + ":" + tm + ":" + ts);
+	      }, 1000);
 	    }
 	  });
 	
-	  // 리셋할때
-	  $("#stopbtn").click(function(){
-	    if(time != 0){
-	      clearInterval(timer);
-	      starFlag = true;
-	      time = 0;
-	      init();
-	    }
-	  });	
 		
+		//퇴근버튼함수
+	  end("work_week");
+		
+		
+	}//work_week_Fun
+	
+	
+	
+	// 초가근무 근무타이머
+	function overtime_Fun(id){
+		let time = 0; 
+		let starFlag = true; // start클릭시 false
+		let hour = 0; //시
+		let min = 0;  //분
+		let sec = 0;  //초
+		let timer; // setInterval()
+	
+	  // 초가 근무타이머는 click이벤트를 사용하지 않는다.
+	  // setTimeout을 이용하여 9시간(점심시간을 포함한 시간)이 지나면 실행되게 할것이다.
+	    if(starFlag){
+	      starFlag = false;
+	      if(time == 0){ //time이 0이면 시간 초기화
+	        init(); 
+	      }
+	
+	      timer = setInterval(function(){
+	        time++;
+	        
+	      //Math.floor()항상 내림하고 주어진 숫자보다 작거나 같은 가장 큰 정수를 반환합니다.
+	                                   //time = 1(1초)  60(1분)   3600(1시간)
+	        min = Math.floor(time/60); //       0         1       60
+	        hour = Math.floor(min/60);//        0         0        1
+	        sec = time%60;            //        1         0        0
+	        min = min%60;             //        0         1        0
+	
+	        
+	        // 시 분 초 가 1의 자리일때 두번째자리는 0 이 붙는다. 01 : 02 : 13
+	        let th = hour;
+	        let tm = min;
+	        let ts = sec;
+	        if(th<10){
+	        th = "0" + hour;
+	        }
+	        if(tm < 10){
+	        tm = "0" + min;
+	        }
+	        if(ts < 10){
+	        ts = "0" + sec;
+	        }
+	       
+	        $(id).text(th + ":" + tm + ":" + ts);
+	      }, 1000);
+	    }
+	
 
-	}
+	  //퇴근버튼함수
+		  end("overtime");
+		
+	}//overtime_Fun
+	
 </script>
 </head>
 <body>
@@ -122,7 +236,7 @@
   
                             <span class="swa_dial">
                                 <span class="watch_name">주간<br>총 근무시간</span><br>
-                                <span id="work_week">00:00:00</span>
+                                <span id="work_week">02:00:00</span>
                                 <input type="hidden" name="work_week">
                             </span> 
 
@@ -135,7 +249,7 @@
                             <span class="swa_dial">
                               <span class="watch_name">초과<br>총 근무시간</span><br>
                               <span id="overtime"> 00:00:00</span>
-                              <input type="hidden" name="watch_name">
+                              <input type="hidden" name="overtime">
                             </span>
                 </div> 
                 
@@ -143,17 +257,17 @@
                                
                <div id="workbutton">
                       <div id="gotowork">                 
-                     <button  type="button" class="btn btn-outline-primary">출근</button>
+                     <button  type="button" class="btn btn-outline-primary" id="start">출근</button>
                      </div>
                      <div id="leavework">
-                     <button type="submit" class="btn btn-outline-primary">퇴근</button>
+                     <button type="submit" class="btn btn-outline-primary" id="end">퇴근</button>
                      </div>
                </div>       
            </form> 
           
           
            <div id="work">  
-           <button  type="button" class="btn btn-success" id="overtime">근태신청</button>
+           <button  type="button" class="btn btn-success" id="overtimes">근태신청</button>
             <h5>나의 근무 현황</h5>
 		      <div class="progress">
 		       <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="50"
