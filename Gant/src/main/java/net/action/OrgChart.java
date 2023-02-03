@@ -34,6 +34,9 @@ public class OrgChart implements Action {
 		array.add(json4);
 		array.add(json5);
 		array.add(json6);
+		
+		response.setContentType("application/json;charset=utf-8");
+		response.getWriter().print(array);
 		return null;
 		}
 	}
