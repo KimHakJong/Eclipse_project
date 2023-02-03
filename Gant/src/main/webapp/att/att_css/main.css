@@ -36,11 +36,12 @@ font-size: 15px;
 top:100%;
 
 }
-#overtimes,#work_today,#work_week{
+
+/* #overtime,#work_today,#work_week{
  position : absolute;
 font-size: 15px;
 bottom: 100%
-}
+} */
 
 
 .swa_dial{
@@ -130,7 +131,7 @@ margin: auto;
 width: 80%;
 }
 
-#overtimes,#vacation{
+#overtime_apply,#vacation{
 display: block;
 float: right;
 width: 80px;

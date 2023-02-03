@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>    
 <head>
@@ -9,7 +10,7 @@
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-  <link rel="stylesheet" href="att_css/main.css">
+  <link rel="stylesheet" href="att/att_css/main.css">
 <title>근태관리</title>
 <script>
 	let work_today = "#work_today";
@@ -31,16 +32,16 @@
 		$("#time").text("00:00:00");
 	}
 	
-	function end(name){ // 퇴근버튼 이벤트 함수 
+	/* function end(name,id){ // 퇴근버튼 이벤트 함수 
 		$("#end").click(function(){
+			 $("input[name="+name+"]").val("00:00:00"); //input으로 시간 넘기기
 			  if(time != 0){
 				  clearInterval(timer); // setInterval stop
-				  $('input[name='+id+']').val($('#'+id).text()); // hiddend에 값저장 // DB에 넣을꺼다.
 				  starFlag = true;
 				  time = 0; 
 			  }
 		  });
-	}
+	} */
 	
 	
 	// 하루 총 근무 타이머 함수
@@ -92,7 +93,14 @@
 	
 		
 		//퇴근버튼 
-	  end("work_today");
+	  $("#end").click(function(){
+			  if(time != 0){
+				  $("#today").val($("#work_today").text()); //input으로 시간 넘기기
+				  clearInterval(timer); // setInterval stop
+				  starFlag = true;
+				  time = 0; 
+			  }
+		  });
 		
 	}//work_today_Fun
 
@@ -162,8 +170,15 @@
 	
 		
 		//퇴근버튼함수
-	  end("work_week");
-		
+	  //end("week",id);
+	  $("#end").click(function(){
+		  if(time != 0){
+			  $("#week").val($("#work_week").text()); //input으로 시간 넘기기
+			  clearInterval(timer); // setInterval stop
+			  starFlag = true;
+			  time = 0; 
+		  }
+	  });	
 		
 	}//work_week_Fun
 	
@@ -217,15 +232,25 @@
 	
 
 	  //퇴근버튼함수
-		  end("overtime");
+	    $("#end").click(function(){
+			  if(time != 0){
+				  $("#over").val($("#overtime").text()); //input으로 시간 넘기기
+				  clearInterval(timer); // setInterval stop
+				  starFlag = true;
+				  time = 0; 
+			  }
+		  });	
 		
 	}//overtime_Fun
+	
+	
+	
 	
 </script>
 </head>
 <body>
 <div class="container mt-3">
-          <form action="main.att"  method="post">
+          <form method="post" id="send" action="TimeUpdate.att">
                 <div id="swa_header">
                     <div class="row">                    
                             <h2>근태관리</h2>               
@@ -236,25 +261,23 @@
   
                             <span class="swa_dial">
                                 <span class="watch_name">주간<br>총 근무시간</span><br>
-                                <span id="work_week">02:00:00</span>
-                                <input type="hidden" name="work_week">
+                                <span id="work_week">${work_week}</span> 
+                                <input type="hidden" name="week" id="week">                    
                             </span> 
-
+                               
                             <span class="swa_dial">
                                  <span class="watch_name">오늘<br>총 근무시간</span><br>
                                  <span id="work_today"> 00:00:00</span>
-                                 <input type="hidden" name="work_today">
+                                  <input type="hidden" name="today" id="today">                             
                             </span>
 
                             <span class="swa_dial">
                               <span class="watch_name">초과<br>총 근무시간</span><br>
                               <span id="overtime"> 00:00:00</span>
-                              <input type="hidden" name="overtime">
+                               <input type="hidden" name="over" id="over">             
                             </span>
                 </div> 
-                
-          
-                               
+                           
                <div id="workbutton">
                       <div id="gotowork">                 
                      <button  type="button" class="btn btn-outline-primary" id="start">출근</button>
@@ -267,7 +290,7 @@
           
           
            <div id="work">  
-           <button  type="button" class="btn btn-success" id="overtimes">근태신청</button>
+           <button  type="button" class="btn btn-success" id="overtime_apply">근태신청</button>
             <h5>나의 근무 현황</h5>
 		      <div class="progress">
 		       <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="50"
