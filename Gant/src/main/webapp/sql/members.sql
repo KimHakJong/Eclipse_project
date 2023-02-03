@@ -13,3 +13,7 @@ position		varchar2(10),
 profileimg	varchar2(30)
 );
 select * from members;
+
+insert into members (admin,id,password,name,jumin,phone_num,email,post,address,department,position)
+values ('false','choi55','hakjong1','최공사','111218-1111111','010-4514-1233',
+		'tosil0702@naver.com','33332','서울시 관악구','총무부','부장');

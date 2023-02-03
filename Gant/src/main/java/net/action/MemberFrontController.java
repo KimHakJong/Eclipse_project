@@ -41,10 +41,10 @@ public class MemberFrontController extends HttpServlet {
 			action = new LogoutAction(); //유효한 세션 제거 후 로그아웃 알림창 후 로그인화면 이동
 			break;						 //만약 자동로그인 쿠키 살아있는 경우 쿠키 유효시간 설정 0
 		case "/findid.net":
-			action = new FindIdAction();
+			action = new FindIdAction(); //아이디찾기
 			break;
 		case "/findidok.net":
-			action = new FindIdOkAction();
+			action = new FindIdOkAction(); //아이디찾기
 			break;
 		case "/findpass.net":
 			action = new FindPassAction();
@@ -52,6 +52,11 @@ public class MemberFrontController extends HttpServlet {
 		case "/findpassok.net":
 			action = new FindPassOkAction();
 			break;
+		case "/list.net":
+			action = new ListAction();
+			break;
+		case "/orgchart.net":
+			action = new OrgChart();
 		}
 		
 		forward = action.execute(request, response);
