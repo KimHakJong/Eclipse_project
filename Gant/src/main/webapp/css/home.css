@@ -1,0 +1,84 @@
+footer {
+	position: fixed;
+	bottom: 0px;
+	width: 100%;
+	line-height: 3rem;
+	height: 3rem;
+	text-align: center;
+	color: white;
+	background-color: #006CFF;
+	
+}
+
+a { 
+	color : black;
+	text-decoration:none !important 
+}
+
+
+/* 헤더 부분 */
+header { 
+	position: relative;
+	display: block;
+	margin: 15px auto;
+	width: 300px;
+	border: none;
+	height : 150px;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	margin: 0;
+}
+
+/* 왼쪽메뉴와 main 부분 */
+.row {
+/* 	display: flex; */
+/* 	flex-wrap: wrap; */
+}
+
+/* 왼쪽 메뉴버튼 부분 */
+.side {
+	width : 15%;
+	background-color: white;
+	padding: 20px;
+	border: 1px solid black;
+}
+
+
+/* 캘린더,공지사항 부분 */
+.main {
+	position: relative;
+	width : 85%;
+	background-color: white;
+	padding: 20px;
+	border: 1px solid black;
+}
+
+/* 이번주 캘린더 부분 */
+.calendar {
+	position: relative;
+	background-color: white;
+	width: 98%;
+	height: 300px;
+	padding: 20px;
+	border: 1px solid #607d8b73;
+	border-radius: 12px;
+	left : 10px;
+}
+
+/* 공지사항 부분 */
+.notice {
+	position: relative;
+	background-color: white;
+	width: 98%;
+	height: 200px;
+	padding: 20px;
+	border: 1px solid #607d8b73;
+	border-radius: 12px;
+	left : 10px;
+}
