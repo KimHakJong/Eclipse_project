@@ -37,13 +37,13 @@ body {
 
 /* 왼쪽메뉴와 main 부분 */
 .row {
-/* 	display: flex; */
-/* 	flex-wrap: wrap; */
+	display: flex;
+	flex-wrap: wrap;
 }
 
 /* 왼쪽 메뉴버튼 부분 */
 .side {
-	width : 15%;
+	flex : 15%;
 	background-color: white;
 	padding: 20px;
 	border: 1px solid black;
@@ -53,7 +53,7 @@ body {
 /* 캘린더,공지사항 부분 */
 .main {
 	position: relative;
-	width : 85%;
+	flex : 85%;
 	background-color: white;
 	padding: 20px;
 	border: 1px solid black;
