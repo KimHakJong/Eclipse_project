@@ -6,14 +6,22 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.db.Members;
+import net.db.MembersDAO;
+
 public class ChatAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String id = request.getParameter("id");
+		MembersDAO dao = new MembersDAO();
+		Members member = dao.selectForChat(request.getParameter("id"));
 		
-		return null;
+		ActionForward forward = new ActionForward();
+		request.setAttribute("member", member);
+		forward.setPath("chat/chat.jsp");
+		forward.setRedirect(false);
+		return forward;
 	}
 
 }
