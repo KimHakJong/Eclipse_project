@@ -672,4 +672,46 @@ public class MembersDAO {
 		}
 		return result;
 	}
+
+	public Members selectForChat(String id) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Members m = null;
+		try {
+			conn = ds.getConnection();
+			StringBuilder sql = new StringBuilder();
+			sql.append("select name,profileimg from members ");
+			sql.append("where id = ?");
+			pstmt = conn.prepareStatement(sql.toString());
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				m = new Members();
+				m.setName(rs.getString("name"));
+				m.setProfileimg(rs.getString("profileimg"));
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("selectName에러");
+		}finally {
+			try {
+				if(rs!=null)
+					rs.close();
+			}catch(SQLException se) {
+				se.printStackTrace();
+			}try {
+				if(pstmt!=null)
+					pstmt.close();
+			}catch(SQLException se) {
+				se.printStackTrace();
+			}try {
+				if(conn!=null)
+					conn.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return m;
+	}
 }
