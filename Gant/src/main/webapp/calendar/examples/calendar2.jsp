@@ -144,20 +144,23 @@ body {
                                   
                                  console.log(end_date);
                                  console.log(m_end);
+                                 console.log(m_end.getFullYear());
+                                 console.log(m_end.getMonth()+1);
                                  
-                                 if(m_end.getMonth()+1 < 10 && m_end.getMonth()+1 < 10)
+                                 
+                                 if(m_end.getMonth()+1 < 10 && m_end.getDate() < 10)
                                	{
                                 	 var m_end_dt = m_end.getFullYear() + '-0' + (m_end.getMonth()+1) + '-0' + m_end.getDate();	 
                                 }
-                              else if (m_end.getMonth()+1 < 10 && m_end.getMonth()+1 >= 10  )
+                              else if (m_end.getMonth()+1 < 10 && m_end.getDate() >= 10  )
                               {
                             	  var m_end_dt = m_end.getFullYear() + '-0' + (m_end.getMonth()+1) + '-' + m_end.getDate();	  	 
                               }
-                              else if(m_end.getMonth()+1 >= 10 && m_end.getMonth()+1 < 10)
+                              else if(m_end.getMonth()+1 >= 10 && m_end.getDate() < 10)
                               {
                             	  var m_end_dt = m_end.getFullYear() + '-' + (m_end.getMonth()+1) + '-0' + m_end.getDate();
                               }
-                              else if(m_end.getMonth()+1 >= 10 && m_end.getMonth()+1 >= 10)
+                              else if(m_end.getMonth()+1 >= 10 && m_end.getDate() >= 10)
                               {
                             	  var m_end_dt = m_end.getFullYear() + '-' + (m_end.getMonth()+1) + '-' + m_end.getDate();
                               }
@@ -643,7 +646,7 @@ body {
 					</div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-warning" id="addCalendar">추가</button>
+					<button type="button" class="btn btn-warning" id="addCalendar" onClick="close_pop();">추가</button>
 					<button type="button" class="btn btn-secondary"
 						data-dismiss="modal" id="sprintSettingModalClose">취소</button>
 				</div>
