@@ -13,6 +13,8 @@ public class Members {
 	private String department;
 	private String position;
 	private String profileimg;
+	private String hiredate;
+	
 	public String getAdmin() {
 		return admin;
 	}
@@ -84,6 +86,12 @@ public class Members {
 	}
 	public void setProfileimg(String profileimg) {
 		this.profileimg = profileimg;
+	}
+	public String getHiredate() {
+		return hiredate;
+	}
+	public void setHiredate(String hiredate) {
+		this.hiredate = hiredate;
 	}
 	
 }

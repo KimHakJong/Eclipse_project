@@ -47,8 +47,19 @@ public class AttendanceFrontController extends HttpServlet {
 	  case "/TimeUpdate.att":
 		action = new AttendanceTimeUpdateAction();
 		break;
-	
-
+	  case "/Overtime.att":
+			action = new OvertimeAction();
+			break;	
+	  case "/OvertimeRequest.att": 
+		action = new OvertimeRequestAction();
+		    break;
+	  case "/Vacation.att": 
+			action = new VacationAction();
+			break;		
+	  case "/VacationRequest.att": 
+			action = new VacationRequestAction();
+			break;
+			
 	} // switch
      forward = action.execute(request,response);
      

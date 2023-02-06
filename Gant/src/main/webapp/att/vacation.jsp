@@ -44,7 +44,123 @@
                      $("#startDate").datepicker( "option", "maxDate", selectedDate );
                  }    
  
-            });    
+            });  
+            
+            
+            //submit click 이벤트 
+            $(".btn.btn-primary.btn-block").click(function(){
+		    	//공백 검사
+            	if($("#startDate").val() == ""){
+		    		alert('휴가 시작일을 선택하세요.');
+		    		$("#startDate").focus();
+					return false;
+		    	}
+		    	
+            	if($("#endDate").val() == ""){
+		    		alert('휴가 종료일을 선택하세요.');
+		    		$("#endDate").focus();
+					return false;
+		    	}
+            	
+            	if($("#emergency_one").val() == ""){
+		    		alert('비상연락망을 입력하세요');
+		    		$("#emergency_one").focus();
+					return false;
+		    	}
+            	
+            	
+            	if($("#emergency_two").val() == ""){
+		    		alert('비상연락망을 입력하세요');
+		    		$("#emergency_two").focus();
+					return false;
+		    	}
+            	
+            	if($("#emergency_three").val() == ""){
+		    		alert('비상연락망을 입력하세요');
+		    		$("#emergency_three").focus();
+					return false;
+		    	}
+            	
+            	if($("#details").val() == ""){
+		    		alert('세부사항을 입력하세요');
+		    		$("#details").focus();
+					return false;
+		    	}
+         	
+  		  });
+            
+            // 휴가 시작날짜 입력시 유효성 검사
+            $('#startDate').keyup(function(){
+            	if($.trim($(this).val()).length == 8){ // 입력값이 8자리가 되었을때 실행
+            	// 년도4자리 월2자리 일 자리	
+        		const pattern = /^[0-9]{4}(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|[3][01])$/;
+        		const domain = $(this).val();
+        		if(!pattern.test(domain)){
+        			alert('날짜 형식에 맞게 입력하여 주세요');
+        			$(this).val("").focus();
+        		}
+            	}
+        	}); 
+            
+            // 휴가 종료날짜 입력시 유효성 검사
+            $('#endDate').keyup(function(){
+            	if($.trim($(this).val()).length == 8){ // 입력값이 8자리가 되었을때 실행
+            	// 년도4자리 월2자리 일 자리	
+        		const pattern = /^[0-9]{4}(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|[3][01])$/;
+        		const domain = $(this).val();
+        		if(!pattern.test(domain)){
+        			alert('날짜 형식에 맞게 입력하여 주세요');
+        			$(this).val("").focus();
+        		}
+            	}
+        	});
+            
+            //전화번호 입력시 유효성 검사
+            $('#emergency_one').keyup(function(){
+            	if($.trim($(this).val()).length == 3){ // 입력값이 8자리가 되었을때 실행
+            	// 년도4자리 월2자리 일 자리	
+        		const pattern = /^[0-9]{3}$/;
+        		const domain = $(this).val();
+        		if(!pattern.test(domain)){
+        			alert('형식에 맞게 숫자로 입력하여 주세요');
+        			$(this).val("").focus();
+        		}else{
+        			$('#emergency_two').focus();
+        		}
+            	}
+        	});
+            
+            $('#emergency_two').keyup(function(){
+            	if($.trim($(this).val()).length == 4){ // 입력값이 8자리가 되었을때 실행
+            	// 년도4자리 월2자리 일 자리	
+        		const pattern = /^[0-9]{4}$/;
+        		const domain = $(this).val();
+        		if(!pattern.test(domain)){
+        			alert('형식에 맞게 숫자로 입력하여 주세요');
+        			$(this).val("").focus();
+        		}else{
+        			$('#emergency_three').focus();
+        		}
+            	}
+        	});
+            
+            $('#emergency_three').keyup(function(){
+            	if($.trim($(this).val()).length == 4){ // 입력값이 8자리가 되었을때 실행
+            	// 년도4자리 월2자리 일 자리	
+        		const pattern = /^[0-9]{4}$/;
+        		const domain = $(this).val();
+        		if(!pattern.test(domain)){
+        			alert('형식에 맞게 숫자로 입력하여 주세요');
+        			$(this).val("").focus();
+        		}else{
+        			$('#details').focus();
+        		}
+            	}
+        	});
+            
+            
+            
+            
     });
 </script>
 
@@ -75,35 +191,33 @@ width: 20px
 </head>
 <body>
 <div class="container">
-  <form action="BoardAddAction.bo" method="post" name="boardform">
+  <form action="VacationRequest.att" method="post" name="boardform">
     
      <h1>휴가 신청서</h1> 
         
     <div class="form-group">
     <label for="vacation">휴가기간</label>
     <div class="input-group mb-3">
-    <input type="text" class="form-control" name="startDate" id="startDate" placeholder="휴가 시작일을 선택하세요">&nbsp;~&nbsp;
-    <input type="text" class="form-control" name="endDate" id="endDate" placeholder="휴가 종료일을 선택하세요">
+    <input type="text" class="form-control" name="startDate" id="startDate" placeholder="휴가 시작일">&nbsp;~&nbsp;
+    <input type="text" class="form-control" name="endDate" id="endDate" placeholder="휴가 종료일">
    </div>
    </div>
   
     <div class="form-group">
     <label for="emergency">비상연락망</label>
     <div class="input-group mb-3">
-    <input type="text" class="form-control emergency" name="emergency" placeholder="010" maxlength="3"> &nbsp;- &nbsp;
-    <input type="text" class="form-control emergency" name="emergency" placeholder="0000" maxlength="4">&nbsp;- &nbsp;
-    <input type="text" class="form-control emergency" name="emergency" placeholder="0000" maxlength="4">
+    <input type="text" class="form-control emergency" name="emergency_one" id="emergency_one" placeholder="010" maxlength="3"> &nbsp;- &nbsp;
+    <input type="text" class="form-control emergency" name="emergency_two" id="emergency_two" placeholder="0000" maxlength="4">&nbsp;- &nbsp;
+    <input type="text" class="form-control emergency" name="emergency_three" id="emergency_three" placeholder="0000" maxlength="4">
    </div>
    </div>
-   
    
    <div class="form-group">
       <label for="details">세부사항</label>
       <textarea name="details" id="details"   
                 rows="10" class="form-control" ></textarea>
    </div>
-   
-    
+     
     <div class="form-group">
     <button type="submit" class="btn btn-primary btn-block">신청</button>
     </div>

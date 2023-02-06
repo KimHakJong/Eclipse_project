@@ -2,11 +2,18 @@ package att.db;
 
 public class Attendance{
 	private String id;
-	private String overtime;
+	private String starTtime;
+	private String endTime;
+	private String overTime;
 	private String work_today;
 	private String work_week;
+	private String overtime_date;
 	private String overtime_content;
 	private String overtime_reason;
+	private String checkbutton;
+	private String work_date;
+	
+	
 	
 	public String getId() {
 		return id;
@@ -14,11 +21,23 @@ public class Attendance{
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getOvertime() {
-		return overtime;
+	public String getStarTtime() {
+		return starTtime;
 	}
-	public void setOvertime(String overtime) {
-		this.overtime = overtime;
+	public void setStarTtime(String starTtime) {
+		this.starTtime = starTtime;
+	}
+	public String getEndTime() {
+		return endTime;
+	}
+	public void setEndTime(String endTime) {
+		this.endTime = endTime;
+	}
+	public String getOverTime() {
+		return overTime;
+	}
+	public void setOverTime(String overTime) {
+		this.overTime = overTime;
 	}
 	public String getWork_today() {
 		return work_today;
@@ -44,6 +63,27 @@ public class Attendance{
 	public void setOvertime_reason(String overtime_reason) {
 		this.overtime_reason = overtime_reason;
 	}
+	public String getCheckbutton() {
+		return checkbutton;
+	}
+	public void setCheckbutton(String checkbutton) {
+		this.checkbutton = checkbutton;
+	}
+	public String getWork_date() {
+		return work_date;
+	}
+	public void setWork_date(String work_date) {
+		this.work_date = work_date;
+	}
+	public String getOvertime_date() {
+		return overtime_date;
+	}
+	public void setOvertime_date(String overtime_date) {
+		this.overtime_date = overtime_date;
+	}
+	
+	
+	
 	
 
 }
