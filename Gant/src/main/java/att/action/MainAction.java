@@ -40,34 +40,7 @@ public class MainAction implements Action {
 			return null;
 			}
 	  
-		
-		// select == 0 // DB에 id에 해당하는 데이터가 없음을 뜻한다. ->insert
-		// select == 1 // 기존에 데이터를 가져온다. -> getselect()	
-		int select =  attdao.Attselect(id);
-		if(select == 0) {
-			attdao.insert(id);	
-			request.setAttribute("work_week","00:00:00");
-			request.setAttribute("checkbutton","false");
-		}else if(select == 1) {
-			att = attdao.getselect(id); // AttendanceDAO의 메서드를 이용하여 DB에 저장되어있는 정보를 가져온다.
-			
-			// 오늘의 요일을 구한다 -> 주간 총 근무시간은 월요일에 리셋이되어야한다. 월요일이면 work_week 값은 00:00:00이 된다.
-			Calendar rightNow = Calendar.getInstance();
-			// day_of_week 값이(요일이) int 형태로 나타난다. 1 = 일요일, 2 = 월요일 ,3= 화요일 ...7 = 토요일 
-			int day_of_week = rightNow.get(Calendar.DAY_OF_WEEK);
-			if(day_of_week == 2) {//2 = 월요일 이면 리셋
-				request.setAttribute("work_week","00:00:00");
-				request.setAttribute("work_week_hours","00"); // 주간 근무 현황의 % 채우기 용도로 사용한다.
-				
-			}else {
-			request.setAttribute("work_week",att.getWork_week()); // 월요일이 아니라면 기존의 주간 총 근무시간을 가져온다.
-			request.setAttribute("work_week_hours",att.getWork_week().split(":")[0]);
-			
-			}
-			request.setAttribute("checkbutton",att.getCheckbutton()); // 출/퇴근 버튼 활성화 비활성화를 위한 값 
-		}
-		
-		
+
 	    //휴가 갯수 데이터 가져오기
 		//selectVacation == 0 // DB에 id에 해당하는 데이터가 없음을 뜻한다. ->insert
 		// select == 1 // 기존에 데이터를 가져온다. -> 
@@ -131,6 +104,50 @@ public class MainAction implements Action {
 			vac = attdao.VacationGetselect(id);	
 			request.setAttribute("vacation_num",vac.getVacation_num()); //DB에 저장되어있는 휴가 갯수를 보낸다.
 		}
+		
+		
+		
+		// select == 0 // attendance DB에 id에 해당하는 데이터가 없음을 뜻한다. ->insert
+				// select == 1 // 기존에 데이터를 가져온다. -> getselect()	
+				int select =  attdao.Attselect(id);
+				if(select == 0) {
+					attdao.insert(id);	
+					request.setAttribute("work_week","00:00:00");
+					request.setAttribute("checkbutton","false");
+				}else if(select == 1) {
+					att = attdao.getselect(id); // AttendanceDAO의 메서드를 이용하여 DB에 저장되어있는 정보를 가져온다.
+					
+					// 오늘의 요일을 구한다 -> 주간 총 근무시간은 월요일에 리셋이되어야한다. 월요일이면 work_week 값은 00:00:00이 된다.
+					Calendar rightNow = Calendar.getInstance();
+					// day_of_week 값이(요일이) int 형태로 나타난다. 1 = 일요일, 2 = 월요일 ,3= 화요일 ...7 = 토요일 
+					int day_of_week = rightNow.get(Calendar.DAY_OF_WEEK);
+					
+					if(day_of_week == 2) {//2 = 월요일 이면 리셋 하지만 한번만 리셋되어야한다.
+					    int check_work_week = att.getCheck_work_week(); // 리셋 체크 -> 1일때 리셋 2일때 리셋 x
+						
+						    if(check_work_week == 1) { //check_work_week을 이용해서 월요일일때 한번만 리셋
+							request.setAttribute("work_week","00:00:00");
+							request.setAttribute("work_week_hours","00"); // 주간 근무 현황의 % 채우기 용도로 사용한다. 0시간으로 리셋
+							attdao.check_Plus(id); // check_work_week의 값을 2로 만들어준다.
+							
+						    }else {
+						    	request.setAttribute("work_week",att.getWork_week()); // 월요일이 이지만 check_work_week == 2라면 기존의 주간 총 근무시간을 가져온다.
+								request.setAttribute("work_week_hours",att.getWork_week().split(":")[0]);
+						    }
+					    
+					}else {
+				    attdao.check_Minus(id); //check_work_week의 값을 1로 만들어준다.	
+					request.setAttribute("work_week",att.getWork_week()); // 월요일이 아니라면 기존의 주간 총 근무시간을 가져온다.
+					request.setAttribute("work_week_hours",att.getWork_week().split(":")[0]);
+					
+					}
+					
+					request.setAttribute("checkbutton",att.getCheckbutton()); // 출/퇴근 버튼 활성화 비활성화를 위한 값 
+				}
+		
+		
+		
+		
 		
 		request.setAttribute("id",id);
 		forward.setPath("att/attmain.jsp");

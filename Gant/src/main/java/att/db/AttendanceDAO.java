@@ -90,6 +90,7 @@ private DataSource ds;
 					String work_week = rs.getString("work_week");
 					String checkbutton = rs.getString("checkbutton");
 					String work_date = rs.getString("work_date");
+					int check_work_week = rs.getInt("check_work_week");
 					
 
 					System.out.println(work_week);
@@ -101,7 +102,7 @@ private DataSource ds;
 					att.setWork_week(work_week);	
 					att.setCheckbutton(checkbutton);
 					att.setWork_date(work_date);
-					
+					att.setCheck_work_week(check_work_week);
 				
 				}
 				}catch(Exception se) {
@@ -550,6 +551,133 @@ private DataSource ds;
 		return result;
 		
 	}//overtimeUpdate end
+	
+	
+	// check_work_week 값을 2로 만들어준다.
+	public void check_Plus(String id) {
+		 Connection conn = null;
+		 PreparedStatement pstmt = null;
+		 int result = 0;
+		 String sql = " update attendance "
+		 		    + " set check_work_week = 2 "
+		 		    + " where id=? ";
+		
+		 try {
+		    conn = ds.getConnection();
+		    
+		    pstmt =conn.prepareStatement(sql);
+			pstmt.setString(1,id);		
+			result = pstmt.executeUpdate();
+			
+			if(result == 1) {
+            System.out.println("월요일 체크 업데이트 성공");
+			}
+		}catch(Exception ex) {
+			ex.printStackTrace();
+			System.out.println(" check_Plus 에러 :" +ex );
+		}finally {
+			try {
+				if(pstmt != null)
+					pstmt.close();
+			}catch(SQLException e1) {
+				e1.printStackTrace();
+			}
+			try {
+				if (conn != null)
+					conn.close();
+			}catch(SQLException e1) {
+				e1.printStackTrace();
+				}
+	}
+			
+	}//check_Plus
+	
+	
+	// check_work_week 값을 1로 만들어준다.
+	public void check_Minus(String id) {
+		 Connection conn = null;
+		 PreparedStatement pstmt = null;
+		 int result = 0;
+		 String sql = " update attendance "
+		 		    + " set check_work_week = 1 "
+		 		    + " where id=? ";
+		
+		 try {
+		    conn = ds.getConnection();
+		    
+		    pstmt =conn.prepareStatement(sql);
+			pstmt.setString(1,id);		
+			result = pstmt.executeUpdate();
+			
+			if(result == 1) {
+            System.out.println("월요일 체크 업데이트 성공");
+			}
+		}catch(Exception ex) {
+			ex.printStackTrace();
+			System.out.println(" check_Plus 에러 :" +ex );
+		}finally {
+			try {
+				if(pstmt != null)
+					pstmt.close();
+			}catch(SQLException e1) {
+				e1.printStackTrace();
+			}
+			try {
+				if (conn != null)
+					conn.close();
+			}catch(SQLException e1) {
+				e1.printStackTrace();
+				}
+	}
+			
+	}//check_Minus
+	
+
+	
+	//휴가 신청 UPdate
+	public int VacationUpdate(Vacation vc, long vacationDate) {
+		 Connection conn = null;
+		 PreparedStatement pstmt = null;
+		 int result = 0;
+		 String sql = " update vacation "
+		 		    + " set startDate = ? , endDate=? , vacation_num = vacation_num -"+vacationDate+" , "
+		 		    		+ " emergency = ? , details=? "
+		 		    + " where id=? ";
+		
+		 try {
+		    conn = ds.getConnection();
+		    
+		    pstmt =conn.prepareStatement(sql);
+			pstmt.setString(1,vc.getStartDate());	
+			pstmt.setString(2,vc.getEndDate());
+			pstmt.setString(3,vc.getEmergency());
+			pstmt.setString(4,vc.getDetails());
+			pstmt.setString(5,vc.getId());
+			result = pstmt.executeUpdate();
+			
+			if(result == 1) {
+            System.out.println(" 휴가신청 성공");
+			}
+		}catch(Exception ex) {
+			ex.printStackTrace();
+			System.out.println(" 휴가신청 성공 :" +ex );
+		}finally {
+			try {
+				if(pstmt != null)
+					pstmt.close();
+			}catch(SQLException e1) {
+				e1.printStackTrace();
+			}
+			try {
+				if (conn != null)
+					conn.close();
+			}catch(SQLException e1) {
+				e1.printStackTrace();
+				}
+	}
+		return result;
+	}//check_Minus
+	
 	
 	
 	
