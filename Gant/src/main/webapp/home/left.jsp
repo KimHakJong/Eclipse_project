@@ -140,11 +140,12 @@ body {
 }
 
 
-/* 서치 박스*/
+/* 검색 박스*/
 #mySearch {
-  	position: fixed;
+  	position: relative;
+    top: -10px;
     left: 14px;
-    width: 13.3%;
+    width: 90%;
     font-size: 17px;
     padding: 11px;
     border: 3px solid #006CFF;
@@ -159,14 +160,14 @@ body {
 }
 /*메뉴안의 글자*/
 #myMenu li a {
-  padding: 12px;
+  	padding: 12px;
     text-decoration: none;
     color: black;
     font-size: 20px;
     font-weight: 800;
     display: block;
     position: relative;
-    top: 45px;
+    top: -10px;
     text-align: center;
     background-color: #006CFF;
     color: white;
@@ -228,8 +229,6 @@ li {
 <!-- 	전체적으로 링크 아직 안걸어놓음 -->
 	<div class="my">
 		<a href="#">
-<!-- 			프로필 사진 현재는 고정으로 해놓음 -->
-<!-- 			유동적으로 바꿔야됨 -->
 	    	<img src="image/ice4.png" alt="profile" id="profile">
 	   	</a>
 	   	
