@@ -12,7 +12,7 @@ public class Attendance{
 	private String overtime_reason;
 	private String checkbutton;
 	private String work_date;
-	
+	private int check_work_week;
 	
 	
 	public String getId() {
@@ -80,6 +80,12 @@ public class Attendance{
 	}
 	public void setOvertime_date(String overtime_date) {
 		this.overtime_date = overtime_date;
+	}
+	public int getCheck_work_week() {
+		return check_work_week;
+	}
+	public void setCheck_work_week(int check_work_week) {
+		this.check_work_week = check_work_week;
 	}
 	
 	
