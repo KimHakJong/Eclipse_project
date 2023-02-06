@@ -1,5 +1,3 @@
-drop table members cascade constraints purge;
-
 create table members(
 admin 		varchar2(5) check (admin in ('true','false')),
 id		varchar2(15) PRIMARY KEY,
