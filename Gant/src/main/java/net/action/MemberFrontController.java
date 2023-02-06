@@ -41,22 +41,29 @@ public class MemberFrontController extends HttpServlet {
 			action = new LogoutAction(); //유효한 세션 제거 후 로그아웃 알림창 후 로그인화면 이동
 			break;						 //만약 자동로그인 쿠키 살아있는 경우 쿠키 유효시간 설정 0
 		case "/findid.net":
-			action = new FindIdAction(); //아이디찾기
+			action = new FindIdAction(); //아이디찾기 화면 이동
 			break;
 		case "/findidok.net":
-			action = new FindIdOkAction(); //아이디찾기
-			break;
-		case "/findpass.net":
+			action = new FindIdOkAction();  //입력한 이름과 이메일을 조회 후 없으면 알림창 뜨면서 뒤로가기
+			break;							//조회결과 일치: 이름, 아이디값을 findidok.jsp로 보냄
+		case "/findpass.net":				//비밀번호찾기 화면 이동
 			action = new FindPassAction();
 			break;
-		case "/findpassok.net":
-			action = new FindPassOkAction();
+		case "/findpassok.net":				 //입력한 아이디,이름,이메일 조회 후 일치하면 id와 알려줄 비밀번호값 findpassok.jsp로 보낸다.
+			action = new FindPassOkAction(); //불일치하면 불일치한 값 알림창으로 알려주고 뒤로가기
 			break;
-		case "/list.net":
+		case "/list.net":				//한페이지당 보여줄 개수, 현재 페이지,검색필드, 검색어확인 후 시작 끝 최대 페이지와 해당회원 목록 보냄
 			action = new ListAction();
 			break;
-		case "/orgchart.net":
-			action = new OrgChart();
+		case "/orgchart.net":			//주소록에 include할 조직도 화면
+			action = new OrgChart();	//부서별 이름을 조회 후 Json객체에 담음	
+			break;
+		case "/detail.net":
+			action = new DetailAction();
+			break;
+		case "/delete.net":
+			action = new DeleteAction();
+			break;
 		}
 		
 		forward = action.execute(request, response);

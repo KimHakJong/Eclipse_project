@@ -1,5 +1,8 @@
 package net.db;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Members {
 	private String admin;
 	private String id;
@@ -42,6 +45,34 @@ public class Members {
 	}
 	public void setJumin(String jumin) {
 		this.jumin = jumin;
+	}
+	
+	public String getBirth() {
+		//현재 년도 뒤자리 2개 추출
+		SimpleDateFormat sd = new SimpleDateFormat("yyyy");
+		int nowyear = Integer.parseInt(sd.format(new Date()).substring(2,4));
+		
+		int ytest = Integer.parseInt(jumin.substring(0,2));
+		String year;
+		if(ytest <= nowyear) {
+			year = "20" + jumin.substring(0,2) + "년 ";
+		}else {
+			year = "19" + jumin.substring(0,2) + "년 ";
+		}
+		
+		String mon;
+		if(jumin.substring(2,3).equals("0"))
+			mon = jumin.substring(3,4) + "월 ";
+		else
+			mon = jumin.substring(2,4) + "월 ";
+		
+		String day;
+		if(jumin.substring(4,5).equals("0"))
+			day = jumin.substring(5,6) + "일";
+		else
+			day = jumin.substring(4,6) + "일";
+		
+		return year+mon+day;
 	}
 	public String getPhone_num() {
 		return phone_num;

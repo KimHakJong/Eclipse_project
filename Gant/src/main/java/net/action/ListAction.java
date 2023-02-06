@@ -7,6 +7,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.JsonObject;
+
 import net.db.Members;
 import net.db.MembersDAO;
 
@@ -17,7 +19,20 @@ public class ListAction implements Action {
 			throws ServletException, IOException {
 		ActionForward forward = new ActionForward();
 		
+		
 		MembersDAO dao = new MembersDAO();
+		
+		//출퇴근 표시아이콘을 위한 코드 (ajax로 처리)
+		if(request.getParameter("name") != null) { //ajax로 키 name이 넘어오면
+			String name = request.getParameter("name");
+			String department = request.getParameter("department");
+			String phone_num = request.getParameter("phone_num");
+			JsonObject json = dao.checkCommute(name,department,phone_num);
+			response.setContentType("application/json;charset=utf-8");
+			System.out.println(json.toString());
+			response.getWriter().print(json);
+			return null;
+		}
 		
 		int page = 1; //현재 페이지 기본값
 		
@@ -51,6 +66,12 @@ public class ListAction implements Action {
 		
 		if (endpage > maxpage) endpage=maxpage;
 		
+		//관리자와 인사부는 삭제버튼 보이기 위한 코드
+		String id = (String) request.getSession().getAttribute("id");
+		String isadminhuman = dao.isadminhuman(id);
+		request.setAttribute("isadminhuman", isadminhuman);
+		
+		//테이블조회를 위한 코드
 		request.setAttribute("maxpage", maxpage);
 		request.setAttribute("startpage", startpage);
 		request.setAttribute("endpage", endpage);
