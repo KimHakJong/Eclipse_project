@@ -32,16 +32,10 @@ body{
 
 .watch_name{
  position : absolute;
-font-size: 15px;
+font-size: 13px;
 top:100%;
 
 }
-
-/* #overtime,#work_today,#work_week{
- position : absolute;
-font-size: 15px;
-bottom: 100%
-} */
 
 
 .swa_dial{
@@ -64,8 +58,8 @@ bottom: 100%
 	position: relative;
 	display: inline-block;
 	top: 50%;
-	transform: translateY(-50%);
-	font-weight: 700;
+	transform: translateY(-100%);
+	font-weight: 600;
 }
 
 
@@ -131,14 +125,18 @@ margin: auto;
 width: 80%;
 }
 
-#overtime_apply,#vacation{
+#overtime_request,#vacation_request{
 display: block;
 float: right;
-width: 80px;
+width: 86px;
 height: 28px;
 font-size: 10px;
 }
 h5{
 margin-top: 10px;
+margin-bottom: 10px;
+font-size: 14px;
+font-weight: 700;
 text-align: center;
+margin-left: 78px;	
 }
