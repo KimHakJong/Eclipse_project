@@ -1,3 +1,5 @@
+drop table members cascade constraints purge;
+
 create table members(
 admin       varchar2(5) check (admin in ('true','false')),
 id      varchar2(15) PRIMARY KEY,
@@ -11,6 +13,6 @@ address     varchar2(60),
 department    varchar2(15),
 position    varchar2(10),
 profileimg   varchar2(30),
-HIREDATE    varchar2(8) default to_char(SYSDATE, 'YYYYMMDD') not null -- 입사일
+hiredate    varchar2(8) default to_char(SYSDATE, 'YYYYMMDD') not null -- 입사일
+
 );
-select * from members;
