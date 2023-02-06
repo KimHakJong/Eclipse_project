@@ -12,7 +12,7 @@ public class MainAction implements Action{
 		
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(false);
-		forward.setPath("home/home.jsp");
+		forward.setPath("home/main.jsp");
 		return forward;
 		
 	}
