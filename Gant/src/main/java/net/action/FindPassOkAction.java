@@ -45,7 +45,7 @@ public class FindPassOkAction implements Action {
 		
 		return null;
 	}
-	
+
 	public static void samecode(PrintWriter out, String message) {
 		out.println("<script>");
 		out.println("alert('입력한 " + message + " 존재하지 않습니다.');");

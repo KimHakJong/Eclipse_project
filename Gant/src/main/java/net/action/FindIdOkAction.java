@@ -43,7 +43,7 @@ public class FindIdOkAction implements Action {
 			forward.setRedirect(false);
 			return forward;
 		}
-		return null;
+		return null; 
 	}
 
 }

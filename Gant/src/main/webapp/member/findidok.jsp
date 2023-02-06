@@ -25,7 +25,7 @@ button{height:50px; width:200px;
 #logbtn{float:left; background:#00B50B; opacity:0.8}
 #logbtn:hover{opacity:1}
 
-#findpassbtn{float:right; background:#dc3545}
+#findpassbtn{float:right; background:#dc3545}#dc3545#BD2130
 #findpassbtn:hover{background:#BD2130}
 </style>
 <script>

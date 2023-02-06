@@ -11,6 +11,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 public class MembersDAO {
@@ -435,11 +436,11 @@ public class MembersDAO {
 		return list;
 	}
 
-	public JsonObject selectByDname(String dname) {
+	public String selectByDname(String dname) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		JsonObject json = new JsonObject();
+		String names = "";
 		try {
 			conn = ds.getConnection();
 			String sql = "select name from members "
@@ -448,17 +449,63 @@ public class MembersDAO {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, dname);
 			rs = pstmt.executeQuery();
-			String names="";
 			
-			String comma=",";
 			while(rs.next()) {
-				if(rs.isLast())
-					comma="";
-				names += rs.getString("name") + comma;
+				names += rs.getString("name") + ",";
 			}
 			
-			if(!names.equals("")) {
-				json.addProperty(dname, names);
+		}catch(Exception ex) {
+			ex.printStackTrace();
+			System.out.println("selectByDname에러");
+		}finally {
+			try {
+			if(rs!=null)
+				rs.close();
+			}catch(SQLException se) {
+				se.printStackTrace();
+			}try {
+				if(pstmt!=null)
+					pstmt.close();
+			}catch(SQLException se) {
+				se.printStackTrace();
+			}try {
+				if(conn!=null)
+					conn.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return names;
+	}
+
+	public JsonObject memberDetail(String name) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		JsonObject json = new JsonObject();
+		try {
+			conn = ds.getConnection();
+			String sql = "select profileimg, name, department, position, jumin, "
+					+ "phone_num, email, address from members "
+					+ "where name = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, name);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				
+				Members m = new Members();
+				json.addProperty("profileimg", rs.getString("profileimg"));
+				json.addProperty("name",rs.getString("name"));
+				json.addProperty("department",rs.getString("department"));
+				json.addProperty("position",rs.getString("position"));
+			
+				m.setJumin(rs.getString("jumin"));
+				json.addProperty("birth",m.getBirth()); //주민번호를 생년월일로 변환
+				
+				json.addProperty("phone_num",rs.getString("phone_num"));
+				json.addProperty("email",rs.getString("email"));
+				json.addProperty("address",rs.getString("address"));
 			}
 		}catch(Exception ex) {
 			ex.printStackTrace();
@@ -484,4 +531,145 @@ public class MembersDAO {
 		return json;
 	}
 	
+	public JsonObject checkCommute(String name, String department, String phone_num) { //출퇴근표시아이콘을위한 메소드
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		JsonObject json = new JsonObject();
+		try {
+			conn = ds.getConnection();
+			conn.setAutoCommit(false);
+
+			//해당 이름,부서명,폰번호에 해당하는 id값 추출
+			String sql1 = "select id from members "
+					    + "where name = ? "
+					    + "and department = ? "
+					    + "and phone_num = ?";
+			
+			pstmt = conn.prepareStatement(sql1);
+			pstmt.setString(1, name);
+			pstmt.setString(2, department);
+			pstmt.setString(3, phone_num);
+			rs = pstmt.executeQuery();
+			String id="";
+			if(rs.next()) {
+				id = rs.getString("id");
+			}
+			pstmt.close();
+			rs.close();
+			
+			StringBuilder sql2 = new StringBuilder();
+			sql2.append("select checkbutton ");
+			sql2.append("from attendance ");
+			sql2.append("where id = ?");
+			
+			pstmt = conn.prepareStatement(sql2.toString());
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				json.addProperty("check", rs.getString("checkbutton"));
+				conn.commit();
+			}
+		}catch(Exception ex) {
+			ex.printStackTrace();
+			try {
+				if(conn != null)
+					conn.rollback();
+				System.out.println("checkCommute()에러");
+			}catch(SQLException e1) {
+				e1.printStackTrace();
+			}
+		}finally {
+			try {
+				if(rs!=null)
+					rs.close();
+			}catch(SQLException se) {
+				se.printStackTrace();
+			}try {
+				if(pstmt!=null)
+					pstmt.close();
+			}catch(SQLException se) {
+				se.printStackTrace();
+			}try {
+				if(conn!=null) {
+					conn.setAutoCommit(true);
+					conn.close();
+				}
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return json;
+	}
+	
+	public String isadminhuman(String id) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String adminhuman = "";
+		try {
+			conn = ds.getConnection();
+			String sql = "select admin, department from members "
+					   + "where id = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				if(rs.getString("admin").equals("true") || rs.getString("department").equals("인사부")) {
+					adminhuman = "true";
+				}
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null)
+					rs.close();
+			}catch(SQLException se) {
+				se.printStackTrace();
+			}try {
+				if(pstmt!=null)
+					pstmt.close();
+			}catch(SQLException se) {
+				se.printStackTrace();
+			}try {
+				if(conn!=null)
+					conn.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return adminhuman;
+	}
+
+	public int delete(String name, String department, String phone_num) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			conn = ds.getConnection();
+			String sql = "delete from members "
+					   + "where name = ? and department = ? and phone_num = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, name);
+			pstmt.setString(2, department);
+			pstmt.setString(3, phone_num);
+			result = pstmt.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(pstmt!=null)
+					pstmt.close();
+			}catch(SQLException se) {
+				se.printStackTrace();
+			}try {
+				if(conn!=null)
+					conn.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
 }
