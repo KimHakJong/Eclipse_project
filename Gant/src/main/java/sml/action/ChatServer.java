@@ -1,11 +1,7 @@
 package sml.action;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.servlet.http.HttpServlet;
 import javax.websocket.OnClose;
@@ -15,6 +11,8 @@ import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
+import sml.db.Chat;
+
 @ServerEndpoint("/ChatServer")
 public class ChatServer extends HttpServlet {
 	
@@ -23,7 +21,12 @@ public class ChatServer extends HttpServlet {
        
 	@OnMessage
 	public void onMessage(String message, Session session){
+		Chat chat = new Chat();
 		System.out.println("receive:"+message);
+		String[] dividMessage = message.split("||");
+		chat.setChatimg(dividMessage[0]);
+		chat.setName(dividMessage[1]);
+		chat.setContents(message);
 		try {
 			synchronized (sessionList) {
 				for(Session s : sessionList) {

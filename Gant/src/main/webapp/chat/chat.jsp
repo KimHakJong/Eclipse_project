@@ -18,8 +18,8 @@
 #myinfo>img{width:45px; height:45px; float:left;margin-right:20px; border-radius:50%}
 #myinfo>div:nth-child(2){width:400px;font-weight:bold; margin-bottom:5px}
 #myinfo>div:nth-child(3){width:400px; margin-top:5px}
-.main{border:1px solid #DBDBDB; border-radius:2px; background:white; height:345px}
-#messageWindow2{padding:12px; height:18em; overflow:auto;}
+.main{border:1px solid #DBDBDB; border-radius:2px; background:white; height:80%}
+#messageWindow2{padding:12px; height:78%; overflow:auto;}
 
 .username{padding:3px; margin-left:3px}
 
@@ -34,8 +34,8 @@
 #bottombox{position:relative; height:74px; padding:12px;margin-top:7px}
 #inputMessage {width: 94%;  display:inline-block;
 			   border:1px solid #DBDBDB; border-radius:25px; margin:0 auto;
-			   height:40px; padding:10px 20px; font-size:14px; position:absolute; left:15px}			 
-button{background:transparent; border:none; outline:none; position:absolute; right:18px;top:16px}
+			   height:40px; padding:10px 20px; font-size:14px; position:absolute; left:3%}			 
+button{background:transparent; border:none; outline:none; position:absolute; right:5%;top:16px}
 button>img{width:30px;height:30px;}
 
 </style>
@@ -43,7 +43,7 @@ button>img{width:30px;height:30px;}
 <body>
 <div class="out">
 	<div id="myinfo">
-	  <img src="member/image/defaultprofile.png"><div>나</div><div>${member.name}</div>
+	  <img src="memberupload/${member.profileimg}"><div>나</div><div>${member.name}</div>
 	</div>
 <!-- onkeydown을 통해서 엔터키로도 입력되도록 설정. -->
 
@@ -90,6 +90,7 @@ button>img{width:30px;height:30px;}
 	// OnClose는 웹 소켓이 끊겼을 때 동작하는 함수.
 	function onClose(event){
 		webSocket.send("${member.name} 님이 채팅방을 나가셨습니다.\n");
+		webSocket.close();
 	}
 	
 	// OnMessage는 클라이언트에서 서버 측으로 메시지를 보내면 호출되는 함수
@@ -108,7 +109,7 @@ button>img{width:30px;height:30px;}
 				let username = "<div class='username'>"+ message[0] + "</div>";
 				
 				$('#messageWindow2').append(username);
-
+			
 				re_send = message[0];
 			}
 		
@@ -133,7 +134,7 @@ button>img{width:30px;height:30px;}
 		if($('#inputMessage').val()!=""){
 			
 			//	서버에 보낼때 날아가는 값.
-			webSocket.send("${member.name}|\|" + $('#inputMessage').val());
+			webSocket.send("${member.profileimg}|\|${member.name}|\|" + $('#inputMessage').val());
 			console.log("${member.name}|\|" + $('#inputMessage').val());
 			// 채팅화면 div에 붙일 내용
 			let sendmessage = "<div class='sendmessage'>"+$("#inputMessage").val()+"</div>";
