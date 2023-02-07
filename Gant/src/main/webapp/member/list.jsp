@@ -11,6 +11,7 @@
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
+<link href="css/home.css" rel="stylesheet" type="text/css">
 <meta charset="UTF-8">
 <title>GANT</title>
 <style>
@@ -191,6 +192,15 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
+	<header>
+		<jsp:include page="../home/header.jsp" />
+	</header>
+
+	<div class="row">
+		<div class="side">
+			<jsp:include page="../home/left.jsp" />
+		</div>
+	
 <aside>
 <jsp:include page="orgchart.jsp"/>
 </aside>
@@ -375,6 +385,12 @@ $(document).ready(function(){
       <h1>검색된 회원은 존재하지 않습니다.</h1>
 	</div>
     </c:if>  
- </div>   
+ </div><%--list end --%>
+ 	</div>
+
+
+	<footer>
+		<jsp:include page="../home/bottom.jsp" />
+	</footer>
 </body>
 </html>
