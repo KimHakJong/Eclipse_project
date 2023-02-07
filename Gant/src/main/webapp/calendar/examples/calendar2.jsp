@@ -210,6 +210,11 @@ body {
 </head>
 
 <body>
+	<div class="row">
+		<div class="side">
+			<jsp:include page="../home/left.jsp" />
+		</div>
+	</div>
 
 	<div id='calendar'></div>
 
