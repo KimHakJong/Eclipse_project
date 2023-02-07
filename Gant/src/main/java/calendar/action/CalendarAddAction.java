@@ -20,7 +20,7 @@ public class CalendarAddAction implements Action {
 		CalendarBean cal = new CalendarBean();
 		
 		int check = 0;
-		
+		 
 		String id = request.getParameter("id");
 		String start = request.getParameter("start");
 		String end = request.getParameter("end");
