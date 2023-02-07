@@ -27,18 +27,18 @@ public class CalendarFrontController extends javax.servlet.http.HttpServlet {
 		String command = RequestURI.substring(contextPath.length());
 		System.out.println("command = " + command);
 		
-		int a = 1;
-		System.out.println("======작업하나 완료했습니다.======="+a);
-		a++;
 	
 		
 		ActionForward forward = null;
 		Action action = null;
 		switch(command) 
 		{
-			case "/project_calendarallSave.cal":
-					action = new CalAllsaveAction();
+			case "/main.calendar":
+					action = new CalendarAction();
 					break;
+			case "/add.calendar":
+				action = new CalendarAddAction();
+				break;
 				
 		}//switch end
 				

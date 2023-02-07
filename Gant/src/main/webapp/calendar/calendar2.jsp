@@ -5,9 +5,8 @@
 <%
 request.setCharacterEncoding("utf-8");
 String sessionId = (String) (session.getAttribute("id"));
-String sessionNm = (String) (session.getAttribute("nm"));
 
-sessionId = "ceo";
+sessionId = "id";//임시로 id설정
 
 System.out.println(sessionId);
 
@@ -20,11 +19,15 @@ if (sessionId == null || sessionId.equals("null")) {
 <!DOCTYPE html>
 <html>
 <head>
+
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
+*{font-family:"noto sans", sans-serif;}
 body {
 	margin: 40px 10px;
 	padding: 0;
-	font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+	
 	font-size: 14px;
 }
 
@@ -40,13 +43,14 @@ body {
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <!-- bootstrap 4 -->
-<link rel="stylesheet"
-	href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-
+	
+	
 <script
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	
 
 <!-- fullcalendar -->
 
@@ -54,6 +58,7 @@ body {
 	rel='stylesheet' />
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/calendar/lib/main.js"></script>
+	
 
 <script>
 
@@ -210,6 +215,12 @@ body {
 </head>
 
 <body>
+
+	<header>
+		<jsp:include page="../home/header.jsp" />
+	</header>
+
+
 
 	<div id='calendar'></div>
 
