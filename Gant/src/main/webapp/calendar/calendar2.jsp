@@ -21,10 +21,13 @@ if (sessionId == null || sessionId.equals("null")) {
 <head>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
+*{font-family:"noto sans", sans-serif;}
 body {
 	margin: 40px 10px;
 	padding: 0;
-	font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+	
 	font-size: 14px;
 }
 
@@ -55,6 +58,7 @@ body {
 	rel='stylesheet' />
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/calendar/lib/main.js"></script>
+	
 
 <script>
 
@@ -211,6 +215,12 @@ body {
 </head>
 
 <body>
+
+	<header>
+		<jsp:include page="../home/header.jsp" />
+	</header>
+
+
 
 	<div id='calendar'></div>
 
