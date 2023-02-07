@@ -16,4 +16,3 @@ hiredate    varchar2(8) default to_char(SYSDATE, 'YYYYMMDD') not null -- 입사�
 );
 
 
-drop table members cascade constraints purge;
