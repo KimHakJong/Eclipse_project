@@ -149,7 +149,7 @@
 	      let h = Number(work_week_hours);
 	      let work_percent = Math.floor(h/45*100); // 전체값의 일부값은 = 일부값/전체값*100 -> 퍼센트 구하는 공식
 	      $("#work_percent").css({"width":work_percent+"%"});
-	      $("#work_percent").text(work_percent+"%");
+	      $("#my_week").text("나의 주간 근무 현황 ("+work_percent+"%)");
 	      
 	      
 	   // 나의 휴가 현황(%) -> 기본 휴가 15개로 산정한다. 
@@ -157,7 +157,7 @@
 	      let vnum = Number(vacation_num);
 	      let vacation_percent = Math.floor(vnum/15*100); // 포함값/전체값*100 -> 퍼센트 구하는 공식
 	      $("#vacation_percent").css({"width":vacation_percent+"%"});
-	      $("#vacation_percent").text("남은 휴가 갯수:"+vacation_num);
+	      $("#my_vacation").text("나의 휴가 현황 (남은 휴가 갯수:"+vacation_num+")");
 	      
 	     // 휴가신청 버튼 이벤트 팝업창 생성
 		  $("#vacation_request").click(function(){		    	
@@ -188,27 +188,24 @@
 		
 		<div class="main">
 			<div class="container mt-3">
-
-                <div id="swa_header">
-                    <div class="row">                    
-                            <h2>근태관리</h2>               
-                    </div>
-                </div>
-                
+               
+              
+               
                 <div class="watch">            
-  
+		               <div id="watch_names">
+		               <span class="watch_name">&nbsp;주간 총 근무시간</span>
+		               <span class="watch_name">&nbsp;오늘 총 근무시간</span>
+		               <span class="watch_name">초과 총 근무시간</span>
+		               </div>
                             <span class="swa_dial">
-                                <span class="watch_name">주간<br>총 근무시간</span><br>
                                 <span id="work_week">${work_week}</span>                     
                             </span> 
                                
                             <span class="swa_dial">
-                                 <span class="watch_name">오늘<br>총 근무시간</span><br>
                                  <span id="work_today">00:00:00</span>                            
                             </span>
 
                             <span class="swa_dial">
-                              <span class="watch_name">초과<br>총 근무시간</span><br>
                               <span id="overtime">00:00:00</span>           
                             </span>
                 </div> 
@@ -225,7 +222,7 @@
           
            <div id="work">  
            <button  type="button" class="btn btn-success" id="overtime_request">초과근무신청</button>
-            <h5>나의 주간 근무 현황</h5>
+            <h6 id="my_week">나의 주간 근무 현황</h6>
 		      <div class="progress">
 		       <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="50"
 		        id="work_percent" aria-valuemin="0" aria-valuemax="100" >
@@ -236,7 +233,7 @@
           
            <div id="work" class="vacationbox">  
            <button  type="button" class="btn btn-success" id="vacation_request">휴가신청</button>
-            <h5>나의 휴가 현황</h5>
+            <h6 id="my_vacation">나의 휴가 현황</h6>
 		      <div class="progress">
 		       <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="50"
 		       id="vacation_percent"  aria-valuemin="0" aria-valuemax="100" >

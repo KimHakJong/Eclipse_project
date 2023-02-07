@@ -92,11 +92,23 @@ public class AttendanceTimeUpdateAction implements Action {
 			long todaywork = (end.getTime()+32400000) - (start.getTime()+32400000);
 			
 			//만약 당일에 퇴근버튼을 클릭하지 않고 다음날 퇴근버튼을 클릭했다면 출근시간보다 퇴근시간이 빨라 ms가 음수 (-) 형태로 나올 가능성이 있다.
-			//그럴때는 0으로 계산하여준다. 즉 퇴근버튼을 클릭하지 못한 날은 근무시간에 들어가지 못하는것이다.
-			if( 0 > todaywork) {
+			//또한 오늘날짜와 출근 날짜가 다르다면 그것또한 퇴근버튼을 클릭하지 않은것이다. 이럴때는 퇴근날짜를 클릭하지 않은 날은 0시간으로 누적되게 한다.
+			
+			//출근을 클릭했을때 년 월일
+			String last_Work_date = att.getWork_date();
+			
+		    //오늘 날짜 구하기
+			Date now = new Date();
+	        // 포맷팅 정의
+			SimpleDateFormat Day = new SimpleDateFormat("yyyyMMdd");
+			 // 포맷팅 적용
+			// 현재 년월일.
+			String now_Day = Day.format(now); 
+			
+			// 하루근무시간(ms)가 음수로 나오거나 출근을 클릭했을때와 퇴근을 클릭했을때 날짜가 다르다면 하루 근무시간은 0으로 한다.
+			if( 0 > todaywork || last_Work_date.equals(now_Day)) {
 				todaywork = 0;
 			}
-			
 			
 			long hours = (todaywork / 1000) / 60 / 60 % 24; //밀리초를 시간으로 계산
 			long minutes = (todaywork / 1000) / 60 % 60; //밀리초를 분으로 계산

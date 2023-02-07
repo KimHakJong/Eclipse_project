@@ -1,5 +1,5 @@
 CREATE TABLE attendance(
-id                  varchar2(15) PRIMARY KEY, --아이디
+id                 varchar2(15) references members(id) on delete cascade, --아이디
 starTtime          varchar2(8),       --출근시간
 endTime              varchar2(8),       --퇴근시간
 overTime          varchar2(8),       --초과근무시간
