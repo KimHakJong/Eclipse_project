@@ -14,5 +14,6 @@ profileimg   varchar2(30),
 hiredate    varchar2(8) default to_char(SYSDATE, 'YYYYMMDD') not null -- 입사일
 
 );
-insert into members (admin,id,password,name,jumin,phone_num,email,post,address,department,position) 
-values('true','admin','admin','관리자','980101-1111111','010-4518-0161','tosil0702@naver.com','15142','서울시 관악구','대표','대표');
+
+
+drop table members cascade constraints purge;
