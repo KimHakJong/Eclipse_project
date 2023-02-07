@@ -25,7 +25,7 @@
             
             
             //submit click 이벤트 
-            $(".btn.btn-primary.btn-block").click(function(){
+            $(".btn.btn-dark.btn-block").click(function(){
 		    	//공백 검사
             	if($("#overtime_date").val() == ""){
 		    		alert('근무일자를 선택하세요.');
@@ -135,7 +135,7 @@ width: 20px
    </div> 
     
     <div class="form-group">
-    <button type="submit" class="btn btn-primary btn-block">신청</button>
+    <button type="submit" class="btn btn-dark btn-block">신청</button>
     </div>
   </form>
 </div>
