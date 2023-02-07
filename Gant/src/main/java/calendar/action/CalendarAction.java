@@ -20,6 +20,8 @@ public class CalendarAction implements Action {
 	      forward.setRedirect(false);
 	      forward.setPath("calendar/calendar2.jsp");
 	      return forward;
+	      
+	      
 
 	}
 
