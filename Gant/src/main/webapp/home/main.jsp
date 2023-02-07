@@ -37,7 +37,7 @@
 		
 		<div class="main" style="width:85%">
 			<h4>이번주 캘린더</h4>
-			<div class="calendar" >
+			<div class="calendarView" >
 <%-- 				<jsp:include page="calendar.jsp" />  --%>
 <!-- 				해당하는 페이지 가져다 놓을 예정 -->
 				해당 캘린더

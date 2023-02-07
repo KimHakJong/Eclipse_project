@@ -70,7 +70,7 @@ body {
 /* 여기부터 바로가기 버튼 관련 css*/
 .sidepanel  {
   width: 0;
-    position: fixed;
+    position: relative;
     z-index: 1;
     /* height: 150px; */
     left: 0;
@@ -83,8 +83,8 @@ body {
     /* border : 1px solid green; */
     bottom: 0;
     opacity: 0.8;
-    top: 650px;
-    left: 119px;
+    top: -20%;
+    left: 80%;
 }
 
 /* 바로가기 표시되는 중에 스크롤바 표시X */
@@ -121,8 +121,8 @@ body {
   padding: 10px 15px;
   border: none;
   border-radius:12px;
-  position: fixed;
-  top: 750px;
+  position: relative;
+  bottom: 3%;
   left: 10px;
 }
 
@@ -149,7 +149,7 @@ body {
     width: 95%;
     font-size: 17px;
     padding: 11px;
-    border: 3px solid #7487a0;
+    border: 3px solid black;
     background: white;
     border-radius: 12px;
 }
@@ -171,7 +171,7 @@ body {
     position: relative;
     top: -10px;
     text-align: center;
-    background-color: #006CFF;
+    background-color: black;
     color: white;
     border-radius: 12px;
 }
@@ -189,8 +189,8 @@ body {
 
 #myMenu li a:hover {
   background-color: white;
-  border: 1px solid #006CFF;
-  color: #006CFF;
+  border: 3px solid black;
+  color: black;
   border-radius: 12px;
 }
 
@@ -279,11 +279,12 @@ height: 50px;
 <!-- 	    	각 메뉴마다 해당 메뉴에 맞게 링크 걸어야됨 -->
 	      <li><a href="Main.att ">근태관리</a></li>
 	      <li><a href="Main.bo">공지/자유게시판</a></li>
-	      <li><a href="#">캘린더</a></li>
+	      <li><a href="main.calendar">캘린더</a></li>
 	      <li><a href="list.net">주소록</a></li>
 	    </ul>
 	  </div>
     
+    <button class="openbtn" onclick="openNav()">바로가기</button>
     <div id="mySidepanel" class="sidepanel">
 	  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
 <!-- 	    	각 메뉴마다 해당 메뉴에 맞게 링크 걸어야됨 -->
@@ -292,7 +293,7 @@ height: 50px;
      채팅</a>
 	  <a href="#">메모장</a>
 	</div>
-	<button class="openbtn" onclick="openNav()">바로가기</button>  
+	  
 	
 	<div></div>
 	<div></div>
