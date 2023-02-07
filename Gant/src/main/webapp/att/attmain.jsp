@@ -11,6 +11,7 @@
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
   <link rel="stylesheet" href="att/att_css/main.css">
+  <link href="css/home.css" rel="stylesheet" type="text/css">
 <title>근태관리</title>
 <script>
 

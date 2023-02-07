@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import att.db.Attendance;
+
 import att.db.AttendanceDAO;
 import att.db.Vacation;
 
@@ -134,7 +134,7 @@ public class VacationRequestAction implements Action {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
 		out.println("<script>");
-		out.println("alert('초과근무 신청되었습니다.');");
+		out.println("alert('휴가 신청되었습니다.');");
 		out.println("window.close();"); 
 		out.println("</script>");
 		out.close();
