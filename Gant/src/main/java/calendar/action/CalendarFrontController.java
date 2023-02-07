@@ -27,7 +27,6 @@ public class CalendarFrontController extends javax.servlet.http.HttpServlet {
 		String command = RequestURI.substring(contextPath.length());
 		System.out.println("command = " + command);
 		
-		System.out.println("1");
 		
 		ActionForward forward = null;
 		Action action = null;

@@ -19,6 +19,20 @@ if (sessionId == null || sessionId.equals("null")) {
 <!DOCTYPE html>
 <html>
 <head>
+<link href=../css/home.css rel='stylesheet' />
+<header>
+	<jsp:include page="../home/header.jsp" />
+</header>
+
+
+	<div class="side">
+		<jsp:include page="../home/left.jsp" />
+	</div>
+
+<footer>
+	<jsp:include page="../home/bottom.jsp" />
+</footer>
+
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
@@ -216,13 +230,6 @@ body {
 </head>
 
 <body>
-
-	<header>
-		<jsp:include page="../home/header.jsp" />
-	</header>
-
-
-
 
 	<div id='calendar'></div>
 
