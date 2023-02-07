@@ -35,7 +35,7 @@ public class LoginCheckAction implements Action{
 			
 			//자동 로그인 체크한 경우
 			if(auto != null && auto.equals("yes")) {
-				cookie2.setMaxAge(60*1); //1분(테스트용)
+				cookie2.setMaxAge(60*6); //1분(테스트용)
 				response.addCookie(cookie2);
 				System.out.println("자동로그인 쿠키확인");
 			}else {
