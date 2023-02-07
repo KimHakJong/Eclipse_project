@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -248,17 +249,17 @@ li {
 	    <input type="text" id="mySearch" onkeyup="myFunction()" placeholder="메뉴를 검색하세요">
 	    <ul id="myMenu">
 <!-- 	    	각 메뉴마다 해당 메뉴에 맞게 링크 걸어야됨 -->
-	      <li><a href="#">근태관리</a></li>
-	      <li><a href="#">공지/자유게시판</a></li>
+	      <li><a href="Main.att ">근태관리</a></li>
+	      <li><a href="Main.bo">공지/자유게시판</a></li>
 	      <li><a href="#">캘린더</a></li>
-	      <li><a href="#">주소록</a></li>
+	      <li><a href="list.net">주소록</a></li>
 	    </ul>
 	  </div>
     
     <div id="mySidepanel" class="sidepanel">
 	  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
 <!-- 	    	각 메뉴마다 해당 메뉴에 맞게 링크 걸어야됨 -->
-	  <a href="#">채팅</a>
+	  <a href="chat.sml">채팅</a>
 	  <a href="#">메모장</a>
 	</div>
 	<button class="openbtn" onclick="openNav()">바로가기</button>  

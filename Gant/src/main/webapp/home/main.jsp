@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,19 +14,19 @@
 	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-
 <link href="css/home.css" rel="stylesheet" type="text/css">
 
-<style>
-</style>
-
-<script>
-		
-</script>
 
 </head>
 
 <body>
+
+<c:if test="${empty id}">
+	<script>
+		location.href = "login.net";
+	</script>
+</c:if>
+
 	<header>
 		<jsp:include page="header.jsp" />
 	</header>
@@ -34,20 +35,20 @@
 		<div class="side">
 			<jsp:include page="left.jsp" />
 		</div>
-		
+
 		<div class="main">
 			<h4>이번주 캘린더</h4>
-			<div class="calendar" >
-<%-- 				<jsp:include page="calendar.jsp" />  --%>
-<!-- 				해당하는 페이지 가져다 놓을 예정 -->
+			<div class="calendar">
+				<%-- 				<jsp:include page="calendar.jsp" />  --%>
+				<!-- 				해당하는 페이지 가져다 놓을 예정 -->
 				해당 캘린더
 			</div>
-			
+
 			<br>
 			<h4>전체 공지사항</h4>
 			<div class="notice">
-<%-- 				<jsp:include page="notice.jsp" />  --%>
-<!-- 				해당하는 페이지 가져다 놓을 예정 -->
+				<%-- 				<jsp:include page="notice.jsp" />  --%>
+				<!-- 				해당하는 페이지 가져다 놓을 예정 -->
 				해당 공지사항
 			</div>
 		</div>
