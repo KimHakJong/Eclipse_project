@@ -23,10 +23,13 @@ public class ChatServer extends HttpServlet {
 	public void onMessage(String message, Session session){
 		Chat chat = new Chat();
 		System.out.println("receive:"+message);
-		String[] dividMessage = message.split("||");
+		String[] dividMessage = message.split("(구분)");
+		System.out.println(dividMessage[0]);
+		System.out.println(dividMessage[1]);
+		System.out.println(dividMessage[2]);
 		chat.setChatimg(dividMessage[0]);
 		chat.setName(dividMessage[1]);
-		chat.setContents(message);
+		chat.setContents(dividMessage[2]);
 		try {
 			synchronized (sessionList) {
 				for(Session s : sessionList) {
