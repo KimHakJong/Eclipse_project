@@ -14,3 +14,6 @@ profileimg   varchar2(30),
 hiredate    varchar2(8) default to_char(SYSDATE, 'YYYYMMDD') not null -- 입사일
 
 );
+
+
+drop table members cascade constraints purge;
