@@ -90,7 +90,13 @@ public class AttendanceTimeUpdateAction implements Action {
 			Date start = f.parse(startTime);
 			// 밀리초로 변경하여 계산 // GMT 기준 한국 시간이 문제가 있어 -32400000ms가더해진 값이 나온다. 그래서 각 ms 값에 32400000을 더해준다. 
 			long todaywork = (end.getTime()+32400000) - (start.getTime()+32400000);
-			//밀리초를 시간 형태로 변경
+			
+			//만약 당일에 퇴근버튼을 클릭하지 않고 다음날 퇴근버튼을 클릭했다면 출근시간보다 퇴근시간이 빨라 ms가 음수 (-) 형태로 나올 가능성이 있다.
+			//그럴때는 0으로 계산하여준다. 즉 퇴근버튼을 클릭하지 못한 날은 근무시간에 들어가지 못하는것이다.
+			if( 0 > todaywork) {
+				todaywork = 0;
+			}
+			
 			
 			long hours = (todaywork / 1000) / 60 / 60 % 24; //밀리초를 시간으로 계산
 			long minutes = (todaywork / 1000) / 60 % 60; //밀리초를 분으로 계산

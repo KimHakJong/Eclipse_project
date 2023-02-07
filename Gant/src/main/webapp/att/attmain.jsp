@@ -176,7 +176,19 @@
 </script>
 </head>
 <body>
-<div class="container mt-3">
+
+	<header>
+		<jsp:include page="../home/header.jsp" />
+	</header>
+
+	<div class="row">
+		<div class="side">
+			<jsp:include page="../home/left.jsp" />
+		</div>
+		
+		<div class="main">
+			<div class="container mt-3">
+
                 <div id="swa_header">
                     <div class="row">                    
                             <h2>근태관리</h2>               
@@ -222,7 +234,7 @@
             </div>
           </div>
           
-           <div id="work">  
+           <div id="work" class="vacationbox">  
            <button  type="button" class="btn btn-success" id="vacation_request">휴가신청</button>
             <h5>나의 휴가 현황</h5>
 		      <div class="progress">
@@ -233,5 +245,14 @@
             </div>
           </div>
      </div>    
+		
+		
+		</div> <%-- class main end --%>
+	</div> <%-- class row end --%>
+
+	<footer>
+		<jsp:include page="../home/bottom.jsp" />
+	</footer>
+
 </body>
 </html>
