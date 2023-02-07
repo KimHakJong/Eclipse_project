@@ -70,20 +70,21 @@ body {
 /* 여기부터 바로가기 버튼 관련 css*/
 .sidepanel  {
   width: 0;
-  position: fixed;
-  z-index: 1;
-  height: 200px;
-  left: 0;
-  background-color: white;
-  color:black;
-  overflow-x: hidden;
-  transition: 0.5s;
-  padding-top: 60px;
-  border-radius:40px;
-  bottom: 0;
-  opacity:0.8;
-  top: 619px;
-  left: 119px;
+    position: fixed;
+    z-index: 1;
+    /* height: 150px; */
+    left: 0;
+    background-color: white;
+    color: black;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    border-radius: 40px;
+    /* border : 1px solid green; */
+    bottom: 0;
+    opacity: 0.8;
+    top: 650px;
+    left: 119px;
 }
 
 /* 바로가기 표시되는 중에 스크롤바 표시X */
@@ -105,11 +106,11 @@ body {
 }
 
 .sidepanel .closebtn {
-  position: absolute;
-  top: 0;
-  color : green;
-  right: 25px;
-  font-size: 30px;
+    position: absolute;
+    top: -10px;
+    color: green;
+    right: -55px;
+    font-size: 30px;
 }
 
 .openbtn {
@@ -145,11 +146,12 @@ body {
   	position: relative;
     top: -10px;
     left: 14px;
-    width: 90%;
+    width: 95%;
     font-size: 17px;
     padding: 11px;
-    border: 3px solid #006CFF;
+    border: 3px solid #7487a0;
     background: white;
+    border-radius: 12px;
 }
 
 /*메뉴안의 글자크기*/
@@ -180,8 +182,9 @@ body {
 	margin-left: 0px;
 }
 
-li {
+.left li {
     margin: 13px -15px;
+    opacity : 0.8;
 }
 
 #myMenu li a:hover {
@@ -191,18 +194,44 @@ li {
   border-radius: 12px;
 }
 
+#mySidepanel a {
+    width: 140px;
+    
+}
+
+
+#mySidepanel > a:nth-child(2){
+height: 50px;
+    position: absolute;
+    top: 30px;
+    color: green;
+}
+
+
+#mySidepanel > a:nth-child(3){
+height: 50px;
+    position: absolute;
+    top: 70px;
+    color: green;
+
+}
 
 </style>
 
 
 <script>
+
+   
 	//바로가기 버튼 부분
 	function openNav() {
 	  document.getElementById("mySidepanel").style.width = "140px";
+	  document.getElementById("mySidepanel").style.height = "150px";
+	  document.getElementById("mySidepanel").style["border"]="1px solid green";
 	}
 	
 	function closeNav() {
 	  document.getElementById("mySidepanel").style.width = "0";
+	  document.getElementById("mySidepanel").style["border"]="none";
 	}
 	
 	//메뉴 검색창 부분
@@ -234,9 +263,8 @@ li {
 	   	</a>
 	   	
 		<div class="dropup">
-		  <button class="dropbtn">${id} 님</button>
+		  <button class="dropbtn">${id} 님 ▲</button>
 			  <div class="dropup-content">
-<!-- 	    	각 메뉴마다 해당 메뉴에 맞게 링크 걸어야됨 -->
 			    <a href="#">마이페이지</a>
 			    <a href="logout.net">로그아웃</a>
 			  </div>
