@@ -7,7 +7,8 @@
 	position: relative;
 	width: 300px;
 	height: 150px;
-	object-fit: cover
+	object-fit: cover;
+	margin-top:6%;
 }
 </style>
 
@@ -15,5 +16,5 @@
     
     
 <div class="logo">
-	<a href="main.home"><img src="image/logo.png" id="logo"></a>
+	<a href="main.home"><img src="image/logoblack.png" id="logo"></a>
 </div>
