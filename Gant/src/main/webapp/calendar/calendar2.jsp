@@ -58,7 +58,8 @@ body {
 	rel='stylesheet' />
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/calendar/lib/main.js"></script>
-	
+
+<link href="css/home.css" rel="stylesheet" type="text/css">
 
 <script>
 
@@ -74,7 +75,7 @@ body {
 
 
 	    calendar = new FullCalendar.Calendar(calendarEl, {
-	    themeSystem: 'bootstrap',
+	    
 	    	
 	        
            headerToolbar: {
@@ -207,7 +208,7 @@ body {
 	    	  if('<%=sessionId%>' == null)
 	    	  {
 	  			alert();
-	  			location.href='login.jsp';
+	  			location.href='main.home';
 	  		}
 	    }
 
@@ -219,6 +220,7 @@ body {
 	<header>
 		<jsp:include page="../home/header.jsp" />
 	</header>
+
 
 
 
