@@ -57,7 +57,7 @@ button:enabled:hover{opacity:1}
 #address + div + div {float:right}
 #address + div + div > label {float:left}
 #department, #position{width:100%}
-select option[value=""]{
+select option[value=""]:disabled{
 	display: none;
 }
 
@@ -117,8 +117,9 @@ button[type=submit]{font-weight:bold; height:60px; font-size:16px; background-co
 		
 		<div>
 		<label>부서명</label>
-			<select name="department" id="department">
-				<option value="" selected>부서명 선택</option><%--대표는 미선택가능 --%>
+			<select name="department" id="department" >
+				<option value="" disabled selected>부서명 선택</option>
+				<option value="대표">대표</option>
 				<option value="기획부">기획부</option>
 				<option value="영업부">영업부</option>
 				<option value="인사부">인사부</option>
@@ -140,6 +141,7 @@ button[type=submit]{font-weight:bold; height:60px; font-size:16px; background-co
 				<option value="사원">사원</option>
 			</select>
 		</div>
+		
 		<button type="submit">가입하기</button>
 	</form>
 </div>

@@ -11,7 +11,7 @@
     .menu .hide{display:none;}
 .organization {border:1px solid lightgray;
 display:inline-block;
- width:250px; height:400px; padding:10px;
+ width:100%; height:100%; padding:10px;
  overflow:auto}
  
 .organization::-webkit-scrollbar {
@@ -19,7 +19,7 @@ display:inline-block;
 }
 .organization::-webkit-scrollbar-thumb {
     height: 30%; /* 스크롤바의 길이 */
-    background: lightgray; /* 스크롤바의 색상 */
+    background: black; /* 스크롤바의 색상 */
     
     border-radius: 10px;
 }

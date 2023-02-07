@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
 <title>실시간 채팅</title>
@@ -43,7 +44,12 @@ button>img{width:30px;height:30px;}
 <body>
 <div class="out">
 	<div id="myinfo">
+	<c:if test="${member.profileimg==null}" > <%--프로필사진 없는 경우: 기본이미지 --%>
+	  <img src="member/image/defaultprofile.png"><div>나</div><div>${member.name}</div>
+	</c:if>
+	<c:if test="${member.profileimg!=null}" > <%--프로필사진 등록한 경우: 그 이미지 --%>
 	  <img src="memberupload/${member.profileimg}"><div>나</div><div>${member.name}</div>
+	</c:if>
 	</div>
 <!-- onkeydown을 통해서 엔터키로도 입력되도록 설정. -->
 
@@ -75,7 +81,7 @@ button>img{width:30px;height:30px;}
 	
 	function onOpen(event) {
 		//접속했을 때 접속자들에게 알릴 내용
-		webSocket.send("{member.name} 님이 채팅방에 들어왔습니다.");
+		webSocket.send("{member.profileimg}(구분){member.name}(구분) 님이 채팅방에 들어왔습니다.");
 	}
 	
 	// OnError는 웹 소켓이 에러가 나면 발생을 하는 함수.
@@ -101,7 +107,7 @@ button>img{width:30px;height:30px;}
 	function onMessage(event) {
 
 		//클라이언트에서 날아온 메시지를 |\| 단위로 분리한다
-		var message = event.data.split("|\|");
+		var message = event.data.split("(구분)");
 		
 			//금방 보낸 이를 re_send에 저장하고,
 			//금방 보낸 이가 다시 보낼경우 보낸이 출력 없도록 함.

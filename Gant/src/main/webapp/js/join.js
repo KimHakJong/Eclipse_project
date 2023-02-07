@@ -384,18 +384,16 @@ $('#spost').click(function(){
 			return false;
 		}
 		
-		if(!$("#department").val()){
-			if(!$("#position").val()=='대표'){
-			alert("부서명을 선택해주세요");
-			$('#department').focus();
-			return false;
-			}
+		if($("#department option:selected").val()==''){
+				alert("부서명을 선택해주세요");
+				$('#department').focus();
+				return false;
 		}
 		
-		if(!$("#position").val()){
+		if($("#position option:selected").val()==''){
 			alert("직급을 선택해주세요");
 			$('#position').focus();
 			return false;
-			}
+		}
 	});
 });

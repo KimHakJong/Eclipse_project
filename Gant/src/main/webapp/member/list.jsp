@@ -11,13 +11,14 @@
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
+<link href="css/home.css" rel="stylesheet" type="text/css">
 <meta charset="UTF-8">
 <title>GANT</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
 *{box-sizing:border-box; font-family:"noto sans", sans-serif;}
 
-aside{width:400px;height:500px; display:inline-block;position:absolute; left:290px; top:200px;}
+aside{width:30%; height: 60%; display:inline-block;position:absolute; left:5%; top:20%;}
 
 #searchdiv{ margin-bottom:70px; height:44px; position:relative; top:30px; float:right;
 			vertical-align:middle;  }
@@ -40,9 +41,9 @@ option{background:white;}
 #searchfield:focus, #searchword:focus {border:2px solid black; outline:none }
 #searchbtn{width:40px;height:40px; background:black; border:none; outline:none; margin:0; padding:0; position:relative; bottom:1px}
 #searchicon{margin:0px 0px 3px 0px}
-.list{width:600px; position:absolute; right:50px; top:140px; display:inline-block}
+.list{width: 54.5%; position:absolute; right: 5%; top: 6%; display:inline-block}
 .addbook{
-    width:600px; border-collapse: collapse; 
+    width: 100%; border-collapse: collapse; 
     border:1px solid lightgray; text-align:left; 
     margin-bottom:20px;
 }
@@ -68,12 +69,12 @@ option{background:white;}
 .godetail:focus{outline:none}
 #detailForm{padding:20px 15px 0px 15px; height:400px}
 .modal-body{height:425px}
-#profile {width:100px; height:100px; float:left; border-radius:50%;
+#profileimg {width:100px; height:100px; float:left; border-radius:50%;
 		 border:none;margin:0px 20px 20px 5px}
 .infodiv {padding: 0px 5px 0px 5px; text-align:left; line-height:25px; height:25px}
-#profile + div {width:400px; margin-top:13px}
+#profileimg + div {width:400px; margin-top:13px}
 b{margin:0px 10px 0px 5px;}
-#profile + div + div{margin-top:5px}
+#profileimg + div + div{margin-top:5px}
 hr{margin:10px;}
 #line1,#line2 {width:300px; position:relative; left:120px}
 #line1 + div > b:last-child{position:relative; left:190px}
@@ -138,9 +139,9 @@ $(document).ready(function(){
 			success : function(rdata){
 				let check = rdata.check;
 				if(check=="true"){
-					where.before('<img src="member/image/greencircle.png" title="출근상태">'); //where은 이미지삽입되는 뒤 형제요소
-				}else if(check=="false"){
-					where.before('<img src="member/image/redcircle.png" title="퇴근상태">');
+					where.before("<img src='member/image/greencircle.png' title='출근상태'>"); //where은 이미지삽입되는 뒤 형제요소
+				}else{
+					where.before("<img src='member/image/redcircle.png' title='퇴근상태'>");
 				}
 			}
 		  });
@@ -155,16 +156,12 @@ $(document).ready(function(){
 			dataType : "json",
 			success : function(data){
 				if(data.profileimg==null){
-					$("#profile").attr('src','member/image/defaultprofile.png');
+					$("#profileimg").attr('src','member/image/defaultprofile.png');
 				}else{
-					$("#profile").attr('src',data.profileimg);
+					$("#profileimg").attr('src','memberupload/'+data.profileimg);
 				}
 				$("#name").text(data.name);
-				if(data.department==null){
-					$("#department").text(''); //대표인 경우 			
-				}else{
-					$("#department").text(data.department);
-				}
+				$("#department").text(data.department);
 				
 				$("#position").text(data.position);
 				$("#birth").text(data.birth);
@@ -191,7 +188,17 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
-	
+	<header>
+		<jsp:include page="../home/header.jsp" />
+	</header>
+
+	<div class="row">
+		<div class="side" style="width:15%">
+			<jsp:include page="../home/left.jsp" />
+		</div>
+		
+		<div class="main" style="width:85%">
+		
 <aside>
 <jsp:include page="orgchart.jsp"/>
 </aside>
@@ -243,7 +250,7 @@ $(document).ready(function(){
 		  	<%--Modal Body --%>
 		  	<div class="modal-body">
 		  		<form name="detailForm" id="detailForm">
-		  		<img src="" id="profile">
+		  		<img src="" id="profileimg">
 		  		<div class="infodiv">
 		  		<b>이름</b><span id="name"></span>
 		  		</div><hr id="line1">
@@ -376,6 +383,12 @@ $(document).ready(function(){
       <h1>검색된 회원은 존재하지 않습니다.</h1>
 	</div>
     </c:if>  
- </div><%--list end --%>
+	</div><%--list end --%>
+  </div><%--main --%>
+  </div><%--row --%>
+
+	<footer>
+		<jsp:include page="../home/bottom.jsp" />
+	</footer>
 </body>
 </html>
