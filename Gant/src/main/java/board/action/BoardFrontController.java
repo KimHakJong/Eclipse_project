@@ -44,7 +44,7 @@ public class BoardFrontController extends HttpServlet {
       
       switch (command) {
 	case "/Main.bo":
-		//action = new BoardListAction();
+		action = new BoardMainAction();
 		break;
 		
 		
