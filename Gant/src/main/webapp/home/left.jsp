@@ -259,7 +259,7 @@ li {
     <div id="mySidepanel" class="sidepanel">
 	  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
 <!-- 	    	각 메뉴마다 해당 메뉴에 맞게 링크 걸어야됨 -->
-	  <a href="chat.sml">채팅</a>
+	  <a href="#">채팅</a>
 	  <a href="#">메모장</a>
 	</div>
 	<button class="openbtn" onclick="openNav()">바로가기</button>  
