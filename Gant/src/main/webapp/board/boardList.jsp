@@ -9,11 +9,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
-  <link href="css/home.css" rel="stylesheet" type="text/css">
+<link href="css/home.css" rel="stylesheet" type="text/css">
+<link href="board/board_css/main_bo.css" rel="stylesheet" type="text/css">
 <script>
 
 </script>
-
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
 .pagination{font-family: 'Lato', sans-serif; margin-top:40px}
