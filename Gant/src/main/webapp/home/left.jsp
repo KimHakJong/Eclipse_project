@@ -84,7 +84,7 @@ body {
     bottom: 0;
     opacity: 0.8;
     top: -20%;
-    left: 80%;
+    left: 48%;
 }
 
 /* 바로가기 표시되는 중에 스크롤바 표시X */
@@ -265,7 +265,7 @@ height: 50px;
 		<div class="dropup">
 		  <button class="dropbtn">${id} 님 ▲</button>
 			  <div class="dropup-content">
-			    <a href="#">마이페이지</a>
+			    <a href="update.home">마이페이지</a>
 			    <a href="logout.net">로그아웃</a>
 			  </div>
 		</div>
@@ -289,8 +289,7 @@ height: 50px;
 	  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
 <!-- 	    	각 메뉴마다 해당 메뉴에 맞게 링크 걸어야됨 -->
 	  <a href="chat.sml" 
-     onclick="window.open(this.href, '_blank', 'width=500, height=450, top=170px, left=230px, resizable=0,menubar=0,status=0,titlebar=0,toolbar=0, scrollbars=0,location=0'); return false;">
-     채팅</a>
+     onclick="window.open(this.href, '_blank', 'width=500, height=450, top=170px, left=230px, resizable=no,menubar=no,status=no,titlebar=no,toolbar=no, scrollbars=no,directories=no,location=no'); return false;">
 	  <a href="#">메모장</a>
 	</div>
 	  
