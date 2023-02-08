@@ -11,3 +11,4 @@ details	        varchar2(2000)	--세부사항
 );
 
 select * from vacation;
+

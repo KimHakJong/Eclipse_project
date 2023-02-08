@@ -23,14 +23,14 @@
 		console.log("checkbutton = "+checkbutton);
 		if(checkbutton == true){ // 출근버튼 비활성화
 			$("#start").attr("disabled", true); 
-			$("#start").attr('class','btn btn-outline-secondary'); // 출근버튼 회색으로 
+			$("#start").attr('class','btn btn-outline-dark'); // 출근버튼 회색으로 
 			$("#end").attr("disabled", false); // 퇴근버튼 활성화
-			$("#end").attr('class','btn btn-outline-dark'); // 퇴근버튼 파란색으로 
+			$("#end").attr('class','btn btn-dark'); // 퇴근버튼 파란색으로 
 		}else if(checkbutton == false){ //  퇴근버튼 비활성화
 			$("#start").attr("disabled",false);
-			$("#start").attr('class','btn btn-outline-dark'); // 출근버튼 파란색으로
+			$("#start").attr('class','btn btn-dark'); // 출근버튼 파란색으로
 			$("#end").attr("disabled",true); // 퇴근버튼 비활성화
-			$("#end").attr('class','btn btn-outline-secondary'); // 퇴근버튼 회색으로
+			$("#end").attr('class','btn btn-outline-dark'); // 퇴근버튼 회색으로
 		}
 		
 		// 출근버튼 클릭시
@@ -67,9 +67,9 @@
 					   alert(data.success);
 					 //퇴근버튼 활성화 , 출근버튼 비활성화 
 					   $("#start").attr("disabled", true); 
-					   $("#start").attr('class','btn btn-outline-secondary'); // 출근버튼 회색으로 
+					   $("#start").attr('class','btn btn-outline-dark'); // 출근버튼 회색으로 
 					   $("#end").attr("disabled", false); // 퇴근버튼 활성화
-					   $("#end").attr('class','btn btn-outline-dark'); // 퇴근버튼 파란색으로
+					   $("#end").attr('class','btn btn-dark'); // 퇴근버튼 파란색으로
 					   
 				   }, //success end
 				   error: function( request, status, error ){
@@ -122,9 +122,9 @@
 						  alert("퇴근등록되었습니다.");
 						 //퇴근버튼 비활성화 , 출근버튼 활성화 
 						$("#start").attr("disabled",false);
-					    $("#start").attr('class','btn btn-outline-dark'); // 출근버튼 파란색으로
+					    $("#start").attr('class','btn btn-dark'); // 출근버튼 파란색으로
 						$("#end").attr("disabled",true); // 퇴근버튼 비활성화
-						$("#end").attr('class','btn btn-outline-secondary'); // 퇴근버튼 회색으로 
+						$("#end").attr('class','btn btn-outline-dark'); // 퇴근버튼 회색으로 
 						
 						// 나의 주간 근무 현황(%) -> 하루 점심시간 1시간씩 포함하여 하루9시간 , 주 5일 근무로 주간 총 근로시간이 45시간이 된다면 100센트로나타나게 한다.
 						  let work_week_hours = data.work_week_hours;
@@ -212,10 +212,10 @@
                            
                <div id="workbutton">
                       <div id="gotowork">                 
-                     <button  type="button" class="btn btn-outline-dark" id="start">출근</button>
+                     <button  type="button" class="btn btn-dark" id="start">출근</button>
                      </div>
                      <div id="leavework">
-                     <button type="button" class="btn btn-outline-dark" id="end" >퇴근</button>
+                     <button type="button" class="btn btn-dark" id="end" >퇴근</button>
                      </div>
                </div>       
           
@@ -224,7 +224,7 @@
            <button  type="button" class="btn btn-dark" id="overtime_request">초과근무신청</button>
             <h6 id="my_week">나의 주간 근무 현황</h6>
 		      <div class="progress">
-		       <div class="progress-bar bg-secondary progress-bar bg-secondary-info" role="progressbar" aria-valuenow="50"
+		       <div class="progress-bar bg-dark progress-bar bg-dark-info" role="progressbar" aria-valuenow="50"
 		        id="work_percent" aria-valuemin="0" aria-valuemax="100" >
 		     
              </div>
@@ -235,7 +235,7 @@
            <button  type="button" class="btn btn-dark" id="vacation_request">휴가신청</button>
             <h6 id="my_vacation">나의 휴가 현황</h6>
 		      <div class="progress">
-		       <div class="progress-bar bg-secondary progress-bar bg-secondary-info" role="progressbar" aria-valuenow="50"
+		       <div class="progress-bar bg-dark progress-bar bg-dark-info" role="progressbar" aria-valuenow="50"
 		       id="vacation_percent"  aria-valuemin="0" aria-valuemax="100" >
 		     
              </div>
