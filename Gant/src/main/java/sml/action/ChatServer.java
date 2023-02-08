@@ -11,38 +11,12 @@ import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
-import sml.db.Chat;
-
 @ServerEndpoint("/ChatServer")
 public class ChatServer extends HttpServlet {
 	
 	private static final List<Session> sessionList=new ArrayList<Session>();
 	private static final long serialVersionUID = 1L;
        
-	@OnMessage
-	public void onMessage(String message, Session session){
-		Chat chat = new Chat();
-		System.out.println("receive:"+message);
-		String[] dividMessage = message.split("(구분)");
-		System.out.println(dividMessage[0]);
-		System.out.println(dividMessage[1]);
-		System.out.println(dividMessage[2]);
-		chat.setChatimg(dividMessage[0]);
-		chat.setName(dividMessage[1]);
-		chat.setContents(dividMessage[2]);
-		try {
-			synchronized (sessionList) {
-				for(Session s : sessionList) {
-					if(!s.equals(session)) {
-						s.getBasicRemote().sendText(message);
-					}
-				}
-			}
-	    }catch (Exception e) {
-	        System.out.println(e.getMessage());
-	    }
-	}
-
 	//@OnOpen은 클라이언트 ㅡ> 서버로 접속할 때의 처리입니다.
 	@OnOpen
 	public void onOpen(Session session) { // Add session to the connected
@@ -57,13 +31,31 @@ public class ChatServer extends HttpServlet {
 	    sessionList.add(session);
 	}
 
+	@OnMessage
+	public void onMessage(String message, Session session){
+		System.out.println("receive:"+message);
+		try {
+			synchronized (sessionList) {
+				for(Session s : sessionList) {
+					if(!s.equals(session)) { //자기한테 안보냄
+						s.getBasicRemote().sendText(message);
+					}
+				}
+			}
+	    }catch (Exception e) {
+	        System.out.println(e.getMessage());
+	    }
+	}
+
+
 	//@OnClose는 접속이 끊겼을때 처리입니다.
 	@OnClose
 	public void onClose(Session session) {
-		System.out.println("클라이언트 연결이 끊김"+session.getId());
+		System.out.println("연결 종료된 클라이언트:"+session.getId());
+		sessionList.remove(session); //종료한 세션은 제거
 	}
 	
-	 @OnError
+	@OnError
 	public void handleError(Throwable t) {
 		 // 콘솔에 에러를 표시한다.
 		 t.printStackTrace();

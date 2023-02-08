@@ -10,20 +10,20 @@
 <style>
 * {font-family:"noto sans", sans-serif;
    box-sizing: border-box}
-    body > div > div{margin-top:60px; margin-bottom:30px; text-align:center}
+    body > div > div{margin-top:30px; text-align:center}
     img{width:150px}
 	h1{font-family:"Lora"; text-align:center; margin-bottom:20px; font-weight:bold; font-size:40px; color:#006CFF}
 	
-	form{width:500px; margin:0 auto; border:1px solid lightgray; padding:20px 40px; border-radius: 4px;
+	form{width:500px; margin:0 auto; border:1px solid #C4C5C8; padding:20px 40px; border-radius: 4px;
 		margin-bottom:50px;}
 		
 	#log{margin: 20px 0px 10px 0px; font-size:32px; font-weight:bold}	
-	#id, #password {width:100%; height:50px; margin:15px 0px; border:1px solid lightgray; padding:15px 12px; border-radius: 4px;
+	#id, #password {width:100%; height:50px; margin:15px 0px; border:1px solid #C4C5C8; padding:15px 12px; border-radius: 4px;
 	}
 	
-	#id:focus, #password:focus{border:3px solid #006CFF; outline:none}
+	#id:focus, #password:focus{border:3px solid black; outline:none}
 	label{cursor:pointer}
-	#check1, #check2 {margin:5px 0px;}
+	#check1, #check2 {margin:5px 0px; accent-color:black}
 	a{float:right;  text-decoration: none; color:black; }
 	button{width:100%; height:50px; margin:10px 0px; 
 	border-radius: 4px; color:white;
@@ -31,10 +31,10 @@
 	border:none;
 	}
 	 
-	#submitbtn{background-color:#006CFF; opacity:0.8;}
-	#joinbtn {background-color:#00B50B; opacity:0.8;}
-	#submitbtn:hover, #joinbtn:hover {opacity:1; cursor:pointer}
-	#joinbtn:hover {background-color:#00B50B}
+	#joinbtn{background-color:black}
+	#submitbtn {background-color: white; color: black; border: 1px solid black;}
+	#submitbtn:hover, #joinbtn:hover {cursor:pointer}
+	#submitbtn:hover {background-color:black; color:white}
 </style>
 <script>
 $(document).ready(function(){
@@ -54,7 +54,7 @@ $(document).ready(function(){
 </head>
 <body>
 <div>
-	<div><img src="member/image/logo.png"></div>
+	<div><img src="member/image/logoblack.png"></div>
 	<form action="logincheck.net" method="post">
 		<div id="log">LOGIN</div>
 		<div>
@@ -69,7 +69,7 @@ $(document).ready(function(){
 			<a href="findid.net">아이디/비밀번호 찾기</a>
 		</div>
 		<div id="check2">
-			<label for="auto">
+			<label for="autologin">
 				<input type="checkbox" name="autologin" id="autologin" value="yes"> 자동 로그인</label>
 		</div>
 		<button type="submit" id="submitbtn">로그인</button>
