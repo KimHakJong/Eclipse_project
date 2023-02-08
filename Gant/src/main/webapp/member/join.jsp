@@ -15,7 +15,7 @@
 body>div{margin-top:6em; margin-bottom:4em}
 form>div {font-size:32px; font-weight:bold; text-align:center; margin:0px 0px 40px 0px}
 
-form{width:600px; margin:0 auto; border:1px solid lightgray; border-radius:4px;
+form{width:600px; margin:0 auto; border:1px solid #C4C5C8; border-radius:4px;
 	 padding: 60px 90px 30px 90px}
 	 
 span { font-size: 13px;}
@@ -23,13 +23,13 @@ span { font-size: 13px;}
 label{font-size:14px; font-weight:bold; display:block;margin-top:20px}
 select, input, button { height:50px; margin:10px 0px 0px 0px; 
 						border-radius:4px; cursor:pointer;
-						border:1px solid lightgray; background-color:white}
-input:focus {border:3px solid #006CFF; outline:none}
+						border:1px solid #C4C5C8; background-color:white}
+input:focus {border:3px solid black; outline:none}
 input, button {width:100%;  padding:15px 12px}
 select {background:white;}
 
-button:disabled{background:#AEAEAE; border:none}
-button:enabled {opacity:0.8}
+button:disabled{background:#b4b4b4; border:none}
+button:enabled {opacity:0.9}
 button:enabled:hover{opacity:1}
 
 #password {margin-bottom:0px;}
@@ -61,8 +61,8 @@ select option[value=""]:disabled{
 	display: none;
 }
 
-button{background-color:#006CFF; color:white}
-button[type=submit]{font-weight:bold; height:60px; font-size:16px; background-color:#006CFF; color:white; border:none; outline:none}
+button{background-color:black; color:white}
+button[type=submit]{font-weight:bold; height:60px; font-size:16px; background-color:black; color:white; border:none; outline:none}
 </style>
 </head>
 <body>

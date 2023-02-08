@@ -1,11 +1,13 @@
 package net.action;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.JsonObject;
 
@@ -19,20 +21,7 @@ public class ListAction implements Action {
 			throws ServletException, IOException {
 		ActionForward forward = new ActionForward();
 		
-		
 		MembersDAO dao = new MembersDAO();
-		
-		//출퇴근 표시아이콘을 위한 코드 (ajax로 처리)
-		if(request.getParameter("name") != null) { //ajax로 키 name이 넘어오면
-			String name = request.getParameter("name");
-			String department = request.getParameter("department");
-			String phone_num = request.getParameter("phone_num");
-			JsonObject json = dao.checkCommute(name,department,phone_num);
-			response.setContentType("application/json;charset=utf-8");
-			System.out.println(json.toString());
-			response.getWriter().print(json);
-			return null;
-		}
 		
 		int page = 1; //현재 페이지 기본값
 		
@@ -68,6 +57,17 @@ public class ListAction implements Action {
 		
 		//관리자와 인사부는 삭제버튼 보이기 위한 코드
 		String id = (String) request.getSession().getAttribute("id");
+		if(id==null) {
+			response.setContentType("text/html;charset=utf-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("alert('로그인 후 이용해주세요');"); 
+			out.println("location.href='login.net';");
+			out.println("</script>");
+			out.close();
+			return null;
+		}
+		
 		String isadminhuman = dao.isadminhuman(id);
 		request.setAttribute("isadminhuman", isadminhuman);
 		

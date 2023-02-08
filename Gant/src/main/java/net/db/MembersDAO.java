@@ -11,7 +11,6 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 public class MembersDAO {
@@ -538,47 +537,24 @@ public class MembersDAO {
 		JsonObject json = new JsonObject();
 		try {
 			conn = ds.getConnection();
-			conn.setAutoCommit(false);
-
-			//해당 이름,부서명,폰번호에 해당하는 id값 추출
-			String sql1 = "select id from members "
-					    + "where name = ? "
-					    + "and department = ? "
-					    + "and phone_num = ?";
-			
-			pstmt = conn.prepareStatement(sql1);
+			StringBuilder sql = new StringBuilder();
+			sql.append("select checkbutton ");
+			sql.append("from members natural join attendance ");
+			sql.append("where id = ");
+			sql.append("           (select id from members ");
+			sql.append("            where name=? and department=? and phone_num=?)");
+			pstmt = conn.prepareStatement(sql.toString());
 			pstmt.setString(1, name);
 			pstmt.setString(2, department);
 			pstmt.setString(3, phone_num);
 			rs = pstmt.executeQuery();
-			String id="";
-			if(rs.next()) {
-				id = rs.getString("id");
-			}
-			pstmt.close();
-			rs.close();
 			
-			StringBuilder sql2 = new StringBuilder();
-			sql2.append("select checkbutton ");
-			sql2.append("from attendance ");
-			sql2.append("where id = ?");
-			
-			pstmt = conn.prepareStatement(sql2.toString());
-			pstmt.setString(1, id);
-			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				json.addProperty("check", rs.getString("checkbutton"));
-				conn.commit();
 			}
 		}catch(Exception ex) {
 			ex.printStackTrace();
-			try {
-				if(conn != null)
-					conn.rollback();
-				System.out.println("checkCommute()에러");
-			}catch(SQLException e1) {
-				e1.printStackTrace();
-			}
+			System.out.println("checkCommute()에러");
 		}finally {
 			try {
 				if(rs!=null)

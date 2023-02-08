@@ -36,7 +36,7 @@ text-align: center;
 
 
 .swa_dial{
-    background: #7ab5f4;
+    background: #b9c7d7;
 	position: relative;
 	display: inline-block;
 	height: 150px;
@@ -161,3 +161,4 @@ margin-top: 12px;
 #work_week,#work_today,#overtime,.watch_name,#my_vacation,#my_week{
 color:#143e6e	
 }
+

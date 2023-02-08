@@ -106,7 +106,7 @@ public class AttendanceTimeUpdateAction implements Action {
 			String now_Day = Day.format(now); 
 			
 			// 하루근무시간(ms)가 음수로 나오거나 출근을 클릭했을때와 퇴근을 클릭했을때 날짜가 다르다면 하루 근무시간은 0으로 한다.
-			if( 0 > todaywork || last_Work_date.equals(now_Day)) {
+			if( 0 > todaywork || !last_Work_date.equals(now_Day)) {
 				todaywork = 0;
 			}
 			

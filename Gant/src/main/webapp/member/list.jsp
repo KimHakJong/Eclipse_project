@@ -20,11 +20,11 @@
 
 aside{width:30%; height: 60%; display:inline-block;position:absolute; left:5%; top:20%;}
 
-#searchdiv{ margin-bottom:70px; height:44px; position:relative; top:30px; float:right;
+#searchdiv{ margin-bottom:80px; height:44px; position:relative; top:30px; float:right;
 			vertical-align:middle;  }
 #searchfield{height:40px; padding:0px 30px 0px 15px;
 			 position:relative; left:7px; width:120px;
-			 border:1px solid lightgray; background-color:white;
+			 border:1px solid #C4C5C8; background-color:white;
 		-webkit-appearance:none; /* for chrome */
    		 -moz-appearance:none; /*for firefox*/
    		 appearance:none;
@@ -36,20 +36,22 @@ option{background:white;}
 }			
 #searchword{height:40px; padding:0px 10px; width:300px;
 			 position:relative; left:7px;
-			 border:1px solid lightgray;
+			 border:1px solid #C4C5C8;
 			 }
 #searchfield:focus, #searchword:focus {border:2px solid black; outline:none }
 #searchbtn{width:40px;height:40px; background:black; border:none; outline:none; margin:0; padding:0; position:relative; bottom:1px}
 #searchicon{margin:0px 0px 3px 0px}
 .list{width: 54.5%; position:absolute; right: 5%; top: 6%; display:inline-block}
+.explain img {width:17px; height:17px;margin-bottom:4px}
+.explain {position: absolute; top: 15.2%; padding: 10px 10px 0px 0px;}
 .addbook{
     width: 100%; border-collapse: collapse; 
-    border:1px solid lightgray; text-align:left; 
+    border:1px solid #C4C5C8; text-align:left; 
     margin-bottom:20px;
 }
-.addbook>thead>tr{border-bottom:2px solid lightgray}
-.addbook>tbody>tr>td{border:1px solid lightgray; padding:10px 10px 10px 20px}
-.addbook>thead>tr>th{border-right:1px solid lightgray; padding:10px 10px 10px 20px}
+.addbook>thead>tr{border-bottom:2px solid #C4C5C8}
+.addbook>tbody>tr>td{border:1px solid #C4C5C8; padding:10px 10px 10px 20px}
+.addbook>thead>tr>th{border-right:1px solid #C4C5C8; padding:10px 10px 10px 20px}
 .addbook>thead>tr>th:nth-child(1){width:30%}
 .addbook>thead>tr>th:nth-child(2){width:28%}
 .addbook>thead>tr>th:nth-child(3){width:42%; border-right:none}
@@ -64,13 +66,14 @@ option{background:white;}
 
 .addbook tr {height:50px}
 .addbook>tbody>tr>td:first-child>img{width:17px; height:17px; margin-right:3px; position:relative; bottom:2px;}
-.godetail{text-decoration:none;color:black}
-.godetail:hover{color:black}
+.godetail{color:black}
+.godetail:hover{color:black; text-docoration:underline}
 .godetail:focus{outline:none}
 #detailForm{padding:20px 15px 0px 15px; height:400px}
+#detailmodal{margin-top:90px}
 .modal-body{height:425px}
 #profileimg {width:100px; height:100px; float:left; border-radius:50%;
-		 border:none;margin:0px 20px 20px 5px}
+		 border:1px solid #C4C5C8;margin:0px 20px 20px 5px}
 .infodiv {padding: 0px 5px 0px 5px; text-align:left; line-height:25px; height:25px}
 #profileimg + div {width:400px; margin-top:13px}
 b{margin:0px 10px 0px 5px;}
@@ -87,11 +90,11 @@ hr{margin:10px;}
 #email{margin-left:46px}
 #address{margin-left:60px}
 #close{height:50px; width:100px;display:block; 
-	  font-weight:bold; margin:0 auto; opacity:0.8;
+	  font-weight:bold; margin:0 auto; opacity:1;
       border-radius:4px;height:50px; font-size:16px;
-      background-color:#006CFF; color:white; border:none;
+      background-color:black; color:white; border:none;
       outline:none; margin-top:23px}
-#close:hover{opacity:1}
+#close:hover{background:white; color:black; border:2px solid black}
 a.page-link{font-family: 'Lato', sans-serif}
 .pagination{ margin-top:40px}
 .page-link {border:none; color:#777777; margin:0px 12px 0px 12px; padding:0px; 
@@ -112,15 +115,19 @@ h1 {
   text-align:center;
   margin-top:150px;
 }
-.noresult{width:600px; height:350px; margin-top:113px; border:1px solid lightgray}
+.noresult{width:100%; height:350px; margin-top:125px; border:1px solid #C4C5C8}
 </style>
 <script>
-$(document).ready(function(){
+
+$(document).ready(function($){
 	let selval = '${searchfield}';
 	if(selval != ""){
 		$("#searchfield").val(selval);
 	}else{
 		selval=0; //선택된 필드X
+	}
+	if($('.noresult').length==1){
+		$('.explain').css('display','none');	
 	}
 	
 	$('.addbook>tbody>tr').each(function(index,item){
@@ -132,7 +139,7 @@ $(document).ready(function(){
 		function ajax(name, department, phone_num, where){
 			
 		  $.ajax({
-			url : "list.net",
+			url : "commutecheck.net",
 			data : { "name" : name, "department" : department,
 				    "phone_num" : phone_num },
 			dataType : "json",
@@ -147,6 +154,7 @@ $(document).ready(function(){
 		  });
 		}
 	});
+	
 	//모달
 	$('.godetail').click(function(){
 		let clickname = $(this).text();
@@ -160,6 +168,7 @@ $(document).ready(function(){
 				}else{
 					$("#profileimg").attr('src','memberupload/'+data.profileimg);
 				}
+
 				$("#name").text(data.name);
 				$("#department").text(data.department);
 				
@@ -216,6 +225,11 @@ $(document).ready(function(){
 <button type="submit" id="searchbtn"><img id="searchicon" src="member/image/searchicon2.png"></button>
 </div>
 </form>
+
+<div class='explain'>
+	<img src='member/image/greencircle.png'> 출근
+	<img src='member/image/redcircle.png'> 퇴근
+</div>
 
 <c:if test="${membercount > 0}">
 <table class="addbook">
@@ -300,7 +314,7 @@ $(document).ready(function(){
 	    <c:url var="first" value="list.net">
 	    	<c:param name="searchfield" value="${searchfield}"/>
 	    	<c:param name="searchword" value="${searchword}"/>
-	    	<c:param name="first" value="${1}"/>
+	    	<c:param name="page" value="${1}"/>
 	    </c:url>
 	    
 	   	<c:url var="back" value="list.net">
@@ -373,12 +387,18 @@ $(document).ready(function(){
     </c:if>
     
     <c:if test="${membercount==0 && empty searchword}">
+    <script>
+    $('.explain').attr('display','none');
+    </script>
     <div class="noresult">
       <h1>회원이 존재하지 않습니다.</h1>
     </div>
     </c:if>
     
     <c:if test="${membercount==0 && !empty searchword}">
+    <script>
+    $('.explain').attr('display','none');
+    </script>
 	<div class="noresult">
       <h1>검색된 회원은 존재하지 않습니다.</h1>
 	</div>

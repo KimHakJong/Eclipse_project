@@ -53,15 +53,18 @@ public class MemberFrontController extends HttpServlet {
 			action = new FindPassOkAction(); //불일치하면 불일치한 값 알림창으로 알려주고 뒤로가기
 			break;
 		case "/list.net":				//한페이지당 보여줄 개수, 현재 페이지,검색필드, 검색어확인 후 시작 끝 최대 페이지와 해당회원 목록 보냄
-			action = new ListAction();
+			action = new ListAction();  //인사부,관리자는 테이블삭제가능 기능
 			break;
 		case "/orgchart.net":			//주소록에 include할 조직도 화면
 			action = new OrgChart();	//부서별 이름을 조회 후 Json객체에 담음	
 			break;
-		case "/detail.net":
+		case "/commutecheck.net":		//주소록 이름 옆 출퇴근아이콘 표시를 위한 클래스
+			action = new CommuteCheck();
+			break;
+		case "/detail.net":				//주소록에서 클릭한 이름값을 넘겨받아 상세정보를 json으로 list.jsp에 보낸다.
 			action = new DetailAction();
 			break;
-		case "/delete.net":
+		case "/delete.net":				//주소록에서 삭제눌렀을 때 이름,부서명,휴대폰번호 값 넘겨받아 해당 회원 삭제 후 다시 list.net으로 이동
 			action = new DeleteAction();
 			break;
 		}
