@@ -2,13 +2,18 @@
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+
 <%
 request.setCharacterEncoding("utf-8");
 String sessionId = (String) (session.getAttribute("id"));
+String paramId = (String) (request.getParameter("id"));
+String isAdmin = (String) (request.getParameter("admin"));
 
-sessionId = "id";//임시로 id설정
+//sessionId = "id";//임시로 id설정
 
 System.out.println(sessionId);
+System.out.println(paramId);
+System.out.println(isAdmin);
 
 if (sessionId == null || sessionId.equals("null")) {
 	//out.println("<script>alert('로그인 해주세요');location.href='login.jsp';</script>");
@@ -19,29 +24,20 @@ if (sessionId == null || sessionId.equals("null")) {
 <!DOCTYPE html>
 <html>
 <head>
-<link href=../css/home.css rel='stylesheet' />
-<header>
-	<jsp:include page="../home/header.jsp" />
-</header>
 
-
-	<div class="side">
-		<jsp:include page="../home/left.jsp" />
-	</div>
-
-<footer>
-	<jsp:include page="../home/bottom.jsp" />
-</footer>
 
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+@import
+	url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
 
-*{font-family:"noto sans", sans-serif;}
+* {
+	font-family: "noto sans", sans-serif;
+}
+
 body {
 	margin: 40px 10px;
 	padding: 0;
-	
 	font-size: 14px;
 }
 
@@ -60,12 +56,12 @@ body {
 
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-	
-	
+
+
 <script
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-	
 
+<link href="css/home.css" rel="stylesheet" type="text/css">
 <!-- fullcalendar -->
 
 <link href=${pageContext.request.contextPath}/calendar/lib/main.css
@@ -73,25 +69,34 @@ body {
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/calendar/lib/main.js"></script>
 
-<link href="css/home.css" rel="stylesheet" type="text/css">
+
 
 <script>
 
  var calendar = null;
-	    $(document).ready(function(){
+ document.addEventListener('DOMContentLoaded', function () {
+	    	
+	 
+            $('#xbutton').on('click', function(){
+                $('#calendarModal').modal('hide');
+            })
+            $('#sprintSettingModalClose').on('click', function(){
+                $('#calendarModal').modal('hide');
+            })
+ 
 
-	      var calendarEl = $('#calendar')[0];
-	      
 
-	      var containerEl = document.getElementById('external-events');
 	      var calendarEl = document.getElementById('calendar');
-	      var checkbox = document.getElementById('drop-remove');
+
+		
 
 
 	    calendar = new FullCalendar.Calendar(calendarEl, {
-	    
 	    	
-	        
+	    	
+	    
+	    
+
            headerToolbar: {
                left: 'prevYear,prev,next,nextYear today',
                 center: 'title',
@@ -101,14 +106,28 @@ body {
              },
 
 	          editable: true,
-	
+	          
+			
+			
 	          customButtons: {
+	        	  
                   addEventButton: { // 추가한 버튼 설정
+
+                	  
                       text : "일정 추가",  // 버튼 내용
-                      click : function(){ // 버튼 클릭 시 이벤트 추가
+                      click : function(){ 
+                    	  // 버튼 클릭 시 이벤트 추가
+                    	  
                           $("#calendarModal").modal("show"); // modal 나타내기
 
-                          $("#addCalendar").on("click",function(){  // modal의 추가 버튼 클릭 시
+
+                          $('#calendar_content').val('');
+                          $('#calendar_start_date').val('');
+                          $('#calendar_end_date').val('');
+
+                          $("#addCalendar").off("click").on("click",function(){  // modal의 추가 버튼 클릭 시
+                        	  
+
                         	  
                               var content = $("#calendar_content").val();
                               var start_date = $("#calendar_start_date").val();
@@ -124,15 +143,20 @@ body {
                               }else if(new Date(end_date)- new Date(start_date) < 0){ // date 타입으로 변경 후 확인
                                   alert("종료일이 시작일보다 먼저입니다.");
                               }else{ // 정상적인 입력 시
+                            	  
                                   var obj = {
                                       "title" : content,
                                       "start" : start_date,
                                       "end" : end_date,
                                       "allDay" : true
                                   }//전송할 객체 생성
-                                  
+
                               
-                          adddata(obj);
+                         adddata(obj);
+                              
+   
+ 
+
                           
                            var m_end = new Date(end_date.substr(0, 4), end_date.substr(5, 2)-1, end_date.substr(8, 2));
                               
@@ -163,21 +187,32 @@ body {
                            }
 
                                console.log(m_end_dt);
-                               console.log(obj);
-                               
-                               
+                             
+                             calendar.addEvent({
+                            	 
+              			            title: content,
+              			            start: start_date,
+              			            end: m_end_dt,
+              			            allDay: true
+       						 })
+       						 
+                             console.log('obj = ' + obj);
+                             
+                             var allEvent =	 calendar.getEvents();
+                             
+                             console.log('allEvent[0] = ');
+                             console.log(allEvent[0].title);
+                             console.log(allEvent[0].start);
+                             console.log(allEvent[0].end);
+                             
+                             console.log('allEvent = ');
+                             console.log(allEvent);
+                             
+       						 
                          }
-                            
-                        calendar.addEvent({
-       			            title: content,
-       			            start: start_date,
-       			            end: m_end_dt,
-       			            allDay: true
-						 })
-                              
-                              
-                              
+                              $('#calendarModal').modal('hide');
                           });
+
                       }
                   }
               },
@@ -192,12 +227,39 @@ body {
 	        	
 	        	
 	          	console.log('추가');
+
+	          	
+	  
 	
 	          },
 
      });
      calendar.render();
    });
+	    
+ 
+	function loadingEvents(){
+	 	   
+	 	   var return_value = null;
+	    		$.ajax({
+	    			type:'POST',
+	    			url:'${pageContext.request.contextPath}/show.calendar',
+	    			dataType:"json",
+	    			async:false,
+	    			success:function(result){
+	    				return_value = result;
+	    				console.log('이벤트 가져왔습니다.');
+	    				
+	    				console.log(result);
+	    				console.log('다음');
+	    				console.log(return_value);
+	    			},
+	    			error:function(request,status,error){},
+	    			complete:function(){}
+	    		}) 
+	 	return return_value;   
+	    }
+	    
 
 	    
 	function adddata(jsondata){
@@ -219,19 +281,32 @@ body {
 	    //일정등록창 모달
 	    function insertModalOpen(arg){
 	  	
-	    	  if('<%=sessionId%>' == null)
-	    	  {
-	  			alert();
-	  			location.href='main.home';
-	  		}
-	    }
+	    	  if('<%=sessionId%>' == null) {
+			alert();
+			location.href = 'login.net';
+		}
+	}
+
 
 </script>
 </head>
 
 <body>
 
-	<div id='calendar'></div>
+	<header>
+		<jsp:include page="../home/header.jsp" />
+	</header>
+
+
+	<div class="row">
+		<div class="side">
+			<jsp:include page="../home/left.jsp" />
+
+		</div>
+		<div id='calendar'></div>
+	</div>
+
+
 
 	<!-- modal 추가 -->
 
@@ -241,10 +316,12 @@ body {
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title" id="exampleModalLabel">일정을 입력하세요.</h5>
+
 					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
+						aria-label="Close" id="xbutton">
 						<span aria-hidden="true">&times;</span>
 					</button>
+
 				</div>
 				<div class="modal-body">
 					<div class="form-group">
@@ -260,14 +337,21 @@ body {
 					</div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-warning" id="addCalendar" >추가</button>
+					<button type="button" class="btn btn-warning" id="addCalendar">추가</button>
+					
 					<button type="button" class="btn btn-secondary"
-						data-dismiss="modal" id="sprintSettingModalClose">닫기</button>
+						data-dismiss="modal" id="sprintSettingModalClose"
+						data-backdrop="static" data-keybord="false">닫기</button>
 				</div>
 
 			</div>
 		</div>
 	</div>
+
+	<footer>
+		<jsp:include page="../home/bottom.jsp" />
+	</footer>
+
 
 
 </body>
