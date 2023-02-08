@@ -22,12 +22,14 @@ public class CalendarAddAction implements Action {
 		int check = 0;
 		 
 		String id = request.getParameter("id");
+		String admin = request.getParameter("admin");
 		String start = request.getParameter("start");
 		String end = request.getParameter("end");
 		String title = request.getParameter("title");
 
 
 		System.out.println("id : " + id);
+		System.out.println("admin : " + admin);
 		System.out.println("start : " + start);
 		System.out.println("end : " + end);
 		System.out.println("title : " + title);

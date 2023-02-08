@@ -26,7 +26,15 @@ public class CalendarBean {
 	public void setTitle(String title) {
 		this.title = title;
 	}
+	public String getAdmin() {
+		return admin;
+	}
+	public void setAdmin(String admin) {
+		this.admin = admin;
+	}
 	String id;
+	String admin;
+
 	String start;
 	String end;
 	String title;
