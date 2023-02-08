@@ -61,7 +61,7 @@ public class OvertimeRequestAction implements Action {
 			response.setContentType("text/html;charset=utf-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
-			out.println("alert('초가근무 시작시간과 종료시간을 다시 확인하여 주세요');"); 
+			out.println("alert('초과근무 시작시간과 종료시간을 다시 확인하여 주세요');"); 
 			out.println("history.back(-1);");
 			out.println("</script>");
 			out.close();

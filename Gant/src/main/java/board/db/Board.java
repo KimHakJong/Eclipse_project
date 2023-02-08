@@ -13,8 +13,9 @@ public class Board {
 	private int    board_re_seq; // 답변 글의 순서 (원문글 기준으로 보여주느 순서)
 	private int    board_readcount; // 글의 조회수
 	private String board_date; //글의 작성날짜
-	private int cnt;
-	
+	private int    cnt;
+	private int    board_like ; // 좋아요수
+	private String board_notice; // 공지사항글이면 true 아니면 false 
 	
 	
 	public int getBoard_num() {
@@ -81,7 +82,7 @@ public class Board {
 		return board_date;
 	}
 	public void setBoard_date(String board_date) {
-		this.board_date = board_date.substring(0,10); //년-월-일 시:분:초 => 년-월-일
+		this.board_date = board_date; 
 	}
 	public int getCnt() {
 		return cnt;
@@ -94,6 +95,20 @@ public class Board {
 	}
 	public void setId(String id) {
 		this.id = id;
+	}
+	
+	
+	public int getBoard_like() {
+		return board_like;
+	}
+	public void setBoard_like(int board_like) {
+		this.board_like = board_like;
+	}
+	public String getBoard_notice() {
+		return board_notice;
+	}
+	public void setBoard_notice(String board_notice) {
+		this.board_notice = board_notice;
 	}
 	
 }

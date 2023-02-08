@@ -135,6 +135,7 @@ public class VacationRequestAction implements Action {
 		PrintWriter out = response.getWriter();
 		out.println("<script>");
 		out.println("alert('휴가 신청되었습니다.');");
+		out.println("opener.parent.location.reload();"); // 부모창 새로고침 ( 휴가 갯수 새로고침을 위해서 )
 		out.println("window.close();"); 
 		out.println("</script>");
 		out.close();
