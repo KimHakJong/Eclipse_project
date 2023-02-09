@@ -37,7 +37,7 @@ public class MypageDAO {
 			conn = ds.getConnection();
 			
 			String sql = "select name, id, password, phone_num, "
-						+ " email, post, address, department, position "
+						+ " email, post, address, department, position, jumin "
 						+ " from members "
 						+ " where id = ? ";
 			
@@ -56,6 +56,7 @@ public class MypageDAO {
 				m.setAddress(rs.getString("address"));
 				m.setDepartment(rs.getString("department"));
 				m.setPosition(rs.getString("position"));
+				m.setJumin(rs.getString("jumin"));
 			}
 			
 			

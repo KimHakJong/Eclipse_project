@@ -276,7 +276,6 @@ height: 50px;
     <div class="left">
 	    <input type="text" id="mySearch" onkeyup="myFunction()" placeholder="메뉴를 검색하세요">
 	    <ul id="myMenu">
-<!-- 	    	각 메뉴마다 해당 메뉴에 맞게 링크 걸어야됨 -->
 	      <li><a href="Main.att ">근태관리</a></li>
 	      <li><a href="Main.bo">공지/자유게시판</a></li>
 	      <li><a href="main.calendar">캘린더</a></li>
@@ -287,9 +286,8 @@ height: 50px;
     <button class="openbtn" onclick="openNav()">바로가기</button>
     <div id="mySidepanel" class="sidepanel">
 	  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-<!-- 	    	각 메뉴마다 해당 메뉴에 맞게 링크 걸어야됨 -->
 	  <a href="chat.sml" 
-     onclick="window.open(this.href, '_blank', 'width=500, height=450, top=170px, left=230px, resizable=no,menubar=no,status=no,titlebar=no,toolbar=no, scrollbars=no,directories=no,location=no'); return false;">
+     		onclick="window.open(this.href, '_blank', 'width=500, height=450, top=170px, left=230px, resizable=no,menubar=no,status=no,titlebar=no,toolbar=no, scrollbars=no,directories=no,location=no'); return false;">
 	  <a href="#">메모장</a>
 	</div>
 	  
