@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.JsonObject;
 
-import net.db.Members;
 import net.db.MembersDAO;
 
 public class DetailAction implements Action {
@@ -21,9 +20,7 @@ public class DetailAction implements Action {
 		JsonObject json = dao.memberDetail(name);
 		
 		response.setContentType("application/json;charset=utf-8");
-		System.out.println(json.toString());
 		response.getWriter().print(json);
-		
 		return null;
 		
 	}

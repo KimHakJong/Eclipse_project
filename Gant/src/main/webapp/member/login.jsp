@@ -25,6 +25,7 @@
 	label{cursor:pointer}
 	#check1, #check2 {margin:5px 0px; accent-color:black}
 	a{float:right;  text-decoration: none; color:black; }
+	a:hover{color:black}
 	button{width:100%; height:50px; margin:10px 0px; 
 	border-radius: 4px; color:white;
 	padding: 10px;
