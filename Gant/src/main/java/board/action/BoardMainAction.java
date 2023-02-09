@@ -44,17 +44,38 @@ public class BoardMainAction implements Action {
 		if(request.getParameter("page") != null) {
 			page = Integer.parseInt(request.getParameter("page"));
 		}
-		
+				
 		System.out.println("넘어온 페이지 =" + page);
 		
+		//게시물 갯수
+		int listcount = 0 ;
 		
-		//총 리스트 수를 받아옵니다.
-		int listcount = boarddao.getListCount();
-		
-		//리스트를 받아옵니다.
-		boardlist = boarddao.getBoardList(page,limit);
-		
-		boardNoticelist =boarddao.getBoardNoticeList();
+        //검색어 
+		String search_name = request.getParameter("search_name");
+		// 검색어가 있는경우
+		if(search_name != null) {
+			
+			//검색어에 포함되어있는 게시글 수 
+			listcount = boarddao.getSearchListCount(search_name);
+			
+			//리스트를 받아옵니다.
+			//검색어에 포함되어있는 게시글 리스트
+			boardlist = boarddao.getSearchBoardList(page,limit,search_name);
+			
+			
+		}else {// 검색어가없는경우
+			
+			//총 리스트 수를 받아옵니다.
+			listcount = boarddao.getListCount();
+			
+			//리스트를 받아옵니다.
+			//일반게시물 리스트
+			boardlist = boarddao.getBoardList(page,limit);
+			
+			//공지게시글 리스트
+			boardNoticelist =boarddao.getBoardNoticeList();
+		}
+				
 		
 		//페이지 수 구하기 -> int는 나머지 숫자를 없앤다.
 		int maxpage = (listcount + limit - 1) / limit;

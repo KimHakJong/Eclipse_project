@@ -12,51 +12,15 @@
 <link href="css/home.css" rel="stylesheet" type="text/css">
 <link href="board/board_css/main_bo.css" rel="stylesheet" type="text/css">
 <script>
-
+$(function(){
+	
+	$("#board_write").click(function(){
+		location.href="BoardWrite.bo"; 
+		 })
+		 
+		 
+});		 
 </script>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
-.pagination{font-family: 'Lato', sans-serif; margin-top:40px}
-.page-link {border:none; color:#777777; margin:0px 12px 0px 12px; padding:0px; 
-height:25px; font-size:16px}
-.page-link:focus{box-shadow: none;}
-.page-link:hover{background-color:white;color:#777777;}
-.page-item.active .page-link {
-    color: #000;
-    background-color: white;
-     border-bottom:2px solid #000;
-}
-.first {margin:0px 12px 0px 0px;}
-.back {margin:0px 22px 0px 0px;}
-.next {margin:0px 0px 0px 22px;}
-.last {margin:0px 0px 0px 12px;}
-
-select.form-control{
-width: auto;
-margin-bottom: 2em;
-display: inline-block;
-}
-
-.rows{
-text-align: right;
-}
-
-.gray {
- color: gray;
-}
-
-body > div > table > thead > tr:nth-child(2) > th:nth-child(1){width:8%}
-body > div > table > thead > tr:nth-child(2) > th:nth-child(2){width:47%}
-body > div > table > thead > tr:nth-child(2) > th:nth-child(3){width:13%}
-body > div > table > thead > tr:nth-child(2) > th:nth-child(4){width:14%}
-body > div > table > thead > tr:nth-child(2) > th:nth-child(5){width:9%}
-body > div > table > thead > tr:nth-child(2) > th:nth-child(6){width:9%}
-
-
-
-</style>
-
-<%--<script src="js/list.js"></script> --%>
 <title>자유/공지 게시판</title>
 </head>
 <body>
@@ -72,6 +36,9 @@ body > div > table > thead > tr:nth-child(2) > th:nth-child(6){width:9%}
 		
 		<div class="main">
 			<div class="container">
+         <div>
+		<button type="button" class="btn btn-dark float-right" id="board_write">글쓰기</button>
+		</div>
  
 <%-- 게시글이 있는경우 --%>
 <c:if test="${listcount > 0 }">
@@ -80,16 +47,16 @@ body > div > table > thead > tr:nth-child(2) > th:nth-child(6){width:9%}
     <tr>
      <th colspan="4">공지/자유 게시판</th>
      <th colspan="2">
-       <span>글 개수 : ${listcount}</span>
+       <span>검색한 게시글 수 : ${listcount}</span>
      </th>
    </tr>
    <tr>
-     <th><div>번호</div></th>
-     <th><div>제목</div></th>    
-     <th><div>작성자</div></th>  
-     <th><div>작성일</div></th>  
-     <th><div>조회수</div></th>
-     <th><div>추천</div></th>  
+     <th id="th1"><div >번호</div></th>
+     <th id="th2"><div>제목</div></th>    
+     <th id="th3"><div>작성자</div></th>  
+     <th id="th4"><div>작성일</div></th>  
+     <th id="th5"><div>조회수</div></th>
+     <th id="th6"><div>추천</div></th>  
    </tr>
    </thead>
    <tbody>
@@ -97,48 +64,48 @@ body > div > table > thead > tr:nth-child(2) > th:nth-child(6){width:9%}
     <c:set var="num" value="${listcount-(page-1)*limit}" />
     
     <%-- 1페이지일때 공지사항인 게시글 이 먼저 올라간다. --%>  
-    <c:if test="${page==1}">  
-    <c:forEach var="b" items="${boardNoticelist}">
-			   <tr>
-		       <td><%-- 번호 --%>
-		         <c:out value="${'[공지]'}" /> <%-- num 출력 --%>
-		         <c:set var="num" value="${num-1}" /> <%-- num = num-1 의미 --%>
-		       </td>
-		       <td><%--제목 --%>
-		        <div>
-		          <%-- 답변글 제목 앞에 여백처리부분 --%>
-		         <c:if test="${b.board_re_lev != 0}"> <%-- 답글인경우 --%>
-			           <c:forEach var="a" begin="0" end="${b.board_re_lev*2}" step="1">
-			           &nbsp;
-			           </c:forEach>
-		           <img src="board/board_image/arrow.png"> 
-		         </c:if>
-		         
-		         <c:if test="${b.board_re_lev == 0}"><%-- 원문인경우 --%>
-		         &nbsp;
-		         </c:if>
-		         
-		         <a href="BoardDetailAction.bo?num=${b.board_num}">
-		           <c:if test="${b.board_subject.length()>= 18}">
-		            <c:out value="${b.board_subject.substring(0,18)}..." />
-		          </c:if>
-		          <c:if test="${b.board_subject.length() < 18}">
-		            <c:out value="${b.board_subject}" />
-		          </c:if>
-		         </a>[${b.cnt}]
-		        </div>  
-		       </td>
-		       <td><div>${b.board_name}</div></td>
-		       <td><div>${b.board_date}</div></td>
-		       <td><div>${b.board_readcount}</div></td>
-		       <td><div>${b.board_like}</div></td>
-		      </tr>
-		    
-	  </c:forEach> 
+    <c:if test="${page==1 && !empty boardNoticelist}">  
+	    <c:forEach var="b" items="${boardNoticelist}">
+				   <tr>
+			       <td><%-- 번호 --%>
+			         <c:out value="${'공지'}" /> <%-- num 출력 --%>
+			         <c:set var="num" value="${num-1}" /> <%-- num = num-1 의미 --%>
+			       </td>
+			       <td><%--제목 --%>
+			        <div>
+			          <%-- 답변글 제목 앞에 여백처리부분 --%>
+			         <c:if test="${b.board_re_lev != 0}"> <%-- 답글인경우 --%>
+				           <c:forEach var="a" begin="0" end="${b.board_re_lev*2}" step="1">
+				           &nbsp;
+				           </c:forEach>
+			           <img src="board/board_image/arrow.png"> 
+			         </c:if>
+			         
+			         <c:if test="${b.board_re_lev == 0}"><%-- 원문인경우 --%>
+			         &nbsp;
+			         </c:if>
+			         
+			         <a href="BoardDetailAction.bo?board_num=${b.board_num}">
+			           <c:if test="${b.board_subject.length()>= 18}">
+			            <c:out value="${b.board_subject.substring(0,18)}..." />
+			          </c:if>
+			          <c:if test="${b.board_subject.length() < 18}">
+			            <c:out value="${b.board_subject}" />
+			          </c:if>
+			         </a>[${b.cnt}]
+			        </div>  
+			       </td>
+			       <td><div>${b.board_name}</div></td>
+			       <td><div>${b.board_date}</div></td>
+			       <td><div>${b.board_readcount}</div></td>
+			       <td><div>${b.board_like}</div></td>
+			      </tr>
+			    
+		  </c:forEach> 
 	 </c:if> 
 	   <%-- 공지사항인 게시글 끝 --%>
 	   
-	   <%-- 일반게시물 --%>
+	   <%-- 일반게시물 && 검색게시물 --%>
 	   <c:forEach var="b" items="${boardlist}">    
 			      
 		      <tr>
@@ -267,9 +234,19 @@ body > div > table > thead > tr:nth-child(2) > th:nth-child(6){width:9%}
  <h3 style="text-align: center">등록된 글이 없습니다.</h3>
 </c:if> 
 
-<button type="button" class="btn btn-dark float-right">글쓰기</button>
-</div>
-
+		
+		<form action="Main.bo" method="post">
+		   <div class="input-group mb-3">
+		  <input type="text" class="form-control" name="search_name" placeholder="제목을 검색하세요">
+		  <div class="input-group-append">
+		   <button class="btn btn-dark" type="submit">🔍︎</button>
+		  </div>
+		</div>
+		</form>
+		
+         
+         
+           </div><%--  class container end --%>
 		</div> <%-- class main end --%>
 	</div> <%-- class row end --%>
 
