@@ -70,7 +70,7 @@ body {
 	src="${pageContext.request.contextPath}/calendar/lib/main.js"></script>
 
 
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment-with-locales.min.js" integrity="sha512-42PE0rd+wZ2hNXftlM78BSehIGzezNeQuzihiBCvUEB3CVxHvsShF86wBWwQORNxNINlBPuq7rG4WWhNiTVHFg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
 
  var calendar = null;
@@ -144,15 +144,10 @@ body {
                                   alert("종료일이 시작일보다 먼저입니다.");
                               }else{ // 정상적인 입력 시
                             	  
-                                  var obj = {
-                                      "title" : content,
-                                      "start" : start_date,
-                                      "end" : end_date,
-                                      "allDay" : true
-                                  }//전송할 객체 생성
+
 
                               
-                         adddata(obj);
+
                               
    
  
@@ -186,8 +181,19 @@ body {
                             	var m_end_dt = m_end.getFullYear() + '-' + (m_end.getMonth()+1) + '-' + m_end.getDate();
                            }
 
-                               console.log(m_end_dt);
+                           
+                           var obj = {
+                                   "title" : content,
+                                   "start" : start_date,
+                                   "end" : m_end_dt,
+                                   "allDay" : true
+                               }//전송할 객체 생성
+                               
+                           console.log(m_end_dt);
+                           
+                           adddata(obj);
                              
+                           
                              calendar.addEvent({
                             	 
               			            title: content,
@@ -204,9 +210,21 @@ body {
                              console.log(allEvent[0].title);
                              console.log(allEvent[0].start);
                              console.log(allEvent[0].end);
+                             console.log(allEvent[0].allDay);
                              
-                             console.log('allEvent = ');
-                             console.log(allEvent);
+							
+                             var startevent = moment(allEvent[0]._instance.range.start).format("YYYY-MM-DD");
+                             var endevent = moment(allEvent[0]._instance.range.end).format("YYYY-MM-DD");
+                             
+                           //allday의 start end를 yyyy-mm-dd로 가공
+                             
+                             console.log('startevent');
+                             console.log(startevent);
+
+                             console.log('endevent');
+                             console.log(endevent);
+
+   
                              
        						 
                          }
@@ -338,7 +356,7 @@ body {
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-warning" id="addCalendar">추가</button>
-					
+
 					<button type="button" class="btn btn-secondary"
 						data-dismiss="modal" id="sprintSettingModalClose"
 						data-backdrop="static" data-keybord="false">닫기</button>

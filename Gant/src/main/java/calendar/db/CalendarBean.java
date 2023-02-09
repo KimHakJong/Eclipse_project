@@ -32,8 +32,16 @@ public class CalendarBean {
 	public void setAdmin(String admin) {
 		this.admin = admin;
 	}
+	public String getAllday() {
+		return "true";
+	}
+	public void setAllday(String allday) {
+		this.allday = allday;
+	}
 	String id;
 	String admin;
+	String allday;
+
 
 	String start;
 	String end;
