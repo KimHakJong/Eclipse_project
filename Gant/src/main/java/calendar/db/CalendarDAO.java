@@ -37,7 +37,7 @@ public class CalendarDAO {
 			conn = ds.getConnection();
 
 			
-			String sql = "insert into calendar values (?, ?, ?, ?)";
+			String sql = "insert into calendar (id, startday, endday, title) values (?, ?, ?, ?)";
 			
 			pstmt = conn.prepareStatement(sql);
 
