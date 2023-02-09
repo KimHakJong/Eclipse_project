@@ -12,5 +12,6 @@ department    varchar2(15),
 position    varchar2(10),
 profileimg   varchar2(30),
 hiredate    varchar2(8) default to_char(SYSDATE, 'YYYYMMDD') not null -- 입사일
+select * from members;
 
 );

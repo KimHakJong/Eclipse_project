@@ -24,7 +24,6 @@ public class CommuteCheck implements Action {
 		JsonObject json = dao.checkCommute(name,department,phone_num);
 		
 		response.setContentType("application/json;charset=utf-8");
-		System.out.println("온라인오프라인 체크 데이터:"+json.toString());
 		response.getWriter().print(json);
 		return null;
 	}
