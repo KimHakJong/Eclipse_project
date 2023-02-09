@@ -15,9 +15,31 @@ public class Board {
 	private String board_date; //글의 작성날짜
 	private int    cnt;
 	private int    board_like ; // 좋아요수
+	private String board_like_check; // 좋아요 클릭시 true 취소시 false 
 	private String board_notice; // 공지사항글이면 true 아니면 false 
+	private String fontColor; // 글색
+	private String fontSize; // 글 사이즈
+	private int fontWeight; // 글 굵기
 	
 	
+	public String getFontColor() {
+		return fontColor;
+	}
+	public void setFontColor(String fontColor) {
+		this.fontColor = fontColor;
+	}
+	public String getFontSize() {
+		return fontSize;
+	}
+	public void setFontSize(String fontSize) {
+		this.fontSize = fontSize;
+	}
+	public int getFontWeight() {
+		return fontWeight;
+	}
+	public void setFontWeight(int fontWeight) {
+		this.fontWeight = fontWeight;
+	}
 	public int getBoard_num() {
 		return board_num;
 	}
@@ -109,6 +131,12 @@ public class Board {
 	}
 	public void setBoard_notice(String board_notice) {
 		this.board_notice = board_notice;
+	}
+	public String getBoard_like_check() {
+		return board_like_check;
+	}
+	public void setBoard_like_check(String board_like_check) {
+		this.board_like_check = board_like_check;
 	}
 	
 }
