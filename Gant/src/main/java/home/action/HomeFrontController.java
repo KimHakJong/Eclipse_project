@@ -29,15 +29,19 @@ public class HomeFrontController extends HttpServlet {
 		case "/main.home":  // 메인페이지로 이동
 			action = new MainAction(); 
 			break;
-		case "/mypage.home": // 마이페이지
-			action = new UpdateAction();
-			break;
 		case "/update.home": // 개인정보 수정
 			action = new UpdateAction();
 			break;
 //		case "/updateProcess.home": // 개인정보 수정 데이터 처리
 //			action = new UpdateProcessAction();
 //			break;
+		case "/schedule.home": // 개인 일정
+			action = new ScheduleAction();
+			break;
+		case "/myboard.home": // 게시판 활동
+			action = new MyboardAction();
+			break;
+			
 		}
 		
 		forward = action.execute(request, response);
