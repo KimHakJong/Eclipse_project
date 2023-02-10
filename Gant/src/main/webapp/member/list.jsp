@@ -25,6 +25,7 @@ aside{width:30%; height: 60%; display:inline-block;position:absolute; left:5%; t
 #searchfield{height:40px; padding:0px 30px 0px 15px;
 			 position:relative; left:7px; width:120px;
 			 border:1px solid #C4C5C8; background-color:white;
+			 top:-0.35px;
 		-webkit-appearance:none; /* for chrome */
    		 -moz-appearance:none; /*for firefox*/
    		 appearance:none;
@@ -37,9 +38,10 @@ option{background:white;}
 #searchword{height:40px; padding:0px 10px; width:300px;
 			 position:relative; left:7px;
 			 border:1px solid #C4C5C8;
+			 top:0px;
 			 }
 #searchfield:focus, #searchword:focus {border:2px solid black; outline:none }
-#searchbtn{width:40px;height:40px; background:#1D1F21; border:none; outline:none; margin:0; padding:0; position:relative; bottom:1px}
+#searchbtn{width:40px;height:40px; background:#1D1F21; border:1px solidb #1D1F21; outline:none; margin:0; padding:0; position:relative; top:-1.5px}
 #searchicon{width:23px; height:23px}
 .list{width: 54.5%; position:absolute; right: 5%; top: 6%; display:inline-block}
 .explain img {width:17px; height:17px;margin-bottom:4px}
