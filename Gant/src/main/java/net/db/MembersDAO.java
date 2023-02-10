@@ -106,6 +106,46 @@ public class MembersDAO {
 		return result;
 	}
 	
+	public String getProfileimg(String id) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String profile = "";
+		try {
+			conn = ds.getConnection();
+			String sql = "select profileimg from members "
+					   + "where id = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				profile = rs.getString("profileimg");
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("getProfileimg 에러");
+		}finally {
+			try {
+				if(rs!=null)
+					rs.close();
+			}catch(SQLException se) {
+				se.printStackTrace();
+			}try {
+				if(pstmt!=null)
+					pstmt.close();
+			}catch(SQLException se) {
+				se.printStackTrace();
+			}try {
+				if(conn!=null)
+					conn.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return profile;
+	}
+	
 	public int insert(Members m) { //회원가입
 		Connection conn = null;
 		PreparedStatement pstmt = null;

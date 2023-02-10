@@ -9,7 +9,7 @@
 <style>
     .menu a{cursor:pointer;}
     .menu .hide{display:none;}
-.organization {border:1px solid lightgray;
+.organization {border:1px solid #C4C5C8;
 display:inline-block;
  width:100%; height:100%; padding:10px;
  overflow:auto}

@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
-	
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
 <style>
 * { 
  box-sizing: border-box;
@@ -15,6 +15,8 @@
 body {
   font-family: "Lato", sans-serif;
 }
+
+.my {text-align:center}
 
 #profile {
 	position: relative;
@@ -39,7 +41,7 @@ body {
 .dropup-content {
   display: none;
   position: absolute;
-  background-color: #006CFF;
+  background-color: black;
   min-width: 160px;
   bottom: 50px;
   z-index: 1;
@@ -56,8 +58,8 @@ body {
 
 .dropup-content a:hover {
 	background-color: white;
-	color : #006CFF;
-	border : 1px solid #006CFF;
+	color : black;
+	border : 1px solid black;
 	border-radius: 12px;
 	}
 
@@ -84,7 +86,7 @@ body {
     bottom: 0;
     opacity: 0.8;
     top: -20%;
-    left: 48%;
+    left: 53%;
 }
 
 /* 바로가기 표시되는 중에 스크롤바 표시X */
@@ -96,43 +98,50 @@ body {
   padding: 8px 8px 8px 32px;
   text-decoration: none;
   font-size: 25px;
-  color: green;
+  color: black;
   display: block;
   transition: 0.3s;
 }
 
 .sidepanel a:hover {
   color: black;
+  font-weight:bold
 }
 
 .sidepanel .closebtn {
     position: absolute;
     top: -10px;
-    color: green;
-    right: -55px;
+    color: black;
+    left: 65px;
     font-size: 30px;
 }
+.closebtn:focus {
+	outline:none
+}
 
+.sidepanel {right:-30px}
 .openbtn {
   font-size: 20px;
   cursor: pointer;
-  background-color: green;
+  background-color: white;
   color: white;
-  padding: 10px 15px;
-  border: none;
+  padding: 7px 15px;
   border-radius:12px;
+  border:1px solid lightgray;
   position: relative;
-  bottom: 3%;
+  bottom: 4.5%;
   left: 10px;
+  box-shadow: 3px 3px 4px grey
 }
 
 .openbtn:hover {
   background-color:white;
-  color:green;
-  border: solid 1px green;
+  border: solid 2px black;
   border-radius:12px;
 }
-
+.openbtn:focus {
+  outline:none;
+}
 /* 메뉴 전체 테두리 */
 .left {
 	width : 100%;
@@ -153,7 +162,17 @@ body {
     background: white;
     border-radius: 12px;
 }
-
+#mySearch:focus {
+	outline:none
+}
+/* 메뉴 검색 아이콘 : #searchicon은 주소록에 있음*/
+#menusearchicon {
+  width: 25px;
+  height: 25px;
+  position: relative;
+  top: -50px;
+  left: 85%;
+}
 /*메뉴안의 글자크기*/
 #myMenu {
   list-style-type: none;
@@ -171,11 +190,12 @@ body {
     position: relative;
     top: -10px;
     text-align: center;
-    background-color: black;
-    color: white;
+    background-color: white;
     border-radius: 12px;
 }
-
+#myMenu li a {
+	outline:none;
+}
 #myMenu li {
   border-color: #006CFF;
 	color: dodgerblue;
@@ -188,23 +208,26 @@ body {
 }
 
 #myMenu li a:hover {
-  background-color: white;
+  background-color: black;
   border: 3px solid black;
-  color: black;
+  color: white;
   border-radius: 12px;
 }
 
+#myMenu li .active{background:black; color:white; border:2px solid black}
 #mySidepanel a {
     width: 140px;
     
 }
-
+#mySidepanel a:focus{
+	outline:none
+}
 
 #mySidepanel > a:nth-child(2){
 height: 50px;
     position: absolute;
     top: 30px;
-    color: green;
+    color: black;
 }
 
 
@@ -212,7 +235,7 @@ height: 50px;
 height: 50px;
     position: absolute;
     top: 70px;
-    color: green;
+    color: black;
 
 }
 
@@ -220,13 +243,13 @@ height: 50px;
 
 
 <script>
-
+	
    
 	//바로가기 버튼 부분
 	function openNav() {
 	  document.getElementById("mySidepanel").style.width = "140px";
 	  document.getElementById("mySidepanel").style.height = "150px";
-	  document.getElementById("mySidepanel").style["border"]="1px solid green";
+	  document.getElementById("mySidepanel").style["border"]="1px solid black";
 	}
 	
 	function closeNav() {
@@ -251,6 +274,20 @@ height: 50px;
 	  }
 	}
 	
+$(document).ready(function(){
+		
+	//현재 프로젝트명 뒤 경로
+	let page = window.location.pathname.substring(6);
+	//메뉴 클릭하면 해당 메뉴에 active 클래스를 생성하여 다른 색으로 칠해지기 위한 코드입니다.
+	const pagename = ["Main.att", "Main.bo", "main.calendar","list.net"];
+	for(var i=0; i<pagename.length; i++){
+		if(page==pagename[i]){
+			$("#myMenu > li:eq("+i+")").find('a').addClass('active');
+		}else{
+			$("#myMenu > li:eq("+i+")").find('a').removeClass('active');
+		}
+	}
+});
 </script>
 
 </head>    
@@ -259,7 +296,12 @@ height: 50px;
 	
 	<div class="my">
 		<a href="#">
-	    	<img src="image/ice4.png" alt="profile" id="profile">
+			<c:if test="${empty profileimg}">
+	    		<img src="member/image/defaultprofile.png" alt="profile" id="profile">
+	    	</c:if>
+	    	<c:if test="${!empty profileimg}">
+	    		<img src="memberupload/${profileimg}" alt="profile" id="profile">
+	    	</c:if>
 	   	</a>
 	   	
 		<div class="dropup">
@@ -274,7 +316,7 @@ height: 50px;
 	<br>
     
     <div class="left">
-	    <input type="text" id="mySearch" onkeyup="myFunction()" placeholder="메뉴를 검색하세요">
+	    <input type="text" id="mySearch" onkeyup="myFunction()" placeholder="메뉴를 검색하세요"><img id="menusearchicon" src="image/searchmain.png">
 	    <ul id="myMenu">
 <!-- 	    	각 메뉴마다 해당 메뉴에 맞게 링크 걸어야됨 -->
 	      <li><a href="Main.att ">근태관리</a></li>
@@ -284,7 +326,7 @@ height: 50px;
 	    </ul>
 	  </div>
     
-    <button class="openbtn" onclick="openNav()">바로가기</button>
+    <button class="openbtn" onclick="openNav()"><img style="width:50px;height:40px" src="image/tap.png"></button>
     <div id="mySidepanel" class="sidepanel">
 	  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
 <!-- 	    	각 메뉴마다 해당 메뉴에 맞게 링크 걸어야됨 -->

@@ -31,8 +31,8 @@
     border: 2px solid #C4C5C8;
     position: absolute;
     z-index: 2;
-    right: 44px;
-    top: 36px;
+    right: 83px;
+    top: 47px;
     background: white;
     outline: none;
     border-radius: 20px;
@@ -81,8 +81,8 @@
 .username + .clear + .receiveRemessage {margin-top:17px}
 .username + .clear + .receiveRemessage + .receiveRetime{top:30px}
 
-.receiveRetime{width:100px; position:relative; left:10%; top:18px; font-size:14px}		 
-.receivetime{width:100px; position:relative; left:10%; top:9px; font-size:14px}		 
+.receiveRetime{width:100px; position:relative; margin-left:65px; top:18px; font-size:14px}		 
+.receivetime{width:100px; position:relative; margin-left:65px; top:9px; font-size:14px}		 
 .sendtime {
     position: relative;
     float: right;

@@ -39,8 +39,8 @@ option{background:white;}
 			 border:1px solid #C4C5C8;
 			 }
 #searchfield:focus, #searchword:focus {border:2px solid black; outline:none }
-#searchbtn{width:40px;height:40px; background:black; border:none; outline:none; margin:0; padding:0; position:relative; bottom:1px}
-#searchicon{margin:0px 0px 3px 0px}
+#searchbtn{width:40px;height:40px; background:#1D1F21; border:none; outline:none; margin:0; padding:0; position:relative; bottom:1px}
+#searchicon{width:23px; height:23px}
 .list{width: 54.5%; position:absolute; right: 5%; top: 6%; display:inline-block}
 .explain img {width:17px; height:17px;margin-bottom:4px}
 .explain {position: absolute; top: 15.2%; padding: 10px 10px 0px 0px;}
@@ -51,7 +51,7 @@ option{background:white;}
 }
 .addbook>thead>tr{border-bottom:2px solid #C4C5C8}
 .addbook>tbody>tr>td{border:1px solid #C4C5C8; padding:10px 10px 10px 20px}
-.addbook>thead>tr>th{border-right:1px solid #C4C5C8; padding:10px 10px 10px 20px}
+.addbook>thead>tr>th{background:#1D1F21; color:white;border-right:1px solid #C4C5C8; padding:10px 10px 10px 20px}
 .addbook>thead>tr>th:nth-child(1){width:30%}
 .addbook>thead>tr>th:nth-child(2){width:28%}
 .addbook>thead>tr>th:nth-child(3){width:42%; border-right:none}
