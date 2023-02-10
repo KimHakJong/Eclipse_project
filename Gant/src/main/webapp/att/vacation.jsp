@@ -27,6 +27,7 @@
                      $("#endDate").datepicker( "option", "minDate", selectedDate );
                  }    
  
+                 
             });
             $( "#endDate" ).datepicker({
                  changeMonth: true, 
