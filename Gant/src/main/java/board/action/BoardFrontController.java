@@ -54,7 +54,10 @@ public class BoardFrontController extends HttpServlet {
 		break;	
 	case "/BoardDetailAction.bo":
 		action = new BoardDetailAction();
-		break;	
+		break;
+	case "/BoardDeleteAction.bo":
+		action = new BoardDeleteAction();
+		break;		
 		
 		
 		

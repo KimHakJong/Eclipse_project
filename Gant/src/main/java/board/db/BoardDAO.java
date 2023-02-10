@@ -625,6 +625,136 @@ import javax.sql.DataSource;
 			return profileimg;
 			}
 
+		
+			public boolean isBoardWriter(int num, String pass) {
+				Connection conn = null;
+				PreparedStatement pstmt = null;
+				ResultSet rs = null;
+				boolean result = false;
+			    String sql = "select BOARD_PASS "
+					         + " from boards "
+					         + " where BOARD_NUM = ? ";  
+			   try {
+					    conn = ds.getConnection();
+						pstmt = conn.prepareStatement(sql);
+						pstmt.setInt(1,num);
+						rs = pstmt.executeQuery();
+						
+						// DB에서 가져온 데이터를 VO 객체에 담습니다.
+						if(rs.next()){
+						if(pass.equals(rs.getString("BOARD_PASS"))) {
+							result = true;
+						}
+						}
+						}catch(Exception ex) {
+							ex.printStackTrace();
+							System.out.println("isBoardWriter() 에러 :" + ex);
+						}finally {
+							try {
+								if(rs != null)
+									rs.close();
+							}catch(SQLException e) {
+								e.printStackTrace();
+							}try {
+								if(pstmt != null)
+									pstmt.close();
+							}catch(SQLException e) {
+								e.printStackTrace();
+							}try {
+								if(conn != null)
+									conn.close();}
+							catch(SQLException e) {
+								e.printStackTrace();
+							}
+				}
+				return result;
+			} //isBoardWriter
+
+			
+			
+			
+			
+			
+			
+			
+			//삭제
+			public boolean boardDelete(int num) {
+				Connection conn = null;
+				PreparedStatement pstmt = null,pstmt2 = null ;
+				ResultSet rs = null;
+				String select_sql = "select BOARD_RE_REF , BOARD_RE_LEV , BOARD_RE_SEQ "
+						          + "  from board "
+						          + "  where BOARD_NUM=? ";
+						         
+				
+				String board_delete_sql =  "delete from BOARDS "
+						    +" where BOARD_RE_REF = ? " 
+						    +" and BOARD_RE_LEV >= ? "
+						    +" and BOARD_RE_SEQ >= ? "
+						    +" and BOARD_RE_SEQ <=( nvl((select min(BOARD_RE_SEQ)-1 "
+						    +"                     from BOARDS "
+						    +"                    where BOARD_RE_REF = ? "
+						    +"                     and BOARD_RE_LEV = ? "
+						    +"                     and BOARD_RE_SEQ > ?) , "
+						    +"                     (select max(BOARD_RE_SEQ) "
+						    +"                      from BOARDS "
+						    +"                     where BOARD_RE_REF = ?)) "
+						    +"                    )";
+
+				  boolean result_check = false;
+			  try {
+					
+				    conn = ds.getConnection();
+					pstmt = conn.prepareStatement(select_sql);
+					pstmt.setInt(1, num);
+					rs = pstmt.executeQuery();
+					if(rs.next()) {
+				 pstmt2 = conn.prepareStatement(board_delete_sql);
+				 pstmt2.setInt(1,rs.getInt("BOARD_RE_REF"));
+				 pstmt2.setInt(2,rs.getInt("BOARD_RE_LEV"));
+				 pstmt2.setInt(3,rs.getInt("BOARD_RE_SEQ"));
+				 pstmt2.setInt(4,rs.getInt("BOARD_RE_REF"));
+				 pstmt2.setInt(5,rs.getInt("BOARD_RE_LEV"));
+				 pstmt2.setInt(6,rs.getInt("BOARD_RE_SEQ"));
+				 pstmt2.setInt(7,rs.getInt("BOARD_RE_REF"));
+					}
+					
+					int count = pstmt2.executeUpdate();
+					
+					if(count >= 1) {
+						result_check = true; // 삭제가 안된경우 false를 반환
+					}
+
+					}catch(Exception ex) {
+						ex.printStackTrace();
+						System.out.println("boardDelete() 에러 :" + ex);;
+					}finally {
+						try {
+							if(rs != null)
+								rs.close();
+						}catch(SQLException e1) {
+							e1.printStackTrace();
+						}try {
+							if(pstmt != null)
+								pstmt.close();
+						}catch(SQLException e) {
+							e.printStackTrace();
+						}try {
+							if(pstmt2 != null)
+								pstmt2.close();
+						}catch(SQLException e) {
+							e.printStackTrace();
+						}
+						try {
+							if(conn != null)
+								conn.close();}
+						catch(SQLException e) {
+							e.printStackTrace();
+						}
+			}
+				return result_check;
+			}// boardDelete 
+
 
 
 
