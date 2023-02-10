@@ -117,21 +117,14 @@ $(document).ready(function(){
 	
 	
 	let checkcert = true;
-	$('.check').hide();
-	
 	//이메일 도메인 올바르게 입력 시 '인증번호 발송'버튼 활성화
 	$('#certsend').attr('disabled',true);
-	
-					// 바꾼 부분
 	$('#email,#domain').keyup(function(){
 		if(checkemail==true && checkdomain==true){
 			$('#certsend').attr('disabled',false);
 		}else{
 			$('#certsend').attr('disabled',true);
 		}
-		$('.check').show();
-		
-		
 	});
 
 	//인증번호 발송 클릭 시 '인증번호 확인'버튼 활성화 , 기본값 비활성화

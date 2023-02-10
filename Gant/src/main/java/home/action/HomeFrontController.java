@@ -32,9 +32,9 @@ public class HomeFrontController extends HttpServlet {
 		case "/update.home": // 개인정보 수정
 			action = new UpdateAction();
 			break;
-//		case "/updateProcess.home": // 개인정보 수정 데이터 처리
-//			action = new UpdateProcessAction();
-//			break;
+		case "/updateProcess.home": // 개인정보 수정 데이터 처리
+			action = new UpdateProcessAction();
+			break;
 		case "/schedule.home": // 개인 일정
 			action = new ScheduleAction();
 			break;
