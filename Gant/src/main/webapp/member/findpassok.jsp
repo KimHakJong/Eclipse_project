@@ -11,7 +11,7 @@
    box-sizing: border-box}
    
 #frame{width:520px; margin:0 auto; margin-top:90px;
-	 border-radius:4px; border:1px solid lightgray; padding:20px 40px 40px 40px}
+	 border-radius:4px; border:1px solid #C4C5C8; padding:20px 40px 40px 40px}
 
 #text{text-align:center}
 span{font-weight:bold;}
@@ -20,10 +20,9 @@ span:nth-child(2){color:red}
 button{height:50px; width:180px; 
        border-radius:4px; border:none; 
 	   outline:none; font-size:16px; cursor:pointer;
-	   color:white; display:block; margin:0 auto}
+	   color:white; background:black; display:block; margin:0 auto}
 	   
-#logbtn{ background:#00B50B; opacity:0.8}
-#logbtn:hover{opacity:1}
+#logbtn:hover{color:black; background:white; border:2px solid black}
 
 </style>
 <script>

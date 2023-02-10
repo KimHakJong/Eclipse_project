@@ -13,24 +13,25 @@
 body > div {margin:0 auto; width:600px; position:relative; top:90px}
 a { font-size:18px;
    display:inline-block; height:50px; width:50%; text-align:center;
-   line-height:50px; border:1px solid lightgray;
+   line-height:50px; border:1px solid #C4C5C8;
    text-decoration-line: none; color:black;}
    
-form{padding:100px 60px 20px 60px; border-radius: 4px; border:1px solid lightgray}
+form{padding:100px 60px 20px 60px; border-radius: 4px; border:1px solid #C4C5C8}
 a:nth-child(1) {float:left; border-bottom:none; font-weight:bold; cursor:default}
 a:nth-child(2) {float:right; border-bottom:1px solid black; font-size:14px}
-
+a:focus{border:none; outline:none}
 label{font-size:16px; width:26%; float:left; height:50px; line-height:50px;margin-top:10px; margin-bottom:10px}
 
 input{padding:15px 12px}
-button,input{height:50px; margin-top:10px; margin-bottom:10px; border:1px solid lightgray; border-radius: 4px}
+button,input{height:50px; margin-top:10px; margin-bottom:10px; border:1px solid #C4C5C8; border-radius: 4px}
+input:focus ,button:focus{border:2px solid black; outline:none}
 #email {width:45%; position:relative; left:5px}
 #name, #certnum {width:73%; float:right}
-#sendcert{width:28%; float:right; color:white; background:#006CFF; opacity:0.8}
+#sendcert{width:28%; float:right; color:white; background:black; opacity:0.9}
 #sendcert:disabled {background:#AEAEAE; opacity:1}
 #sendcert:hover{opacity:1}
 
-button[type=submit]{margin-top:20px; width:100%; background:#006CFF; color:white; font-size:16px; opacity:0.8;}
+button[type=submit]{margin-top:20px; width:100%; background:black; color:white; font-size:16px; opacity:0.9;}
 button[type=submit]:hover{opacity:1}
 </style>
 </head>

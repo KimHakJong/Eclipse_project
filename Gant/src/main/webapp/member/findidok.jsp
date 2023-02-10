@@ -11,7 +11,7 @@
    box-sizing: border-box}
    
 #frame{width:520px; margin:0 auto; margin-top:90px;
-	  border-radius:4px; border:1px solid lightgray; padding:20px 40px 40px 40px;
+	  border-radius:4px; border:1px solid #C4C5C8; padding:20px 40px 40px 40px;
 	  height:310px}
 #text{text-align:center}
 span{font-weight:bold;}
@@ -22,11 +22,10 @@ button{height:50px; width:200px;
 	   outline:none; font-size:16px; cursor:pointer;
 	   color:white;}
 	   
-#logbtn{float:left; background:#00B50B; opacity:0.8}
-#logbtn:hover{opacity:1}
+#logbtn{float:left; background:black;}
+#logbtn:hover, #findpassbtn:hover{color:black; background:white; border:2px solid black}
 
-#findpassbtn{float:right; background:#dc3545}#dc3545#BD2130
-#findpassbtn:hover{background:#BD2130}
+#findpassbtn{float:right; background:black}
 </style>
 <script>
 $(document).ready(function(){
