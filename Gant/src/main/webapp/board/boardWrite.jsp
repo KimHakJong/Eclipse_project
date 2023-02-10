@@ -324,7 +324,7 @@ $(document).ready(function(){
 		</div>
 	</div> 
   </div> 
-
+     
 	<footer>
 		<jsp:include page="../home/bottom.jsp" />
 	</footer> 

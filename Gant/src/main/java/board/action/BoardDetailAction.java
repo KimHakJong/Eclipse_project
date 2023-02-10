@@ -62,15 +62,20 @@ public class BoardDetailAction implements Action {
 		
 		String profileimg =  boarddao.getMemberProfile(id);
 		
+		//해당 id에 admin권한이 있는지확인한다.
+		String admin = boarddao.getadmindate(id);
+		
 		//boarddata 객체를 request객체에 저장
 		request.setAttribute("boarddata",boarddata);
 		
 		
 		if(profileimg == null) { // 프로필 사진이 없다면 기본이미지로 변경
-			request.setAttribute("profileimg","defaultprofile.png");
+			request.setAttribute("profileimg","user.png");
 		}else{
 		    request.setAttribute("profileimg",profileimg);
 		}
+		
+		request.setAttribute("admin",admin);
 		
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(false);

@@ -127,7 +127,7 @@ $(function(){
 		         &nbsp;
 		         </c:if>
 		         
-		         <a href="BoardDetailAction.bo?num=${b.board_num}">
+		         <a href="BoardDetailAction.bo?board_num=${b.board_num}">
 		           <c:if test="${b.board_subject.length()>= 18}">
 		            <c:out value="${b.board_subject.substring(0,18)}..." />
 		          </c:if>

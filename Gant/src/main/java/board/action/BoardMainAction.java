@@ -33,7 +33,7 @@ public class BoardMainAction implements Action {
 			return null;
 			}
 		
-		
+	
 		BoardDAO boarddao = new BoardDAO();
 		List<Board> boardlist = new ArrayList<Board>();
 		List<Board> boardNoticelist = new ArrayList<Board>();
