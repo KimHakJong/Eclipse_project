@@ -32,6 +32,9 @@ public class BoardDetailAction implements Action {
 		out.close();
 		return null;
 		}
+		input_pass board_pass board_num
+		
+		//비밀글일 경우 입력한 input_pass 와 board_pass 가 다르다면 다시 리스트 화면으로 가게한다.
 		
 		
 		

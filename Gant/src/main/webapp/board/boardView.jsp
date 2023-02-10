@@ -117,7 +117,7 @@ $(function(){
 		               <button class="btn btn-warning">수정</button>
 		             </a>
 		            <%-- href의 주소를 #으로 설정합니다. --%> 
-		            <a href="#">
+		            <a href="BoardDeleteAction.bo?num=${boarddata.board_num}">
 		               <button class="btn btn-danger" data-toggle="modal"
 		               data-target="#myModal">삭제</button>
 		            </a>
@@ -129,29 +129,6 @@ $(function(){
 		           <button class="btn btn-dark">답변</button>
 		         </a>
 		      </div>
-			
-			<%-- modal 시작 --%>
-			<div class="modal" id="myModal">
-			   <div class="modal-dialog">
-			      <div class="modal-content">
-			         <%-- Modal body --%>
-			         <div class="modal-body">
-			            <form name="deleteForm" action="BoardDeleteAction.bo" method="post">
-			               <input type="hidden" name="num" value="${param.num}" id="comment_board_num">
-			               <div class="form-group">
-			                   <label for="pwd">비밀번호</label>
-			                   <input type="password"
-			                           class="form-control" placeholder="Enter password"
-			                           name="board_pass" id="board_pass">
-			               </div>
-			               <button type="submit" class="btn btn-dark">전송</button>
-			               <button type="button" class="btn btn-dark" data-dismiss="madal" id="close_modal" >취소</button>
-			            </form>
-			         </div>
-			      </div>
-			   </div>
-			</div>
-			<%-- id="myModal" end --%>	
 		</div> <%-- class="container" end --%>
 	</div> <%-- class main end --%>
 </div> <%-- class row end --%>
