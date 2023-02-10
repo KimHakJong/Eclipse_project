@@ -21,7 +21,7 @@ body {
 #profile {
 	position: relative;
 	width:80px; height:80px; border-radius:50%;
-	left : 10px;
+	margin:0px 35px;
 }
 
 /* 여기부터 회원정보(이름, 직책)관련 css */
