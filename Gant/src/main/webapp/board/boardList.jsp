@@ -84,15 +84,54 @@ $(function(){
 			         <c:if test="${b.board_re_lev == 0}"><%-- 원문인경우 --%>
 			         &nbsp;
 			         </c:if>
-			         
-			         <a href="BoardDetailAction.bo?board_num=${b.board_num}">
-			           <c:if test="${b.board_subject.length()>= 18}">
+			         <%-- 비밀글 설정을 안하면 pass는 1이다. --%>
+			         <c:if test="${b.board_pass == 1}">
+			         <a href="BoardDetailAction.bo?board_num=${b.board_num}&board_pass=${b.board_pass}">
+			          <c:if test="${b.board_subject.length()>= 18}">
 			            <c:out value="${b.board_subject.substring(0,18)}..." />
 			          </c:if>
 			          <c:if test="${b.board_subject.length() < 18}">
 			            <c:out value="${b.board_subject}" />
 			          </c:if>
 			         </a>[${b.cnt}]
+			         </c:if>
+			         <%-- 비밀글 설정을 하면 pass는 1이아니다. 이때는 모달을 이용하여 비밀번호를 확인한다. --%>
+			         <c:if test="${b.board_pass != 1}">
+			         <a href="#">
+			          <c:if test="${b.board_subject.length()>= 18}">
+			            <c:out value="${b.board_subject.substring(0,18)}..." />
+			          </c:if>
+			          <c:if test="${b.board_subject.length() < 18}">
+			            <c:out value="${b.board_subject}" />
+			          </c:if>
+			         </a>[${b.cnt}]
+			         
+			         	<%-- modal 시작 --%>
+			<div class="modal" id="myModal">
+			   <div class="modal-dialog">
+			      <div class="modal-content">
+			         <%-- Modal body --%>
+			         <div class="modal-body">
+			            <form name="deleteForm" action="BoardDetailAction.bo?board_num=${b.board_num}" method="post">
+			               <input type="hidden" name="board_pass" value="${b.board_pass}" id="comment_board_num">
+			               <div class="form-group">
+			                   <label for="pwd">비밀번호</label>
+			                   <input type="password"
+			                           class="form-control" placeholder="Enter password"
+			                           name="input_pass" id="board_pass">
+			               </div>
+			               <button type="submit" class="btn btn-dark">전송</button>
+			               <button type="button" class="btn btn-dark" data-dismiss="madal" id="close_modal" >취소</button>
+			            </form>
+			         </div>
+			      </div>
+			   </div>
+			</div>
+			<%-- id="myModal" end --%>	
+			         
+			         
+			         
+			         </c:if>
 			        </div>  
 			       </td>
 			       <td><div>${b.board_name}</div></td>
@@ -126,6 +165,7 @@ $(function(){
 		         <c:if test="${b.board_re_lev == 0}"><%-- 원문인경우 --%>
 		         &nbsp;
 		         </c:if>
+		         
 		         
 		         <a href="BoardDetailAction.bo?board_num=${b.board_num}">
 		           <c:if test="${b.board_subject.length()>= 18}">

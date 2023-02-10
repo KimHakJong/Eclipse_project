@@ -321,7 +321,7 @@ $(document).ready(function(){
 		    <button type="submit" class="button" id="submit">등록</button>
 		    </div>
 		  </form>
-		</div>
+		</div> <%-- contain--%>
 	</div> 
   </div> 
      
