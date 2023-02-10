@@ -41,10 +41,10 @@ li{list-style-type:none}
 <script>
 $(document).ready(function(){
     $(".menu>a").click(function(){ //플러스마이너스아이콘, show-hide
-   		if($(this).find('img').attr('src')=='member/image/plus.png'){
+   		if($(this).find('img').attr('src')=='member/image/plusblack.png'){
    			$(this).find('img').attr('src','member/image/minus.png');
    		}else{
-   			$(this).find('img').attr('src','member/image/plus.png');
+   			$(this).find('img').attr('src','member/image/plusblack.png');
    		}
     	$(this).next("ul").toggle();
     });
@@ -94,42 +94,42 @@ $(document).ready(function(){
 <body>
 <div class="organization">
 <ul>
-<li class="menu"><a><img src="member/image/plus.png">조직도 열기</a>
+<li class="menu"><a><img src="member/image/plusblack.png">조직도 열기</a>
   <ul class="hide">
   <li>
 	<ul>
-		<li class="menu"><a><img src="member/image/plus.png">대표</a>
+		<li class="menu"><a><img src="member/image/plusblack.png">대표</a>
 		<ul class="hide">
 		<li>
 
 		<ul>
-		<li class="menu"><a><img src="member/image/plus.png">기획부</a>
+		<li class="menu"><a><img src="member/image/plusblack.png">기획부</a>
 		    	<ul class="hide plan">
 		    		
 		    	</ul>
 		    </li>	
 		    
-		    <li class="menu"><a><img src="member/image/plus.png">영업부</a>
+		    <li class="menu"><a><img src="member/image/plusblack.png">영업부</a>
 				<ul class="hide sales">
 		    	</ul>
 		    </li>
 		    			    
-		    <li class="menu"><a><img src="member/image/plus.png">인사부</a>
+		    <li class="menu"><a><img src="member/image/plusblack.png">인사부</a>
 		    	<ul class="hide human">
 		    	</ul>
 		    </li>
 		    	
-		    <li class="menu"><a><img src="member/image/plus.png">전산부</a>
+		    <li class="menu"><a><img src="member/image/plusblack.png">전산부</a>
 		    	<ul class="hide it">
 		    	</ul>
 		    </li>
 		    	
-		    <li class="menu"><a><img src="member/image/plus.png">총무부</a>
+		    <li class="menu"><a><img src="member/image/plusblack.png">총무부</a>
 		    	<ul class="hide chong">
 		    	</ul>
 		    </li>
 		    	
-		    <li class="menu"><a><img src="member/image/plus.png">회계부</a>
+		    <li class="menu"><a><img src="member/image/plusblack.png">회계부</a>
 		    	<ul class="hide account">
 		    	</ul>
 		    </li>
