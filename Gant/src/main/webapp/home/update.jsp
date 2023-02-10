@@ -52,7 +52,7 @@ button:enabled:hover{opacity:1}
 #certsend{float:right; width:35%;}
 
 #certnum {width:63%}
-#certcheck{float:right; width:35%}
+#certcheck{float:right; width:35%; font-size: 16px;}
 
 #post{width:68%}
 #spost{width:30%; float:right}
@@ -83,16 +83,6 @@ button[type=submit]{
 	background-color:green; 
 	}
 
-/* #menuOutline { */
-/*  	border: 1px solid gray; */
-/*     width: 70%; */
-/*     height: 95%; */
-/*     margin: 0 auto; */
-/*     margin-top: 20px; */
-/*     padding-top: 20px; */
-/*     padding-bottom: 20px; */
- 	
-/* } */
 
 .mymenu > a {
 	border: 1px solid black;
@@ -108,10 +98,10 @@ button[type=submit]{
     top: -15px;
 }
 
-/* .change{ */
-/* 	background-color : red; */
-/* 	color : black; */
-/* } */
+input[type=file] {
+		display : none;
+	}
+
 
 </style>
 </head>
@@ -139,8 +129,6 @@ button[type=submit]{
 	<jsp:include page="header.jsp"/>
 </header>
 
-<!-- 	현재 형태만 대략 잡아놓음 -->
-
 	<div class="row">
 	
 		<div class="side" style="width:15%">
@@ -158,7 +146,23 @@ button[type=submit]{
 		  <div id="menuOutline">
 			<form action="updateProcess.home" method="post" enctype="multipart/form-data">
 				<div>개인정보</div>
-			
+				
+<%--    				<span id="filename">${info.profileimg }</span> --%>
+   			<label>
+   				<span id="showImage">
+   					<c:if test='${empty info.profileimg }'>
+						<c:set var='src' value='image/defaultprofile.png'/>   				
+   					</c:if>
+   					
+   					<c:if test='${!empty info.profileimg }'>
+   						<c:set var='src' value='${"memberupload/"}${info.profileimg }'/>
+   						<input type="hidden" name="check" value="${info.profileimg }">
+   					</c:if>
+					<img src="${src}" width="100px" alt="profile" >   					
+   				</span>
+				<input type="file" name="profileimg" accept="image/*">   				
+   			</label>
+				
 				
 				
 				<label for="id">아이디</label>
@@ -183,7 +187,7 @@ button[type=submit]{
 					<input type="text" name="jumin1" id="jumin1" 
 							value="${info.jumin.substring(0,6)}" placeholder="주민번호 앞자리" readOnly>
 				<b> - </b>
-					<input type="password" name="jumin2" id="jumin2" 
+					<input type="text" name="jumin2" id="jumin2" 
 							value="${info.jumin.substring(7)}" placeholder="주민번호 뒷자리" readOnly>
 				<span id="jumin_message"></span>
 				<label for="phone1">휴대폰 번호</label>
@@ -205,10 +209,11 @@ button[type=submit]{
 					<button type="button" id="certsend">인증번호 발송</button>
 					<span id="email_message"></span>
 					
-				<label for="certnum">인증번호</label>	
-					<input type="text" name="certnum" id="certnum" maxlength="6">
-					<button type="button" id="certcheck">인증번호 확인</button>
+				<div class="check">
+						<input type="text" name="certnum" id="certnum" maxlength="6">
+						<button type="button" id="certcheck">인증번호 확인</button>
 					<span id="cert_message"></span>
+				</div>
 					
 				<label for="post">우편번호</label>
 					<input type="text" name="post" id="post" 
@@ -250,7 +255,6 @@ button[type=submit]{
 			      <button type=submit class="signupbtn">수정</button>
 			      <button type=reset class="cancelbtn">취소</button>
 				</div>
-<!-- 				<button type="submit">수정</button> -->
 			</form>
 		  </div> <!-- end menuOutline  -->
 		</div> <!-- end main -->
@@ -260,6 +264,33 @@ button[type=submit]{
   <footer>
 	<jsp:include page="bottom.jsp"/>
   </footer>
+  
+  <script>
+	$('input[type=file]').change(function(event) {
+		const inputfile = $(this).val().split('\\');
+		const filename = inputfile[inputfile.length-1];
+		
+		const pattern = /(gif|jpg|jpeg|png)$/i;
+		if(pattern.test(filename)) {
+// 			$('#filename').text(filename);
+			
+			const reader = new FileReader();
+			
+			reader.readAsDataURL(event.target.files[0]);
+			
+			reader.onload = function() {
+				$('#showImage > img').attr('src', this.result);
+			};
+		} else {
+			alert('이미지 파일(gif,jpg,jpeg,png)이 아닌 경우는 무시됩니다.');
+			$('#filename').text('');
+			$('#showImage > img').attr('src', 'image/profile.png');
+			$(this).val('')
+			$('input[name=check]').val('');
+		}
+	})
+  
+  </script>
 
 
 </body>
