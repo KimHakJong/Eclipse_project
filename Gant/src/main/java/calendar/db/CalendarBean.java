@@ -38,10 +38,16 @@ public class CalendarBean {
 	public void setAllday(String allday) {
 		this.allday = allday;
 	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 	String id;
 	String admin;
 	String allday;
-
+	String name;
 
 	String start;
 	String end;
