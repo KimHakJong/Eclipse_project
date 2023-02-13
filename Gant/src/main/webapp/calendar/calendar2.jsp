@@ -59,7 +59,9 @@ body {
 	padding: 0;
 	font-size: 14px;
 }
-
+.fc-toolbar-title{
+	font-size: 20px !important;
+}
 #calendar {
 	max-width: 3000px;
 	margin: 0 auto;
@@ -84,9 +86,10 @@ body {
 <script>
 var g_arg;	//이벤트 글로벌 변수(모달창에서 호출하는 함수에서 참조하기 위함)
  var calendar = null;
+ var i=0;
  $(document).ready(function() {
 	    	
-	 var i=0;
+
 	 
             $('#xbutton').on('click', function(){
                 $('#calendarModal').modal('hide');
@@ -120,10 +123,10 @@ var g_arg;	//이벤트 글로벌 변수(모달창에서 호출하는 함수에�
 	    
 
            headerToolbar: {
-               left: 'prevYear,prev,next,nextYear today',
-                center: 'title',
+               left: 'prev,next,today,addEventButton',
+
                 right: 'dayGridMonth,listWeek',
-                center: 'addEventButton'
+                center: 'title'
 
              },
 
@@ -219,10 +222,11 @@ var g_arg;	//이벤트 글로벌 변수(모달창에서 호출하는 함수에�
 																				.log('obj = '
 																						+ obj);
 																		adddata(obj);
+																		if(obj != null) i++;
 
 																		calendar
 																				.addEvent({
-																					
+																					id: i,		
 																					title : content,
 																					start : start_date,
 																					end : m_end_dt,
@@ -268,6 +272,12 @@ var g_arg;	//이벤트 글로벌 변수(모달창에서 호출하는 함수에�
 									dayMaxEvents : true,
 									locale : 'ko',
 									events : all_events,
+									 buttonText: {
+							              today: '오늘',
+							              month: '달력',
+							              list: '일정'
+
+							          },
 
 									eventAdd : function(obj) {
 
@@ -310,7 +320,7 @@ var g_arg;	//이벤트 글로벌 변수(모달창에서 호출하는 함수에�
 
 			success : function(result) {
 				resultdata = result;
-				console.log('이벤트 가져왔습니다.');
+				console.log('db에서 값 가져오기 완료');
 
 				console.log(result);
 				console.log('resultdata = ');
@@ -369,7 +379,7 @@ var g_arg;	//이벤트 글로벌 변수(모달창에서 호출하는 함수에�
 			var data = {"gubun": "delete", "id" : arg.event.id, "allowyn": "0"};
 			//DB 삭제
 			$.ajax({
-			  url: "./deleteSch.jsp",
+			  url: "${pageContext.request.contextPath}/delete.calendar",
 			  type: "POST",
 			  data: JSON.stringify(data),
 			  dataType: "JSON",
@@ -377,7 +387,7 @@ var g_arg;	//이벤트 글로벌 변수(모달창에서 호출하는 함수에�
 			  success : function(data, status, xhr){
 				  //alert(xhr.status);
 				  arg.event.remove();
-				  initModal(modal, arg);
+				  g_arg=null;
 			  },
 			  error : function(xhr, status, error){
 				    //alert(xhr.responseText);
