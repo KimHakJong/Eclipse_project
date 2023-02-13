@@ -14,8 +14,6 @@ public class UpdateAction implements Action{
 	public ActionForward execute(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		
-		// db에 접속해서 해당 회원정보를 가져와서, 화면단 쪽에 뿌려줌
-		
 		ActionForward forward = new ActionForward();
 		MypageDAO dao = new MypageDAO();
 		Members m_info = new Members();
@@ -32,6 +30,8 @@ public class UpdateAction implements Action{
 			forward.setPath("error/error.jsp");
 			return forward;
 		}
+		
+		session.setAttribute("profileimg", m_info.getProfileimg());
 		
 		request.setAttribute("info", m_info);
 		forward.setRedirect(false);

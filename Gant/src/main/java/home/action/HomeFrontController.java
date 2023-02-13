@@ -15,7 +15,7 @@ public class HomeFrontController extends HttpServlet {
     
 	protected void doProcess(HttpServletRequest request, 
 			HttpServletResponse response) throws ServletException, IOException {
-		
+
 		String requestURI = request.getRequestURI();
 		String contextPath = request.getContextPath();
 		String command = requestURI.substring(contextPath.length());
@@ -40,6 +40,9 @@ public class HomeFrontController extends HttpServlet {
 			break;
 		case "/myboard.home": // 게시판 활동
 			action = new MyboardAction();
+			break;
+		case "/myreply.home": // 게시판 활동
+			action = new MyReplyAction();
 			break;
 			
 		}

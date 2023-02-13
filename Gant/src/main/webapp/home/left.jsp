@@ -244,7 +244,7 @@ height: 50px;
 
 <script>
 	
-   
+	
 	//바로가기 버튼 부분
 	function openNav() {
 	  document.getElementById("mySidepanel").style.width = "140px";
@@ -296,6 +296,7 @@ $(document).ready(function(){
 	
 	<div class="my">
 		<a href="#">
+		<!-- 인클루드된 레프트 -->
 			<c:if test="${empty profileimg}">
 	    		<img src="member/image/defaultprofile.png" alt="profile" id="profile">
 	    	</c:if>
@@ -305,6 +306,7 @@ $(document).ready(function(){
 	   	</a>
 	   	
 		<div class="dropup">
+			<input type="hidden" id="id" value="${id }">
 		  <button class="dropbtn">${id} 님 ▲</button>
 			  <div class="dropup-content">
 			    <a href="update.home">마이페이지</a>

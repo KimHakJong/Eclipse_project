@@ -5,17 +5,17 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-
-public class MainAction implements Action{
-	public ActionForward execute(HttpServletRequest request, 
+public class MyReplyAction  implements Action{
+	public ActionForward execute(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		
+
+		// 아직 안건드림
+
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(false);
-		forward.setPath("home/main.jsp");
+		forward.setPath("home/myreply.jsp");
 		return forward;
-		
+
 	}
 }
