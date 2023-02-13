@@ -98,8 +98,7 @@ body {
             $('#deleteCalendar').on('click', function(){
                 alert("정말 삭제하시겠습니까?");
                 deletedata()
-            	
-                
+         
             })
  
 
@@ -203,8 +202,7 @@ body {
                            
                            var obj = 
                            {
-                        "name" : "<%=sessionId%>
-	",
+                        "name" : "<%=sessionId%>",
 																			"title" : content,
 																			"start" : start_date,
 																			"end" : m_end_dt,
