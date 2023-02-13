@@ -4,11 +4,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import board.db.Board;
 import net.db.Members;
 
 public class MypageDAO {
@@ -100,12 +103,12 @@ public class MypageDAO {
 		try {
 			conn = ds.getConnection();
 			String sql = "update members "
-					  + " set password = ?, phone_num = ?, email = ?, "
-					  + " post = ?, "
-					  + " address = ?, department = ?, "
-					  + " position = ?, profileimg = ? "
-					  + " where id = ? ";
-			
+					+ " set password = ?, phone_num = ?, email = ?, "
+					+ " post = ?, "
+					+ " address = ?, department = ?, "
+					+ " position = ?, profileimg = ? "
+					+ " where id = ? ";
+
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, m.getPassword());
 			pstmt.setString(2, m.getPhone_num());
@@ -116,12 +119,12 @@ public class MypageDAO {
 			pstmt.setString(7, m.getPosition());
 			pstmt.setString(8, m.getProfileimg());
 			pstmt.setString(9, m.getId());
-			
+
 			result = pstmt.executeUpdate();
 			if(result == 0) {
 				System.out.println("개인정보 변경하지 못했습니다");
 			}
-			
+
 
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -144,4 +147,134 @@ public class MypageDAO {
 		}
 		return result;
 	}
+
+
+	 // 글 갯수 구하기
+	public int getListCount(String id) {
+		  Connection conn = null;
+		  PreparedStatement pstmt = null;
+		  ResultSet rs = null;
+		  int x = 0; //글의 갯수
+			 try {
+				conn = ds.getConnection();
+				String sql = "select count(*) from boards "
+							+ "	where BOARD_NAME = ?";
+					pstmt = conn.prepareStatement(sql);
+					pstmt.setString(1, id);
+					rs = pstmt.executeQuery();
+				
+					if(rs.next()){
+						x = rs.getInt(1);
+					}
+					}catch(Exception se) {
+						se.printStackTrace();
+						System.out.println("getListCount()에러 :" + se);
+					}finally {
+						try {
+							if(rs != null)
+								rs.close();
+						}catch(SQLException e) {
+							System.out.println(e.getMessage());
+						}try {
+							if(pstmt != null)
+								pstmt.close();
+						}catch(SQLException e) {
+							System.out.println(e.getMessage());
+						}
+						try {
+							if(conn != null)
+								conn.close();}
+						catch(Exception e) {					
+							System.out.println(e.getMessage());
+						}
+			}
+			return x;
+			}//getListCount()
+
+    //일반 게시글 리스트
+	public List<Board> getBoardList(int page, int limit, String id) {
+		  Connection conn = null;
+		  PreparedStatement pstmt = null;
+		  ResultSet rs = null;
+		  
+		  String sql = "select * "
+			    + " from  (select rownum rnum, j.* "
+			    + "        from (select boards.* , nvl(cnt,0) as cnt "
+			    + "              from boards left outer join (select comment_board_num ,count(*) as CNT"
+			    + "                                         from com"
+			    + "                                         group by comment_board_num)"
+			    + "              on BOARD_NUM = comment_board_num "
+			    + "				 where BOARD_NAME = ? "
+			    + "              order by BOARD_RE_REF desc,"
+			    + "              BOARD_RE_SEQ asc) j "                                      
+			    + "       where rownum<=? "
+			    + "        ) "
+			    + " where rnum>=? and rnum<=? ";  
+		
+		  List<Board> list = new ArrayList<Board> ();
+		  int startrow = (page -1) * limit + 1 ; 
+		  int endrow = startrow  + limit -1 ;  
+		  
+		  try {
+
+			    conn = ds.getConnection();
+				pstmt = conn.prepareStatement(sql);
+				
+				pstmt.setString(1, id);
+				pstmt.setInt(2, endrow);
+				pstmt.setInt(3, startrow);
+				pstmt.setInt(4, endrow);
+				
+				rs = pstmt.executeQuery();
+				
+				// DB에서 가져온 데이터를 VO 객체에 담습니다.
+				while(rs.next()){
+
+				Board board = new Board();
+				board.setBoard_num(rs.getInt("BOARD_NUM"));
+				board.setBoard_name(rs.getString("BOARD_NAME"));
+				board.setBoard_pass(rs.getString("BOARD_PASS"));
+				board.setBoard_subject(rs.getString("BOARD_SUBJECT"));
+				board.setBoard_content(rs.getString("BOARD_CONTENT"));
+				board.setBoard_file(rs.getString("BOARD_FILE"));
+				board.setBoard_re_ref(rs.getInt("BOARD_RE_REF"));
+				board.setBoard_re_lev(rs.getInt("BOARD_RE_LEV"));
+				board.setBoard_re_seq(rs.getInt("BOARD_RE_SEQ"));
+				board.setBoard_readcount(rs.getInt("BOARD_READCOUNT"));
+				board.setBoard_date(rs.getString("BOARD_DATE").substring(2,10));
+				board.setCnt(rs.getInt("cnt"));
+				board.setBoard_like(rs.getInt("BOARD_LIKE"));
+				board.setBoard_notice(rs.getString("BOARD_NOTICE"));
+
+				list.add(board); // 값을 담은 객체를 리스트에 저장
+				}
+				
+				}catch(Exception ex) {
+					ex.printStackTrace();
+					System.out.println("getBoardList() 에러 :" + ex);
+				}finally {
+					try {
+						if(rs != null)
+							rs.close();
+					}catch(SQLException e) {
+						e.printStackTrace();
+					}try {
+						if(pstmt != null)
+							pstmt.close();
+					}catch(SQLException e) {
+						e.printStackTrace();
+					}try {
+						if(conn != null)
+							conn.close();}
+					catch(SQLException e) {
+						e.printStackTrace();
+					}
+		}
+		return list;
+
+	}
+
+
+
+
 }

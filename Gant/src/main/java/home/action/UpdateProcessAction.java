@@ -7,12 +7,14 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import home.db.MypageDAO;
 import net.db.Members;
+import net.db.MembersDAO;
 
 public class UpdateProcessAction implements Action{
 	public ActionForward execute(HttpServletRequest request, 
@@ -66,9 +68,15 @@ public class UpdateProcessAction implements Action{
 			response.setContentType("text/html; charset=utf-8");
 			PrintWriter out = response.getWriter();
 			if(result == 1) {
+				
+				MembersDAO mdao = new MembersDAO();
+				mdao.getProfileimg(id);
+				HttpSession session = request.getSession();
+				session.setAttribute("profileimg", mdao.getProfileimg(id));
+				
 				out.println("<script>");
 				out.println("alert('개인정보 수정 성공하였습니다.');");
-				out.println("location.href='update.home';");
+				out.println("location.href='main.home';");
 				out.println("</script>");
 			} else {
 				out.println("<script>");

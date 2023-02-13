@@ -6,6 +6,7 @@
 <head>
 <title>메인 페이지</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
@@ -32,13 +33,13 @@
 
 	<div class="row">
 		<div class="side" style="width:15%">
+		<!-- 메인 레프트 인클루드 -->
 			<jsp:include page="left.jsp" />
 		</div>
 		
 		<div class="main" style="width:85%">
 			<h4>이번주 캘린더</h4>
 			<div class="calendarView" >
-<%-- 				<jsp:include page="calendar.jsp" />  --%>
 <!-- 				해당하는 페이지 가져다 놓을 예정 -->
 				해당 캘린더
 			</div>
@@ -46,7 +47,6 @@
 			<br>
 			<h4>전체 공지사항</h4>
 			<div class="notice">
-<%-- 				<jsp:include page="notice.jsp" />  --%>
 <!-- 				해당하는 페이지 가져다 놓을 예정 -->
 				해당 공지사항
 			</div>

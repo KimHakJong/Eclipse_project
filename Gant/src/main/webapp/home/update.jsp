@@ -27,7 +27,7 @@ form{width:600px; margin:0 auto; border:1px solid lightgray; border-radius:4px;
 	 
 span { font-size: 13px;}
 
-label{font-size:14px; font-weight:bold; display:block;margin-top:20px}
+label{font-size:14px; font-weight:bold; display:block;margin-top:20px; cursor:pointer;}
 select, input, button { height:50px; margin:10px 0px 0px 0px; 
 						border-radius:4px; cursor:pointer;
 						border:1px solid lightgray; background-color:white}
@@ -132,6 +132,7 @@ input[type=file] {
 	<div class="row">
 	
 		<div class="side" style="width:15%">
+		<!-- 업데이트 레프트 인클루드 -->
 			<jsp:include page="left.jsp" />
 		</div>
 		
