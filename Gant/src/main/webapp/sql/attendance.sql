@@ -14,3 +14,7 @@ check_work_week   number  DEFAULT 1 -- 매주 월요일은 주간 총 근무시�
 );
 
 drop table attendance cascade constraints purge;
+
+delete from attendance;
+
+select * from attendance;

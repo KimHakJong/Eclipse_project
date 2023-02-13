@@ -10,5 +10,7 @@ emergency	    varchar2(13),	--비상연락망 010-0000-0000
 details	        varchar2(2000)	--세부사항
 );
 
+delete from vacation;
+
 select * from vacation;
 
