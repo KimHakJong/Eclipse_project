@@ -1,4 +1,4 @@
-package board.action;
+package comment.action;
 
 import java.io.IOException;
 
@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet("*.bo") //뭐가붙든 .bo으로 끝나면 여기서 처리
-public class BoardFrontController extends HttpServlet {
+@WebServlet("*.co") //뭐가붙든 .co으로 끝나면 여기서 처리
+public class CommentFrontController extends HttpServlet {
    
    private static final long serialVersionUID = 1L;
 
@@ -43,43 +43,21 @@ public class BoardFrontController extends HttpServlet {
       Action action = null;
       
       switch (command) {
-	case "/Main.bo":
-		action = new BoardMainAction();
+      case "/CommentList.co":
+  		action = new CommentList();
+  		break;  
+	  case "/CommentDelete.co":
+		action = new CommentDelete();
 		break;
-	case "/BoardWrite.bo":
-		action = new BoardWriteAction();
-		break;	
-	case "/BoardAddAction.bo":
-		action = new BoardAddAction();
-		break;	
-	case "/BoardDetailAction.bo":
-		action = new BoardDetailAction();
+	  case "/CommentAdd.co":
+		action = new CommentAdd();
 		break;
-	case "/BoardDeleteAction.bo":
-		action = new BoardDeleteAction();
+	  case "/CommentUpdate.co":
+		action = new CommentUpdate();
 		break;	
-	case "/LikeCheck.bo":
-		action = new BoardLikeCheckAction();
-		break;	
-	case "/BoardReplyView.bo":
-		action = new BoardReplyView();
-		break;	
-	case "/BoardReplyAction.bo":
-		action = new BoardReplyAction();
-		break;	
-	case "/BoardFileDown.bo":
-		action = new BoardFileDownAction();
-		break;	
-	case "/BoardModifyView.bo":
-		action = new BoardModifyView();
-		break;
-	case "/BoardModifyAction.bo":
-		action = new BoardModifyAction();
-		break;	
-		
-		
-		
-		
+	  case "/CommentReply.co":
+		action = new CommentReply();
+	   break;		
 	} // switch
       
      forward = action.execute(request,response);

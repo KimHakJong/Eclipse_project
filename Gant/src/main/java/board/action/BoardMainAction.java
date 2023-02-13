@@ -53,7 +53,7 @@ public class BoardMainAction implements Action {
         //검색어 
 		String search_name = request.getParameter("search_name");
 		// 검색어가 있는경우
-		if(search_name != null) {
+		if(search_name != null && !search_name.equals("")) {
 			
 			//검색어에 포함되어있는 게시글 수 
 			listcount = boarddao.getSearchListCount(search_name);

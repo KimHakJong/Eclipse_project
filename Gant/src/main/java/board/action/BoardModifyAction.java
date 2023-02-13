@@ -14,12 +14,11 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import board.db.Board;
 import board.db.BoardDAO;
 
-public class BoardAddAction implements Action {
+public class BoardModifyAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
 		BoardDAO boarddao = new BoardDAO();
 		Board boarddata = new Board();
 		ActionForward forward = new ActionForward();
@@ -45,8 +44,8 @@ public class BoardAddAction implements Action {
 					"utf-8",
 					new DefaultFileRenamePolicy());
 		
-		//BoardBean 객체에 글 등록 폼에서 입력 받은 정보들을 저장		
-		String board_name = multi.getParameter("board_name");
+		//BoardBean 객체에 글 등록 폼에서 입력 받은 정보들을 저장
+		int board_num = Integer.parseInt(multi.getParameter("num"));
 		String board_pass = multi.getParameter("board_pass"); //값이 1이번 비밀글x 
 		String board_subject = multi.getParameter("board_subject");
 		String fontColor = multi.getParameter("fontColor");
@@ -63,7 +62,7 @@ public class BoardAddAction implements Action {
 		}
 		
 		System.out.println("board_pass = " +board_pass);
-		boarddata.setBoard_name(board_name);
+		boarddata.setBoard_num(board_num);
 		
 		if(board_pass == null || board_pass.equals("")) { // 비밀글 설정을 안했다면 1을 넣어준다.   
 			boarddata.setBoard_pass("1");
@@ -84,23 +83,22 @@ public class BoardAddAction implements Action {
 		
 		//글 등록 처리를 위해 DAO의 boardInsert() 메서드를 호출합니다.
 		//글 등록 폼에서 입력한 정보가 저장되어있는 boarddata객체를 전달합니다.
-		result = boarddao.boardInsert(boarddata);
+		result = boarddao.boardUpdate(boarddata);
 		
 		//글 등록에실패할 경우 false를 반환
 		if(result == false) {
-			System.out.println("게시판 등록 실패");
+			System.out.println("게시판글수정 실패");
 			forward.setPath("error/error.jsp");
 			request.setAttribute("message","게시판 등록 실패입니다.");
 			forward.setRedirect(false);
 			return forward;
 		}
-		System.out.println("게시판 등록 완료");
+		System.out.println("게시글 수정 완료");
 		
-		//글 등록이 완료되면 글 목록을 보여주기 위해 "Main.bo"로 이동
 		//글 등록이 완료되면 글 목록을 보여주기 위해 "Main.bo"로 이동
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter writer = response.getWriter();
-		writer.println("<script>alert('게시글 작성이 완료되었습니다.'); location.href='Main.bo';</script>"); 
+		writer.println("<script>alert('게시글 수정이 완료되었습니다.'); location.href='Main.bo';</script>"); 
 		writer.close();
 		return null;
 		} catch (IOException ex) {

@@ -14,7 +14,6 @@ BOARD_RE_SEQ     NUMBER,    -- 답변 글의 순서
 BOARD_READCOUNT  NUMBER,    -- 글이 조회수
 BOARD_DATE       VARCHAR2(10) default to_char(SYSDATE, 'YYYY/MM/DD') not null, -- 글작성날짜
 BOARD_LIKE       NUMBER, -- 좋아요수
-BOARD_LIKE_CHECK VARCHAR2(5) check (BOARD_LIKE_CHECK in ('true','false')), -- 좋아요가 클릭되면 true 아니면 false
 BOARD_NOTICE     VARCHAR2(5) check (BOARD_NOTICE in ('true','false')), -- 공지사항글이면 true 아니면 false
 fontColor        VARCHAR2(15), -- 게시판 글 색
 fontSize         VARCHAR2(15), -- 게시판 글 사이즈
@@ -25,7 +24,7 @@ fontWeight       NUMBER   -- 게시판 글 굵기
 
 -- 게시글에 달린 댓글의 갯수를 구하기 위한 과정입니다.
 select * from boards;
-delete from boards;
+delete from boards where BOARD_PASS !=1;
 
 
 select * from boards where BOARD_SUBJECT LIKE '%이%';

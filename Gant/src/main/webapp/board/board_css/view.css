@@ -33,7 +33,7 @@ body>div>table>tbody tr:last-child {
 	background-color: #4f97e5
 }
 
-#myModal {
+.modal {
 	display: none
 }
 
@@ -41,7 +41,7 @@ body>div>table>tbody tr:last-child {
 	width: 60%
 }
 
-/* 크기 조절 고정*/
+/* í¬ê¸° ì¡°ì ˆ ê³ ì •*/
 textarea.form-control {
 	resize: none
 }
@@ -211,7 +211,7 @@ textarea.comment-write-area-text {
 }
 
 button, textarea {
-	font-family: Apple SD Gothic Neo, 맑은 고딕, Malgun Gothic, 돋움, dotum,
+	font-family: Apple SD Gothic Neo, ë§‘ì€ ê³ ë”•, Malgun Gothic, ë‹ì›€, dotum,
 		sans-serif;
 }
 
@@ -355,10 +355,107 @@ font-weight: 300;
 float:left;	
 }
 
-#Filename{
-padding-right:760px;	
-}
-
 #button{
 float:right;	
 }
+
+/* 좋아요버튼 */
+
+		.fas,.far,.fa{
+			font-family: "fontawesome";
+		}
+		.contain{
+		height:10px !important;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			float: right;
+			padding-top:90px;
+			padding-bottom:20px;
+		}
+		.contain button{
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			padding: 6px 14px;
+			color: #fff !important;
+			cursor: pointer;
+			margin: 0  !important;
+			border-radius: 5px;
+			font-size: 17px;
+			background:#0d1317 !important;
+			border : 1px solid  !important;
+		}
+		.contain button:hover{
+			background: #999494;
+		}
+		button#like.heart,button#dislike.brokeheart{
+			background: #fff !important;
+			color: #0d1317 !important;
+		}
+		button#like.heart .ti-thumb-up{
+			animation: upThumb 0.6s linear;
+		}
+		@keyframes upThumb {
+			20%{
+				transform: rotate(8deg);
+			}
+			50%{
+				transform: scale(1.2) rotate(-24deg);
+			}
+			80%{
+				transform: rotate(16deg);
+			}
+		}
+	
+		.heartAnim{
+			position: relative;
+		}
+		.heartAnim span{
+			position: absolute;
+			left: 30px;
+			bottom: -5px;
+			opacity: 0;
+		}
+		.heartAnim.spreadHeart span{
+			color: red;
+			transition: transform 0.5s linear;
+			animation: heartOpa 0.5s linear;
+		}
+		@keyframes heartOpa{
+			0%{
+				opacity: 0;
+			}
+			50%{
+				opacity: 0.5;
+			}
+			80%{
+				opacity: 0.9;
+			}
+			100%{
+				opacity: 0;
+			}
+		}
+		.heartAnim.spreadHeart span:nth-child(1){
+			transform: translate(-3px,-16px);
+			font-size: 14px;
+		}
+		.heartAnim.spreadHeart span:nth-child(2){
+			transform: translate(1px,-31px);
+			font-size: 14px;
+		}
+		.heartAnim.spreadHeart span:nth-child(3){
+			transform: translate(-11px,-30px);
+			font-size: 12px;
+		}
+		.heartAnim.spreadHeart span:nth-child(4){
+			transform: translate(-5px,-46px);
+			font-size: 14px;
+		}
+		.heartAnim.spreadHeart span:nth-child(5){
+			transform: translate(-22px,-47px);
+			font-size: 16px;
+		}
+
+
+

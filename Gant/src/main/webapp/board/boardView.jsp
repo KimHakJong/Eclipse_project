@@ -5,23 +5,13 @@
 <title>게시판 - 상세</title>
 <link rel="stylesheet" href="board/board_css/view.css" type="text/css"> 
 <link href="css/home.css" rel="stylesheet" type="text/css">
-<%--<script src="js/view.js"></script>--%>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-$(function(){
-	 // 가져온 데이터로 글 css 적용
-	$('#content').css('font-weight', ${boarddata.fontWeight}).css('font-size', "${boarddata.fontSize}").css('color', "${boarddata.fontColor}");
-	
-	 //모달 닫기 버튼 클릭시 이벤트
-	$("#close_modal").click(function() {
-        $("#myModal").modal("hide");
-    });
-	
-});
-</script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
+	<script src="board/board_js/view.js"></script>
 </head>
 <body>
 
@@ -35,17 +25,24 @@ $(function(){
 		</div>
 		
 		<div class="main">
-		<input type="hidden" id="loginid" value="${id}" name="loginid"> <%-- view.js 에서 사용하기 위해 추가--%>
+		<%-- view.js 에서 사용하기 위해 추가--%>
+		<input type="hidden" id="loginid" value="${id}" name="loginid"> 
+		<input type="hidden" name="num" value="${boarddata.board_num}" id="comment_board_num">
+		<input type="hidden" name="fontWeight" value=${boarddata.fontWeight} id="fontWeight">
+		<input type="hidden" name="fontSize" value="${boarddata.fontSize}" id="fontSize">
+		<input type="hidden" name="fontColor" value="${boarddata.fontColor}" id="fontColor">
+		<input type="hidden" name="like_check" value="${like_check}" id="like_check">
+		<%-- view.js 에서 사용하기 위해 추가 끝--%>
 		<div class="container">
 		  <table class="table">
 		  <thead class="thead-dark">
 		     <tr>
-		        <th>공지/자유게시판</th>
+		        <th colspan="2">공지/자유게시판</th>
 		        <th id="date"><div id="board_date">${boarddata.board_date}</div></th>
 		    </tr>
 		    </thead>
 		    <tr>
-		       <td id="member">
+		       <td id="member" colspan="2">
 		       <img src="memberupload/${profileimg}" id="memberfile" alt="memberfile">        
 		       <div id="board_name">${boarddata.board_name}</div>
 		       </td>
@@ -54,10 +51,11 @@ $(function(){
 	    <tr>
 	        <td><div>제목</div></td>
 	        <td><c:out value="${boarddata.board_subject}"/></td>
+	        <td></td>
 	    </tr> 
 	    <tr>
 	        <td><div>내용</div></td>
-	        <td style="padding-right: 0px">
+	        <td style="padding-right: 0px" colspan="2">
 	            <textarea class="form-control" 
 	                      rows="5" id="content" readOnly>${boarddata.board_content}</textarea>
 	        </td>
@@ -70,14 +68,47 @@ $(function(){
 	       <%-- 파일을 첨부한 경우 --%>
 	        <c:if test="${!empty boarddata.board_file}">
 	          <td id="Filename"><img src="board/board_image/download.png" width="20px">
-	            <a href="BoardFileDown.bo?filename=${boarddata.board_file}">${boarddata.board_file}</a>
+	            <a href="BoardFileDown.bo?filename=${boarddata.board_file}" id="board_file">${boarddata.board_file}</a>
 	           </td>
 	        </c:if>
 	       <%-- 파일을 첨부하지 않은경우 --%>
-	        <c:if test="${empty boarddata.board_file}">  
-	         <td></td>
+	        <c:if test="${empty boarddata.board_file}"> 
+	        <td></td> 
 	        </c:if>
+	         <td> <%-- 좋아요버튼 --%>
+				         <div class="contain">
+					<div class="heartAnim">
+						<span class="fas fa-heart"></span>
+						<span class="fas fa-heart"></span>
+						<span class="fas fa-heart"></span>
+						<span class="fas fa-heart"></span>
+						<span class="fas fa-heart"></span>
+					</div>
+					<button id="like"><span class="ti ti-thumb-up"></span>&nbsp;Like</button>
+				</div>
+	         </td><%-- 좋아요버튼 끝 --%>
+
 	      </tr>
+	    </c:if>
+	    
+	     <c:if test="${boarddata.board_re_lev != 0}">
+	    <%-- 답글인경우 --%>
+	    <tr>
+	         <td colspan="2"></td>
+	         <td> <%-- 좋아요버튼 --%>
+				         <div class="contain">
+					<div class="heartAnim">
+						<span class="fas fa-heart"></span>
+						<span class="fas fa-heart"></span>
+						<span class="fas fa-heart"></span>
+						<span class="fas fa-heart"></span>
+						<span class="fas fa-heart"></span>
+					</div>
+					<button id="like"><span class="ti ti-thumb-up"></span>&nbsp;Like</button>
+				</div>
+	         </td><%-- 좋아요버튼 끝 --%>
+
+	     </tr>
 	    </c:if>
 	    </table>
 	     
@@ -112,22 +143,22 @@ $(function(){
 			
 			
 		        <div id="button">
+		        <%-- 수정버튼과 삭제버튼은 글쓴이와 admin권한을 가진 사람만 보이게 한다. --%>
 		           <c:if test="${boarddata.board_name == id || admin == 'true' }">
 		             <a href="BoardModifyView.bo?num=${boarddata.board_num}">
 		               <button class="btn btn-warning">수정</button>
 		             </a>
-		            <%-- href의 주소를 #으로 설정합니다. --%> 
-		            <a href="BoardDeleteAction.bo?num=${boarddata.board_num}">
-		               <button class="btn btn-danger" data-toggle="modal"
-		               data-target="#myModal">삭제</button>
-		            </a>
+		           <%--삭제는 confirm으로 확인하고 이동 js 에서 처리 --%>
+		           <button class="btn btn-danger" id="bodelete">삭제</button>		            
 		          </c:if>
 		         <a href="Main.bo">
 		           <button class="btn btn-dark">목록</button>
 		         </a>
+		         <c:if test="${boarddata.board_notice == 'false'}">
 		         <a href="BoardReplyView.bo?num=${boarddata.board_num}">
-		           <button class="btn btn-dark">답변</button>
+		           <button class="btn btn-dark">답글쓰기</button>
 		         </a>
+		         </c:if>
 		      </div>
 		</div> <%-- class="container" end --%>
 	</div> <%-- class main end --%>
@@ -136,7 +167,6 @@ $(function(){
 	<footer>
 		<jsp:include page="../home/bottom.jsp" />
 	</footer>
-		
-		
+
 </body>
 </html>

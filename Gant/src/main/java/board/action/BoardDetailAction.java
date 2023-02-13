@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import board.db.Board;
 import board.db.BoardDAO;
+import board.db.BoardLike;
 
 public class BoardDetailAction implements Action {
 
@@ -18,6 +19,7 @@ public class BoardDetailAction implements Action {
 			throws ServletException, IOException {
 		BoardDAO boarddao = new BoardDAO();
 		Board boarddata = new Board();
+		BoardLike like = new BoardLike();
 		
 		HttpSession session = request.getSession();
 		String id  = (String) session.getAttribute("id");
@@ -32,14 +34,44 @@ public class BoardDetailAction implements Action {
 		out.close();
 		return null;
 		}
-		input_pass board_pass board_num
 		
+	
+			
 		//비밀글일 경우 입력한 input_pass 와 board_pass 가 다르다면 다시 리스트 화면으로 가게한다.
+		String board_pass = request.getParameter("board_pass");
 		
+		if(!board_pass.equals("1")) {
+		String input_pass = request.getParameter("input_pass");	
+		    
+		    // input_pass 와 board_pass 가 다르다면 다시 리스트 화면으로 가게한다
+		    if(!board_pass.equals(input_pass)) {	
+		    	response.setContentType("text/html;charset=utf-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>");
+				out.println("alert('비밀번호가 다릅니다.')");
+				out.println("history.back(-1);");
+				out.println("</script>");
+				out.close();
+				return null;
+		    }
+		      
+		}
 		
 		
 		//글번호  파라미터 값을 num변수에 저장
 		int board_num = Integer.parseInt(request.getParameter("board_num"));
+		
+		//boardLike 테이블이있는지 확인 select으로 확인 
+		//selectlike 1이면 있고 0이면 없음
+		int selectlike = boarddao.selectLike(id,board_num);
+		String like_check = ""; 
+		if(selectlike == 0) {
+			boarddao.insertLike(id,board_num);
+			request.setAttribute("like_check","false");
+		}else if(selectlike == 1) {
+			like_check =  boarddao.selectLikeCheck(id,board_num);
+			request.setAttribute("like_check",like_check);
+		}
 		
 		//내용을 확인할 글의 조회수를 증가시킵니다.
 		boarddao.setReadCountUpdate(board_num);
