@@ -3,7 +3,7 @@ drop table boards cascade constraints purge;
 
 CREATE TABLE BOARDS(
 BOARD_NUM        NUMBER PRIMARY KEY,           --글 번호
-BOARD_NAME       VARCHAR2(30),     --작성자  --references members(id) on delete cascade 완성되면 넣겠습니다.
+BOARD_NAME       VARCHAR2(30) references members(id) on delete cascade,  --작성자 
 BOARD_PASS       VARCHAR2 (30),    --비밀번호
 BOARD_SUBJECT    VARCHAR2 (300),   --제목
 BOARD_CONTENT    VARCHAR2 (4000), --내용

@@ -75,14 +75,4 @@ body {
 	left : 10px;
 }
 
-/* 공지사항 부분 */
-.notice {
-	position: relative;
-	background-color: white;
-	width: 98%;
-	height: 200px;
-	padding: 20px;
-	border: 1px solid #607d8b73;
-	border-radius: 12px;
-	left : 10px;
-}
+
