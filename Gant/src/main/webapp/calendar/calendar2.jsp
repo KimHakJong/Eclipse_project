@@ -59,7 +59,9 @@ body {
 	padding: 0;
 	font-size: 14px;
 }
-
+.fc-toolbar-title{
+	font-size: 20px !important;
+}
 #calendar {
 	max-width: 3000px;
 	margin: 0 auto;
@@ -82,11 +84,12 @@ body {
 
 
 <script>
-
+var g_arg;	//이벤트 글로벌 변수(모달창에서 호출하는 함수에서 참조하기 위함)
  var calendar = null;
+ var i=0;
  $(document).ready(function() {
 	    	
-	 var i=0;
+
 	 
             $('#xbutton').on('click', function(){
                 $('#calendarModal').modal('hide');
@@ -95,11 +98,11 @@ body {
                 $('#calendarModal').modal('hide');
             })
             
-            $('#deleteCalendar').on('click', function(){
+            /*$('#deleteCalendar').on('click', function(){
                 alert("정말 삭제하시겠습니까?");
                 deletedata()
          
-            })
+            })*/
  
 
 
@@ -120,10 +123,10 @@ body {
 	    
 
            headerToolbar: {
-               left: 'prevYear,prev,next,nextYear today',
-                center: 'title',
+               left: 'prev,next,today,addEventButton',
+
                 right: 'dayGridMonth,listWeek',
-                center: 'addEventButton'
+                center: 'title'
 
              },
 
@@ -158,7 +161,11 @@ body {
                         	  
                               var content = $("#calendar_content").val();
                               var start_date = $("#calendar_start_date").val();
+                              
                               var end_date = $("#calendar_end_date").val();
+                              
+                              console.log("start_date");
+                              console.log(start_date);
                               
                               
                               
@@ -215,10 +222,11 @@ body {
 																				.log('obj = '
 																						+ obj);
 																		adddata(obj);
+																		if(obj != null) i++;
 
 																		calendar
 																				.addEvent({
-
+																					id: i,		
 																					title : content,
 																					start : start_date,
 																					end : m_end_dt,
@@ -264,6 +272,12 @@ body {
 									dayMaxEvents : true,
 									locale : 'ko',
 									events : all_events,
+									 buttonText: {
+							              today: '오늘',
+							              month: '달력',
+							              list: '일정'
+
+							          },
 
 									eventAdd : function(obj) {
 
@@ -285,9 +299,11 @@ body {
 												.css('display', 'inline');
 										$('#calendarModal #deleteCalendar')
 												.css('display', 'inline');
-										$("#calendarModal").modal("show");
 
-										//insertModalOpen(arg); //이벤트 클릭 시 모달 호출
+
+										insertModalOpen(arg);//이벤트 클릭 시 모달 호출
+
+
 									}
 
 								});
@@ -304,7 +320,7 @@ body {
 
 			success : function(result) {
 				resultdata = result;
-				console.log('이벤트 가져왔습니다.');
+				console.log('db에서 값 가져오기 완료');
 
 				console.log(result);
 				console.log('resultdata = ');
@@ -337,6 +353,51 @@ body {
 			}
 		})
 	}
+	
+	function insertModalOpen(arg){
+		
+
+		g_arg = arg;
+
+		//값이 있는경우 세팅
+		if(g_arg.event != undefined){
+			
+			$('#calendarModal #calendar_content').val(g_arg.event.title);
+			$('#calendarModal #calendar_start_date').val(g_arg.event.startStr);
+			$('#calendarModal #calendar_end_date').val(g_arg.event.endStr);
+
+		}
+		//모달창 show
+		$('#calendarModal').modal('show');
+
+		$('#calendarModal #calendar_content').focus();
+	  }
+	  
+	  //일정삭제
+	  function deleteSch(modal, arg){
+		if(confirm('일정을 삭제하시겠습니까?')){
+			var data = {"gubun": "delete", "id" : arg.event.id, "allowyn": "0"};
+			//DB 삭제
+			$.ajax({
+			  url: "${pageContext.request.contextPath}/delete.calendar",
+			  type: "POST",
+			  data: JSON.stringify(data),
+			  dataType: "JSON",
+			  traditional: true,
+			  success : function(data, status, xhr){
+				  //alert(xhr.status);
+				  arg.event.remove();
+				  g_arg=null;
+			  },
+			  error : function(xhr, status, error){
+				    //alert(xhr.responseText);
+				  alert('일정 삭제 실패<br>새로고침 후 재시도 해주세요');
+			  }
+			});
+			//
+		}
+	  }
+	
 	/*
 	function deletedata(jsondata) {
 		console.log(jsondata);
@@ -356,12 +417,11 @@ body {
 		})
 	}
 	 */
+	 
 	function deletecal(modal, arg) {
 		if (confirm('일정을 삭제하시겠습니까?')) {
 			var data = {
-				"gubun" : "delete",
 				"id" : arg.event.id,
-				"allowyn" : "0"
 			};
 			//DB 삭제
 			$.ajax({
