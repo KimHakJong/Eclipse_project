@@ -7,7 +7,7 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
 <link href="css/home.css" rel="stylesheet" type="text/css">
 <link href="board/board_css/main_bo.css" rel="stylesheet" type="text/css">
@@ -17,8 +17,7 @@ $(function(){
 	$("#board_write").click(function(){
 		location.href="BoardWrite.bo"; 
 		 })
-		 
-		 
+				 	 
 });		 
 </script>
 <title>자유/공지 게시판</title>
@@ -65,27 +64,17 @@ $(function(){
     
     <%-- 1페이지일때 공지사항인 게시글 이 먼저 올라간다. --%>  
     <c:if test="${page==1 && !empty boardNoticelist}">  
-	    <c:forEach var="b" items="${boardNoticelist}">
+	    <c:forEach var="b" items="${boardNoticelist}"  varStatus="i">
 				   <tr>
 			       <td><%-- 번호 --%>
-			         <c:out value="${'공지'}" /> <%-- num 출력 --%>
+			         <c:out value="${'[공지]'}" /> <%-- num 출력 --%>
 			         <c:set var="num" value="${num-1}" /> <%-- num = num-1 의미 --%>
 			       </td>
 			       <td><%--제목 --%>
 			        <div>
-			          <%-- 답변글 제목 앞에 여백처리부분 --%>
-			         <c:if test="${b.board_re_lev != 0}"> <%-- 답글인경우 --%>
-				           <c:forEach var="a" begin="0" end="${b.board_re_lev*2}" step="1">
-				           &nbsp;
-				           </c:forEach>
-			           <img src="board/board_image/arrow.png"> 
-			         </c:if>
-			         
-			         <c:if test="${b.board_re_lev == 0}"><%-- 원문인경우 --%>
 			         &nbsp;
-			         </c:if>
 			         <%-- 비밀글 설정을 안하면 pass는 1이다. --%>
-			         <c:if test="${b.board_pass == 1}">
+			         <c:if test="${b.board_pass == '1'}">
 			         <a href="BoardDetailAction.bo?board_num=${b.board_num}&board_pass=${b.board_pass}">
 			          <c:if test="${b.board_subject.length()>= 18}">
 			            <c:out value="${b.board_subject.substring(0,18)}..." />
@@ -96,41 +85,37 @@ $(function(){
 			         </a>[${b.cnt}]
 			         </c:if>
 			         <%-- 비밀글 설정을 하면 pass는 1이아니다. 이때는 모달을 이용하여 비밀번호를 확인한다. --%>
-			         <c:if test="${b.board_pass != 1}">
-			         <a href="#">
+			         <c:if test="${b.board_pass != '1'}">
+			         <a data-toggle="modal" data-target="#meModal${i.index}"  style="cursor:pointer;">
 			          <c:if test="${b.board_subject.length()>= 18}">
-			            <c:out value="${b.board_subject.substring(0,18)}..." />
+			            <c:out value="🔒︎${b.board_subject.substring(0,18)}..." />
 			          </c:if>
 			          <c:if test="${b.board_subject.length() < 18}">
-			            <c:out value="${b.board_subject}" />
+			            <c:out value="🔒︎${b.board_subject}" />
 			          </c:if>
-			         </a>[${b.cnt}]
-			         
+			         </a>[${b.cnt}]		         
 			         	<%-- modal 시작 --%>
-			<div class="modal" id="myModal">
+			<div class="modal" id="meModal${i.index}">
 			   <div class="modal-dialog">
 			      <div class="modal-content">
 			         <%-- Modal body --%>
 			         <div class="modal-body">
 			            <form name="deleteForm" action="BoardDetailAction.bo?board_num=${b.board_num}" method="post">
-			               <input type="hidden" name="board_pass" value="${b.board_pass}" id="comment_board_num">
+			               <input type="hidden" name="board_pass" value="${b.board_pass}">
 			               <div class="form-group">
 			                   <label for="pwd">비밀번호</label>
 			                   <input type="password"
-			                           class="form-control" placeholder="Enter password"
-			                           name="input_pass" id="board_pass">
+			                           class="form-control" placeholder=""
+			                           name="input_pass">
 			               </div>
 			               <button type="submit" class="btn btn-dark">전송</button>
-			               <button type="button" class="btn btn-dark" data-dismiss="madal" id="close_modal" >취소</button>
+			               <button type="button" class="btn btn-dark" data-dismiss="modal">닫기</button>
 			            </form>
 			         </div>
 			      </div>
 			   </div>
 			</div>
-			<%-- id="myModal" end --%>	
-			         
-			         
-			         
+			<%-- id="meModal" end --%>	
 			         </c:if>
 			        </div>  
 			       </td>
@@ -145,7 +130,7 @@ $(function(){
 	   <%-- 공지사항인 게시글 끝 --%>
 	   
 	   <%-- 일반게시물 && 검색게시물 --%>
-	   <c:forEach var="b" items="${boardlist}">    
+	   <c:forEach var="b" items="${boardlist}"  varStatus="vs">     
 			      
 		      <tr>
 		       <td><%-- 번호 --%>
@@ -159,22 +144,57 @@ $(function(){
 			           <c:forEach var="a" begin="0" end="${b.board_re_lev*2}" step="1">
 			           &nbsp;
 			           </c:forEach>
-		           <img src="board/board_image/arrow.png"> 
+		           <img src="board/board_image/arrows.png" width="15px"> 
 		         </c:if>
 		         
 		         <c:if test="${b.board_re_lev == 0}"><%-- 원문인경우 --%>
-		         &nbsp;
+		         &nbsp;		         
 		         </c:if>
-		         
-		         
-		         <a href="BoardDetailAction.bo?board_num=${b.board_num}">
-		           <c:if test="${b.board_subject.length()>= 18}">
-		            <c:out value="${b.board_subject.substring(0,18)}..." />
-		          </c:if>
-		          <c:if test="${b.board_subject.length() < 18}">
-		            <c:out value="${b.board_subject}" />
-		          </c:if>
-		         </a>[${b.cnt}]
+		       <%-- 비밀글 설정을 안하면 pass는 1이다. --%>
+			         <c:if test="${b.board_pass == '1'}">
+			         <a href="BoardDetailAction.bo?board_num=${b.board_num}&board_pass=${b.board_pass}">
+			          <c:if test="${b.board_subject.length()>= 18}">
+			            <c:out value="${b.board_subject.substring(0,18)}..." />
+			          </c:if>
+			          <c:if test="${b.board_subject.length() < 18}">
+			            <c:out value="${b.board_subject}" />
+			          </c:if>
+			         </a>[${b.cnt}]
+			         </c:if>
+			         <%-- 비밀글 설정을 하면 pass는 1이아니다. 이때는 모달을 이용하여 비밀번호를 확인한다. --%>
+			         <c:if test="${b.board_pass != '1'}">
+			         <a data-toggle="modal" data-target="#myModal${vs.index}"  style="cursor:pointer;">
+			          <c:if test="${b.board_subject.length()>= 18}">
+			            <c:out value="🔒︎${b.board_subject.substring(0,18)}..." />
+			          </c:if>
+			          <c:if test="${b.board_subject.length() < 18}">
+			            <c:out value="🔒︎${b.board_subject}" />
+			          </c:if>
+			         </a>[${b.cnt}]		         
+			         	<%-- modal 시작 --%>
+			<div class="modal" id="myModal${vs.index}">
+			   <div class="modal-dialog">
+			      <div class="modal-content">
+			         <%-- Modal body --%>
+			         <div class="modal-body">
+			            <form name="deleteForm" action="BoardDetailAction.bo?board_num=${b.board_num}" method="post">
+			               <input type="hidden" name="board_pass" value="${b.board_pass}">
+			               <div class="form-group">
+			                   <label for="pwd">비밀번호</label>
+			                   <input type="password"
+			                           class="form-control" placeholder=""
+			                           name="input_pass">
+			               </div>
+			               <button type="submit" class="btn btn-dark">전송</button>
+			               <button type="button" class="btn btn-dark"  data-dismiss="modal">닫기</button>
+			            </form>
+			         </div>
+			      </div>
+			   </div>
+			</div>
+			<%-- id="myModal" end --%>	
+
+			         </c:if>
 		        </div>  
 		       </td>
 		       <td><div>${b.board_name}</div></td>

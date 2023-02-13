@@ -159,6 +159,7 @@
 	      $("#vacation_percent").css({"width":vacation_percent+"%"});
 	      $("#my_vacation").text("나의 휴가 현황 (남은 휴가 갯수:"+vacation_num+")");
 	      
+	      
 	     // 휴가신청 버튼 이벤트 팝업창 생성
 		  $("#vacation_request").click(function(){		    	
 		      var vacation_popup = window.open('Vacation.att', '휴가신청서', 'width=600px,height=600px,scrollbars=yes');		    	
