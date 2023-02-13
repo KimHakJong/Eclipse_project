@@ -9,11 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.action.LoginAction;
 
-/**
- * Servlet implementation class SmallFrontController
- */
 @WebServlet("*.sml")
 public class SmallFrontController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -26,6 +22,12 @@ public class SmallFrontController extends HttpServlet {
 		switch (command) {
 		case "/chat.sml":				//쿠키값 확인, 로그인화면이동
 			action = new ChatAction(); //자동로그인 쿠키값이 있는 경우 세션에 id값저장 후 메인화면 이동
+			break;
+		case "/memo.sml":
+			action = new MemoLoad(); //Id값을 받아 해당 회원의 메모장 내용,배경색,글자색을 불러옴
+			break;
+		case "/memoupdate.sml":	 	//메모 저장눌렀을 때 내용,배경색,글자색,아이디 값을 받아와 수정 후 성공,실패 값 json으로 넘김
+			action = new MemoUpdate();
 			break;
 		}
 		

@@ -31,7 +31,7 @@ public class LoginAction implements Action {
 		
 		if(!id2.equals("")) { //자동로그인 쿠키가 있는 경우
 			HttpSession session = request.getSession();
-			session.setAttribute("id2", id2);
+			session.setAttribute("id", id2);
 			forward.setRedirect(true);
 			forward.setPath("main.home"); //ID값 들고 로그인화면 안거치고 바로 메인화면 이동
 		}else if(!id.equals("")) { //ID저장 쿠키가 있는 경우

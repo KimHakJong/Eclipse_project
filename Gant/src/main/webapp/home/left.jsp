@@ -1,12 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
+<%@ include file="../memo/memo.jsp" %>
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	   <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 <!-- 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
 	<script src="http://code.jquery.com/jquery-latest.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <style>
 * { 
  box-sizing: border-box;
@@ -238,12 +241,10 @@ height: 50px;
     color: black;
 
 }
-
 </style>
 
 
 <script>
-	
    
 	//바로가기 버튼 부분
 	function openNav() {
@@ -273,9 +274,11 @@ height: 50px;
 	    }
 	  }
 	}
-	
+	  $( function() {
+		    $( ".memo" ).draggable();
+		  } );	
 $(document).ready(function(){
-		
+	
 	//현재 프로젝트명 뒤 경로
 	let page = window.location.pathname.substring(6);
 	//메뉴 클릭하면 해당 메뉴에 active 클래스를 생성하여 다른 색으로 칠해지기 위한 코드입니다.
@@ -287,6 +290,15 @@ $(document).ready(function(){
 			$("#myMenu > li:eq("+i+")").find('a').removeClass('active');
 		}
 	}
+	
+		$('.mySidepanel>a:eq(1)').click(function(){
+			var win;
+			if(win){
+				win.close();
+				win = window.open('chat.sml', 'chat', 'width=500, height=450, top=170px, left=230px, resizable=no,menubar=no,status=no,titlebar=no,toolbar=no, scrollbars=no,directories=no,location=no');
+			}
+		});
+		 
 });
 </script>
 
@@ -324,15 +336,15 @@ $(document).ready(function(){
 	      <li><a href="list.net">주소록</a></li>
 	    </ul>
 	  </div>
-    
+   
     <button class="openbtn" onclick="openNav()"><img style="width:50px;height:40px" src="image/tap.png"></button>
     <div id="mySidepanel" class="sidepanel">
 	  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
 	  <a href="chat.sml" 
-     		onclick="window.open(this.href, '_blank', 'width=500, height=450, top=170px, left=230px, resizable=no,menubar=no,status=no,titlebar=no,toolbar=no, scrollbars=no,directories=no,location=no'); return false;">채팅</a>
-	  <a href="#">메모장</a>
+	  onClick="window.open('chat.sml', 'chat', 'width=500, height=450, top=170px, left=230px, resizable=no,menubar=no,status=no,titlebar=no,toolbar=no, scrollbars=no,directories=no,location=no'); return false;">
+	  채팅</a>
+	  <a id="openmemo" href="javascript:void(0)">메모장</a>
 	</div>
-	  
 	
 	<div></div>
 	<div></div>
