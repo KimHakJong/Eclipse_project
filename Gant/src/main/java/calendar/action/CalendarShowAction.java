@@ -6,6 +6,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.JsonArray;
+
 import calendar.db.CalendarBean;
 import calendar.db.CalendarDAO;
 
@@ -19,32 +21,14 @@ public class CalendarShowAction implements Action {
 		CalendarDAO caldao = new CalendarDAO();		
 		CalendarBean cal = new CalendarBean();
 		
-		int check = 0;
-		 
-		String id = request.getParameter("id");
-		String admin = request.getParameter("admin");
-		String start = request.getParameter("start");
-		String end = request.getParameter("end");
-		String title = request.getParameter("title");
-
-
-		System.out.println("id : " + id);
-		System.out.println("admin : " + admin);
-		System.out.println("start : " + start);
-		System.out.println("end : " + end);
-		System.out.println("title : " + title);
-	
 		
-		cal.setTitle(title);
-		cal.setStart(start);
-		cal.setEnd(end);
-
+		JsonArray list = caldao.getCalList();
 		
-		check = caldao.add(cal);
+		response.setContentType("application/json;charset=utf-8");
+		response.getWriter().print(list);
 		
-		if(check!=0)
-			System.out.println("성공");
-
+		System.out.println(list.toString());
+		
 		return null;
 	}
 

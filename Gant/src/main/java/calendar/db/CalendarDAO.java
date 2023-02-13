@@ -11,6 +11,9 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+
 public class CalendarDAO {
 	
 	private DataSource ds;
@@ -37,11 +40,12 @@ public class CalendarDAO {
 			conn = ds.getConnection();
 
 			
-			String sql = "insert into calendar (id, startday, endday, title) values (?, ?, ?, ?)";
+			String sql = "insert into calendar (id, name, startday, endday, title) values (calseq.nextval, ?, ?, ?, ?)";
 			
 			pstmt = conn.prepareStatement(sql);
-
-			pstmt.setString(1,cal.getId() );
+			
+			
+			pstmt.setString(1,cal.getName() );
 			pstmt.setString(2,cal.getStart());
 			pstmt.setString(3,cal.getEnd());
 			pstmt.setString(4,cal.getTitle());
@@ -60,14 +64,14 @@ public class CalendarDAO {
 		{
 			if (pstmt != null)
 			try {
-					pstmt.close();
+				pstmt.close();
 			} catch (SQLException ex) {
 				ex.printStackTrace();
 			}
 			
 			if (conn != null)
 			try {
-					conn.close();
+				conn.close();
 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -79,32 +83,35 @@ public class CalendarDAO {
 
 	}
 
-	public List<CalendarBean> getCalList() {
+	public JsonArray getCalList() {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
-		String sql = "select * from calendar";
+		String sql = "select id, allday, startday, endday, title from calendar";
 
-		List<CalendarBean> list = new ArrayList<CalendarBean>();
+		JsonArray list = new JsonArray();
 		
 		try {
 			con = ds.getConnection();
 
+			
 			pstmt = con.prepareStatement(sql);
 
 			rs = pstmt.executeQuery();
 
+			
 			while (rs.next()) {
 				
-				CalendarBean b = new CalendarBean();
-						
-				b.setStart(rs.getString("startday"));
-				b.setEnd(rs.getString("endday"));
-				b.setTitle(rs.getString("title"));
-
-				list.add(b);
+				JsonObject j = new JsonObject();
+				
+				j.addProperty("allDay", "true");
+				j.addProperty("start", rs.getString("startday"));
+				j.addProperty("end", rs.getString("endday"));
+				j.addProperty("title", rs.getString("title"));
+				
+				list.add(j);
 			}
 
 
@@ -113,33 +120,127 @@ public class CalendarDAO {
 			
 			ex.printStackTrace();
 
-		} finally {
+		} finally 
+		{
 			if (rs != null)
 			try {
-					rs.close();
+				rs.close();
 			} catch (SQLException ex) {
 				ex.printStackTrace();
 			}
-			if (pstmt != null) {
+			
+			if (pstmt != null)
 			try {
-					pstmt.close();
+				pstmt.close();
 			} catch (SQLException ex) {
 				ex.printStackTrace();
 			}
+			
 			if (con != null)
 			try {
-					con.close();
-
+				con.close();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-
-			}
 		}
+		
 
 		return list;
 
 	}
+	
+	public boolean caldelete(String id) {
 
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		String sql = "delete from Calendar where id = ?";
+		
+		boolean result = false;
+		
+		try {
+			
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			
+			
+			pstmt.setString(1,id);
+
+
+			int rs = pstmt.executeUpdate();
+			
+						
+			if(rs > 0) result = true;
+			
+			
+		}catch(Exception ex) {
+			System.out.println("delete()에러:"+ex);
+			
+		}finally 
+		{
+				
+			if (pstmt != null)
+			try {
+				pstmt.close();
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+			}
+			
+			if (conn != null)
+			try {
+				conn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
+
+	
+	public String getadmindate(String name) {
+		Connection conn = null;
+		  PreparedStatement pstmt = null;
+		  ResultSet rs = null;
+		  String admin = "";
+		  
+		 try {
+			conn = ds.getConnection();
+		    
+			String sql = "select admin from members where id = ?";
+			
+			// PreparedStatement 객체얻기
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1,name);
+				rs = pstmt.executeQuery();
+			
+				
+				
+				if(rs.next()){ 
+					admin = rs.getString("admin");
+				}
+				
+				}catch(Exception se) {
+					se.printStackTrace();
+				}finally {
+					try {
+						if(rs != null)
+							rs.close();
+					}catch(SQLException e) {
+						System.out.println(e.getMessage());
+					}try {
+						if(pstmt != null)
+							pstmt.close();
+					}catch(SQLException e) {
+						System.out.println(e.getMessage());
+					}
+					try {
+						if(conn != null)
+							conn.close();}
+					catch(Exception e) {					
+						System.out.println(e.getMessage());
+					}
+		}
+		return admin;
+		}
 
 }
