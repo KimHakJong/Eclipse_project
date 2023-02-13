@@ -18,17 +18,17 @@ import net.db.MembersDAO;
 public class MainAction implements Action{
    public ActionForward execute(HttpServletRequest request, 
          HttpServletResponse response) throws ServletException, IOException {
+	   
+	   
+	   HttpSession session = request.getSession();
+		String id = (String) session.getAttribute("id");
+		
+		MembersDAO mdao = new MembersDAO();
+		mdao.getProfileimg(id);
+		session.setAttribute("profileimg", mdao.getProfileimg(id));
       
-      
-      HttpSession session = request.getSession();
-      String id = (String) session.getAttribute("id");
-      
-      MembersDAO mdao = new MembersDAO();
-      mdao.getProfileimg(id);
-      session.setAttribute("profileimg", mdao.getProfileimg(id));
-      
-      
-      
+	   
+	   
    
       if(id == null) {//session에 id값이 존재하지 않는다면 로그인 화면으로 이동
       response.setContentType("text/html;charset=utf-8");
