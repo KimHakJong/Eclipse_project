@@ -31,7 +31,7 @@ label{font-size:14px; font-weight:bold; display:block;margin-top:20px; cursor:po
 select, input, button { height:50px; margin:10px 0px 0px 0px; 
 						border-radius:4px; cursor:pointer;
 						border:1px solid lightgray; background-color:white}
-input:focus {border:3px solid #006CFF; outline:none}
+input:focus {border:3px solid black; outline:none}
 input, button {width:100%;  padding:15px 12px}
 select {background:white;}
 
