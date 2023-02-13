@@ -30,7 +30,7 @@ public class LogoutAction implements Action {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
 		out.println("<script>");
-		out.println("alert('정상적으로 로그아웃되었습니다.');");
+		out.println("alert('정상적으로 로그아웃 되었습니다.');");
 		out.println("location.href='login.net';");
 		out.println("</script>");
 		out.close();

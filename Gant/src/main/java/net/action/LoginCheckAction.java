@@ -21,14 +21,12 @@ public class LoginCheckAction implements Action{
 		String pass = request.getParameter("password");
 		MembersDAO dao = new MembersDAO();
 		int result = dao.idPassCheck(id, pass);
-		String profileimg = dao.getProfileimg(id);
 		//아이디없음:0 아이디만일치:-1 아이디,비밀번호일치:1
-
+		
 		//로그인 성공
 		if(result == 1) {
 			HttpSession session = request.getSession();
 			session.setAttribute("id", id);
-			session.setAttribute("profileimg", profileimg);
 			
 			String IDStore = request.getParameter("remember");
 			String auto = request.getParameter("autologin");
@@ -37,7 +35,7 @@ public class LoginCheckAction implements Action{
 			
 			//자동 로그인 체크한 경우
 			if(auto != null && auto.equals("yes")) {
-				cookie2.setMaxAge(60*6); //1분(테스트용)
+				cookie2.setMaxAge(60*60*6);
 				response.addCookie(cookie2);
 				System.out.println("자동로그인 쿠키확인");
 			}else {
