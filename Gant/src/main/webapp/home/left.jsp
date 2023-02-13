@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
-<%@ include file="../memo/memo.jsp" %>
+<%-- <%@ include file="../memo/memo.jsp" %> --%>
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	   <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
