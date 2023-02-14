@@ -44,7 +44,9 @@ public class CalendarFrontController extends javax.servlet.http.HttpServlet {
 			case "/delete.calendar":
 				action = new CalendarDeleteAction();
 				break;
-			
+			case "/update.calendar":
+				action = new CalendarUpdateAction();
+				break;
 				
 				
 		}//switch end
