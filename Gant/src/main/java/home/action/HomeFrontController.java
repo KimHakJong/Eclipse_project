@@ -38,10 +38,10 @@ public class HomeFrontController extends HttpServlet {
 		case "/schedule.home": // 개인 일정
 			action = new ScheduleAction();
 			break;
-		case "/myboard.home": // 게시판 활동
+		case "/myboard.home": // 게시판의 게시글 활동
 			action = new MyboardAction();
 			break;
-		case "/myreply.home": // 게시판 활동
+		case "/myreply.home": // 게시판의 댓글 활동
 			action = new MyReplyAction();
 			break;
 			

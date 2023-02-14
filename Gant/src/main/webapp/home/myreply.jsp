@@ -167,63 +167,68 @@ height:25px; font-size:16px}
 						<aside>
 							<ul>
 								<li><a href="myboard.home">내가 쓴 게시글 보기</a></li>
-								<li><a href="update.home">내가 쓴 댓글 보기</a></li>
+								<li><a href="myreply.home">내가 쓴 댓글 보기</a></li>
 							</ul>
 						</aside>
 					</div>		
 					
 					<div class="col-sm-8">
-	<c:if test="${listcount > 0}">
+	<c:if test="${commentcount > 0}">
 			<table>
 				<thead>
 				  <tr>
-				    <th colspan="2"><div>총 작성한 글 : <span id="lcount">${listcount}</span> 개</div></th>
+				    <th colspan="2"><div>총 작성한 댓글 : <span id="lcount">${commentcount}</span> 개</div></th>
 				  </tr>
 				  <tr>
 				  	<th><div></div></th>
-				  	<th><div style="margin: 8px;">제목</div></th>
-				  	<th><div>댓글 수</div></th>
-				  	<th><div>조회수</div></th>
-				  	<th><div>날짜</div></th>
+				  	<th><div style="margin: 8px;">내용</div></th>
+				  	<th><div>관련 글</div></th>
 				  </tr>
 				</thead>
 				<tbody>
-				  <c:set var="num" value="${listcount-(page-1) * limit }"/>
-					<c:forEach var="b" items="${boardlist }">
+				  <c:set var="num" value="${commentcount-(page-1) * limit }"/>
+					<c:forEach var="b" items="${commentlist }">
 						<tr>
 						  <td>
 						    <c:out value="${num }."/>
 						    <c:set var="num" value="${num-1 }"/>
 						  </td>
+						  
+						  <td><div>${b.content} </div></td>  
+						  
 						  <td>
 						    <div>
 <!-- 						    	원문글을 제외한 -->
 <!-- 									답글경우 들여쓰기 하여 표시하기 위한 설정 -->
-						      <c:if test="${b.board_re_lev != 0 }">
-						        <c:forEach var="a" begin="0" end="${b.board_re_lev*2}" step="1">
-						        &nbsp;
-						        </c:forEach>
-						        <img src='image/line.gif'>
-						      </c:if>
-<!-- 						      	원문글인 경우는 공백하나만 줌 -->
-						      <c:if test="${b.board_re_lev == 0 }">
-						        &nbsp;
+						      <c:if test="${b.comment_re_lev != 0 }">
+						      
+						        <c:if test="${b.comment_re_lev == 1 }">
+						        	재댓글*&nbsp;
+						        </c:if>
+						        <c:if test="${b.comment_re_lev == 2 }">
+						        	재재댓글*&nbsp;
+						        </c:if>
+						        
 						      </c:if>
 						      
-						      <a href="BoardDetailAction.bo?num=${b.board_num }">
-						        <c:if test="${b.board_subject.length() >= 25 }">
-						        	<c:out value="${b.board_subject.substring(0,25)}..."/>
+						      <c:if test="${b.comment_re_lev == 0 }">
+						        댓글*&nbsp;
+						      </c:if>
+						      
+						      <a href="BoardDetailAction.bo?num=${b.num }">
+						        <c:if test="${b.subject.length() >= 25 }">
+						        	<c:out value="${b.subject.substring(0,25)}..."/>
 						        </c:if>
-						        <c:if test="${b.board_subject.length() < 25}">
-						        	<c:out value="${b.board_subject}"/>
+						        <c:if test="${b.subject.length() < 25}">
+						        	<c:out value="${b.subject}"/>
 						        </c:if>
 <!-- 						         해당 게시글에 달른 댓글 갯수 -->
 						      </a> 
 						     </div>
 						   </td>
-						   <td><div>${b.cnt} 개</div></td>  
-						   <td><div>${b.board_readcount}</div></td>  
-						   <td><div>${b.board_date}</div></td>  
+						   
+						   
+						   <td><div>${b.reg_date}</div></td>  
 						   <td><div id="del">삭제</div></td>  
 						</tr>
 					</c:forEach>
