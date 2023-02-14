@@ -6,19 +6,16 @@
 <head>
 <title>GANT</title>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
-<link rel="stylesheet" 
-	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-
 <link href="css/home.css" rel="stylesheet" type="text/css">
-
-<script>
-
-</script>
 <style>
 *{box-sizing:border-box; font-family:"noto sans", sans-serif;}
 button{background-color:black; color:white}
-#del{
+.del{
 	background-color:orange; color:black;
 	border : 1px solid orange;
 	border-radius : 12px;
@@ -116,29 +113,6 @@ height:25px; font-size:16px}
 }
 
 </style>
-<script>
-	
-	// 자기 글이니깐 비밀번호가 설정되어 있더라도 바로 삭제?? 
-			//=> 비번 입력시에는 비번도 가지고 와서 글번호와 비번 넘기기
-			
-	// 아니면 비밀번호 입력?? 
-			//=> 바로 삭제시에는 글번호만 넘기기
-
-	// 아니면 비밀번호 존재 유무를 확인해서 
-		// 있으면 비밀번호 입력 요구
-		// 없으면 바로 삭제
-			
-			
-	$(function() {
-		$('#del').click(function() {
-			alert('정말 삭제하시겠습니까?');
-	
-		})		
-
-	})
-
-</script>
-
 
 </head>
 <body>
@@ -155,6 +129,7 @@ height:25px; font-size:16px}
 		</div>
 		
 		<div class="main" style="width:85%; height:640px;">
+		
 			<div class="mymenu">
 				<a href="update.home">개인정보 수정</a>
 				<a href="schedule.home">개인 일정</a>
@@ -189,7 +164,7 @@ height:25px; font-size:16px}
 				</thead>
 				<tbody>
 				  <c:set var="num" value="${listcount-(page-1) * limit }"/>
-					<c:forEach var="b" items="${boardlist }">
+					<c:forEach var="b" items="${boardlist}"  varStatus="i">
 						<tr>
 						  <td>
 						    <c:out value="${num }."/>
@@ -215,23 +190,83 @@ height:25px; font-size:16px}
 						      <c:if test="${b.board_re_lev == 0 }">
 <!-- 						        &nbsp; -->
 						      </c:if>
-						      
-						      <a href="BoardDetailAction.bo?num=${b.board_num }">
-						        <c:if test="${b.board_subject.length() >= 25 }">
-						        	<c:out value="${b.board_subject.substring(0,25)}..."/>
-						        </c:if>
-						        <c:if test="${b.board_subject.length() < 25}">
-						        	<c:out value="${b.board_subject}"/>
-						        </c:if>
-<!-- 						         해당 게시글에 달른 댓글 갯수 -->
-						      </a> 
+					<%-- 비밀글 설정을 안하면 pass는 1이다. --%>
+			         <c:if test="${b.board_pass == '1'}">
+			         <a href="BoardDetailAction.bo?board_num=${b.board_num}&board_pass=${b.board_pass}">
+			          <c:if test="${b.board_subject.length()>= 18}">
+			            <c:out value="${b.board_subject.substring(0,18)}..." />
+			          </c:if>
+			          <c:if test="${b.board_subject.length() < 18}">
+			            <c:out value="${b.board_subject}" />
+			          </c:if>
+			         </a>
+			         </c:if>
+			         <%-- 비밀글 설정을 하면 pass는 1이아니다. 이때는 모달을 이용하여 비밀번호를 확인한다. --%>	      
+						       <%-- 비밀글 설정을 하면 pass는 1이아니다. 이때는 모달을 이용하여 비밀번호를 확인한다. --%>
+			         <c:if test="${b.board_pass != '1'}">
+			         <a data-toggle="modal" data-target="#meModal${i.index}"  style="cursor:pointer;">
+			          <c:if test="${b.board_subject.length()>= 18}">
+			            <c:out value="🔒︎${b.board_subject.substring(0,18)}..." />
+			          </c:if>
+			          <c:if test="${b.board_subject.length() < 18}">
+			            <c:out value="🔒︎${b.board_subject}" />
+			          </c:if>
+			         </a>	         
+			<%-- modal 시작 --%>
+			<div class="modal" id="meModal${i.index}">
+			   <div class="modal-dialog">
+			      <div class="modal-content">
+			         <%-- Modal body --%>
+			         <div class="modal-body">
+			            <form name="deleteForm" action="BoardDetailAction.bo?board_num=${b.board_num}" method="post">
+			               <input type="hidden" name="board_pass" value="${b.board_pass}">
+			               <div class="form-group">
+			                   <label for="pwd">비밀번호</label>
+			                   <input type="password"
+			                           class="form-control" placeholder=""
+			                           name="input_pass">
+			               </div>
+			               <button type="submit" class="btn btn-dark">전송</button>
+			               <button type="button" class="btn btn-dark" data-dismiss="modal">닫기</button>
+			            </form>
+			         </div>
+			      </div>
+			   </div>
+			</div>
+			<%-- id="meModal" end --%>
+			</c:if>	 
 						     </div>
 						   </td>
 						   <td><div>${b.cnt} 개</div></td>  
 						   <td><div>${b.board_readcount}</div></td>  
 						   <td><div>${b.board_date}</div></td>  
-						   <td><div id="del">삭제</div></td>  
+						   <td><div id="del${i.index}" class="del">삭제</div></td>  
 						</tr>
+					
+    <script>
+	
+	// 자기 글이니깐 비밀번호가 설정되어 있더라도 바로 삭제?? 
+			//=> 비번 입력시에는 비번도 가지고 와서 글번호와 비번 넘기기
+			
+	// 아니면 비밀번호 입력?? 
+			//=> 바로 삭제시에는 글번호만 넘기기
+
+	// 아니면 비밀번호 존재 유무를 확인해서 
+		// 있으면 비밀번호 입력 요구
+		// 없으면 바로 삭제
+			
+			
+	$(function() {		
+		//삭제버튼 클릭이벤트
+		$('#del${i.index}').click(function() {
+			
+		if(confirm("정말 삭제하시겠습니까?")){
+			location.href = 'myboarDelete.home?num=${b.board_num}'						
+		}		
+		})		
+	})
+</script>	
+		
 					</c:forEach>
 				</tbody>  
 			</table>

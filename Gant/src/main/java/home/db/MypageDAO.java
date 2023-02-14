@@ -250,7 +250,6 @@ public class MypageDAO {
 				board.setCnt(rs.getInt("cnt"));
 				board.setBoard_like(rs.getInt("BOARD_LIKE"));
 				board.setBoard_notice(rs.getString("BOARD_NOTICE"));
-
 				list.add(board); // 값을 담은 객체를 리스트에 저장
 			}
 

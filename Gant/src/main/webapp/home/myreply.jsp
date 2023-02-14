@@ -228,8 +228,9 @@ height:25px; font-size:16px}
 						   </td>
 						   
 						   
-						   <td><div>${b.reg_date}</div></td>  
-						   <td><div id="del">삭제</div></td>  
+						   <td><div>${b.reg_date}</div></td>
+						     
+						   <td><%-- <div id="del">삭제</div> --%></td>  
 						</tr>
 					</c:forEach>
 				</tbody>  
