@@ -110,6 +110,31 @@
 
 	     </tr>
 	    </c:if>
+	    <tr>
+	    <td colspan="2"></td>
+	    <td>
+	    <div id="button">
+		        <%-- 수정버튼과 삭제버튼은 글쓴이와 admin권한을 가진 사람만 보이게 한다. --%>
+		           <c:if test="${boarddata.board_name == id || admin == 'true' }">
+		             <a href="BoardModifyView.bo?num=${boarddata.board_num}">
+		               <button class="btn btn-warning">수정</button>
+		             </a>
+		           <%--삭제는 confirm으로 확인하고 이동 js 에서 처리 --%>
+		           <button class="btn btn-danger" id="bodelete">삭제</button>		            
+		          </c:if>
+		         <a href="Main.bo">
+		           <button class="btn btn-dark">목록</button>
+		         </a>
+		         <c:if test="${boarddata.board_notice == 'false'}">
+		         <a href="BoardReplyView.bo?num=${boarddata.board_num}">
+		           <button class="btn btn-dark">답글쓰기</button>
+		         </a>
+		         </c:if>
+		      </div>
+	    
+	    </td>
+	    </tr>
+	    
 	    </table>
 	     
 	     <%-- 댓글 영역 --%>
@@ -142,24 +167,7 @@
 			
 			
 			
-		        <div id="button">
-		        <%-- 수정버튼과 삭제버튼은 글쓴이와 admin권한을 가진 사람만 보이게 한다. --%>
-		           <c:if test="${boarddata.board_name == id || admin == 'true' }">
-		             <a href="BoardModifyView.bo?num=${boarddata.board_num}">
-		               <button class="btn btn-warning">수정</button>
-		             </a>
-		           <%--삭제는 confirm으로 확인하고 이동 js 에서 처리 --%>
-		           <button class="btn btn-danger" id="bodelete">삭제</button>		            
-		          </c:if>
-		         <a href="Main.bo">
-		           <button class="btn btn-dark">목록</button>
-		         </a>
-		         <c:if test="${boarddata.board_notice == 'false'}">
-		         <a href="BoardReplyView.bo?num=${boarddata.board_num}">
-		           <button class="btn btn-dark">답글쓰기</button>
-		         </a>
-		         </c:if>
-		      </div>
+		        
 		</div> <%-- class="container" end --%>
 	</div> <%-- class main end --%>
 </div> <%-- class row end --%>

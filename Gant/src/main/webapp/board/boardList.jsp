@@ -35,27 +35,25 @@ $(function(){
 		
 		<div class="main">
 			<div class="container">
-         <div>
-		<button type="button" class="btn btn-dark float-right" id="board_write">글쓰기</button>
-		</div>
+        
  
 <%-- 게시글이 있는경우 --%>
 <c:if test="${listcount > 0 }">
  <table class="table">
   <thead class="thead-dark">
     <tr>
-     <th colspan="4">공지/자유 게시판</th>
-     <th colspan="2">
+     <th colspan="4" class="th1"></th>
+     <th colspan="2" class="th1">
        <span>검색한 게시글 수 : ${listcount}</span>
      </th>
    </tr>
    <tr>
-     <th id="th1"><div >번호</div></th>
-     <th id="th2"><div>제목</div></th>    
-     <th id="th3"><div>작성자</div></th>  
-     <th id="th4"><div>작성일</div></th>  
-     <th id="th5"><div>조회수</div></th>
-     <th id="th6"><div>추천</div></th>  
+     <th id="th1" class="th2"><div >번호</div></th>
+     <th id="th2" class="th2"><div>제목</div></th>    
+     <th id="th3" class="th2"><div>작성자</div></th>  
+     <th id="th4" class="th2"><div>작성일</div></th>  
+     <th id="th5" class="th2"><div>조회수</div></th>
+     <th id="th6" class="th2"><div>추천</div></th>  
    </tr>
    </thead>
    <tbody>
@@ -294,6 +292,7 @@ $(function(){
  <h3 style="text-align: center">등록된 글이 없습니다.</h3>
 </c:if> 
 
+
 		
 		<form action="Main.bo" method="post">
 		   <div class="input-group mb-3">
@@ -304,7 +303,9 @@ $(function(){
 		</div>
 		</form>
 		
-         
+          <div>
+		<button type="button" class="btn btn-dark float-right" id="board_write">글쓰기</button>
+		</div>
          
            </div><%--  class container end --%>
 		</div> <%-- class main end --%>
