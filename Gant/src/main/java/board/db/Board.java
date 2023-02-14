@@ -2,6 +2,7 @@ package board.db;
 
 public class Board {
 	private String id; // 작성자 id
+	private String id_profileimg; // 작성자 프로필이미지 
 	private int    board_num; //글번호
 	private String board_name; // 작성자
 	private String board_pass; // 비밀번호
@@ -20,7 +21,7 @@ public class Board {
 	private String fontSize; // 글 사이즈
 	private int fontWeight; // 글 굵기
 	
-	
+		
 	public String getFontColor() {
 		return fontColor;
 	}
@@ -130,6 +131,12 @@ public class Board {
 	}
 	public void setBoard_notice(String board_notice) {
 		this.board_notice = board_notice;
+	}
+	public String getId_profileimg() {
+		return id_profileimg;
+	}
+	public void setId_profileimg(String id_profileimg) {
+		this.id_profileimg = id_profileimg;
 	}
 	
 	
