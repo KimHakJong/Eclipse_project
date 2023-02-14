@@ -154,9 +154,16 @@ $(document).ready(function(){
 		  			
 		  			$('.txtMemo').val(Mdata.content); //저장되어있던 내용 불러옴
 		  			storedText = Mdata.content; //메모장 종료할 때 값변경되었는지 확인하기 위해
-		  		
+		  			storedBack = Mdata.background;
+		  			storedColor = Mdata.color;
+		  			console.log("기존회원="+storedBack+"<and>"+ storedColor);
+		  			
 		  		}else{ //막 회원가입하여 방금 메모장테이블 row가 생성된 경우 사용법 알림창
 		  			alert("색변경 및 메모장 작성 후엔\n꼭 저장해주시기 바랍니다.");
+		  			storedText="";
+		  			storedBack = "memo-yellow.png";
+		  			storedColor = "rgb(0, 0, 0)";
+		  			console.log("첫회원="+storedBack+"<and>"+ storedColor);
 		  	    }
 	  	  	  }//success
 			}); //ajax
@@ -164,8 +171,10 @@ $(document).ready(function(){
 	}); //openmemo end
 		
 		$('.btnClose').click(function(){ //메모장 종료
-			if(storedText!=$('.txtMemo').val()){
+			let length = $('.memo').css('background-image').length;
+			if(storedText!=$('.txtMemo').val() || storedBack!=$('.memo').css('background-image').substring(43,length-2) || storedColor!=$('.txtMemo').css('color')){
 				var close = confirm("데이터 변경 후 저장되지 않았습니다.\n정말 종료하시겠습니까?");
+				
 				if(close) { //확인
 					$('.memo').css('display','none');
 				}
@@ -190,7 +199,11 @@ $(document).ready(function(){
 				success : function(rdata){
 					if(rdata == 1){
 						alert("저장되었습니다.");
-						storedText = content; //메모장 종료할 때 값변경되었는지 확인하기 위해
+						//메모장 종료할 때 값변경되었는지 확인하기 위해
+						storedText = content; 
+						storedBack = background;
+						storedColor = color;
+						console.log("저장할때="+storedBack+storedColor)
 					}else{
 						alert("저장 실패입니다.");
 					}
