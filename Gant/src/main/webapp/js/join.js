@@ -401,7 +401,7 @@ $('#spost').click(function(){
 				return false;
 		}
 		
-		if($("#department option:selected").val()=='대표' && $("#position option:selected").val()=='대표'){
+		if($("#department option:selected").val()!='대표' && $("#position option:selected").val()=='대표'){
 				alert("부서명과 직급을 올바르게 선택해주세요");
 				return false;
 		}
