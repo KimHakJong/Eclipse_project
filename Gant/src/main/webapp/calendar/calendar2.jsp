@@ -346,8 +346,8 @@ var g_arg;	//이벤트 글로벌 변수(모달창에서 호출하는 함수에�
 										console.log("arg_name");
 										console.log(arg_name);
 										
-										console.log("arg_id");
-										console.log(arg_id);
+										//console.log("arg_id");
+										//console.log(arg_id);
 										
 										console.log("loginid");
 										console.log(loginid);
@@ -503,11 +503,11 @@ var g_arg;	//이벤트 글로벌 변수(모달창에서 호출하는 함수에�
 		
 		//관리자 admin은 나중에 추가
 		
-		if(name != loginid)
+		/*if(name != loginid)
 		{
             $('#calendarModal #modifyCalendar').css('display', 'none');
 			$('#calendarModal #deleteCalendar').css('display', 'none');
-		}
+		}*/
 
 			
 
@@ -649,10 +649,12 @@ var g_arg;	//이벤트 글로벌 변수(모달창에서 호출하는 함수에�
 							name="calendar_title"> <label for="taskId"
 							class="col-form-label">일정 내용</label> <input type="text"
 							class="form-control" id="calendar_content"
-							name="calendar_content"> <label for="taskId"
+							name="calendar_content"> 
+							<label for="taskId"
 							class="col-form-label">시작 날짜</label> <input type="date"
 							class="form-control" id="calendar_start_date"
-							name="calendar_start_date"> <label for="taskId"
+							name="calendar_start_date" value="2023-02-14">
+							<label for="taskId"
 							class="col-form-label">종료 날짜</label> <input type="date"
 							class="form-control" id="calendar_end_date"
 							name="calendar_end_date">
@@ -680,7 +682,10 @@ var g_arg;	//이벤트 글로벌 변수(모달창에서 호출하는 함수에�
 		<jsp:include page="../home/bottom.jsp" />
 	</footer>
 
+<script>
 
+
+</script>
 
 </body>
 </html>
