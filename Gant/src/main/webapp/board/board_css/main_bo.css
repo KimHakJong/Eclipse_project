@@ -54,3 +54,14 @@ text-align: right;
 	margin-left : 64%
 }
 
+.th1{
+background-color: #ffffff !important;
+color : black !important;
+border-top : 0px solid #ffffff !important;
+}
+
+.main{
+padding-top: 0	;
+}
+
+
