@@ -654,15 +654,17 @@ import javax.sql.DataSource;
 				}   // setReadCountUpdate end
         
 		
+		
 		//글 내용 담기
 		public Board getDetail(int num) {
 			Board board = null; 
 			Connection conn = null;
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
-		    String sql = "select * "
-				         + " from boards "
-				         + " where BOARD_NUM = ? ";  
+		    String sql = "select boards.* , profileimg "
+				         + " from boards INNER JOIN members "
+		    		     + " on boards.BOARD_NAME = members.id "
+				         + " where BOARD_NUM = ? " ;  
 
 		   try {
 				    conn = ds.getConnection();
@@ -689,7 +691,14 @@ import javax.sql.DataSource;
 					board.setFontColor(rs.getString("fontColor"));
 					board.setFontSize(rs.getString("fontSize"));
 					board.setFontWeight(rs.getInt("fontWeight"));
-	
+					
+					// 만약 프로필이 없으면 기본이미지로 한다.
+					if(rs.getString("profileimg") == null || rs.getString("profileimg").equals("")) {
+						board.setId_profileimg("user.png");						
+					}else {
+						board.setId_profileimg(rs.getString("profileimg"));
+					}
+					
 					}
 					}catch(Exception ex) {
 						ex.printStackTrace();
@@ -717,50 +726,7 @@ import javax.sql.DataSource;
        
 		
 		
-		//member 테이블에서 프로필 사진을 가져온다.
-		public String getMemberProfile(String id) {
-			Connection conn = null;
-			  PreparedStatement pstmt = null;
-			  ResultSet rs = null;
-			  String profileimg = "";
-			 try {
-				conn = ds.getConnection();
-			    
-				String sql = "select profileimg from members where id = ? ";
-				
-				// PreparedStatement 객체얻기
-					pstmt = conn.prepareStatement(sql);
-					pstmt.setString(1,id);
-					rs = pstmt.executeQuery();
-				
-					
-					
-					if(rs.next()){ 
-						profileimg = rs.getString("profileimg");
-					}
-					}catch(Exception se) {
-						se.printStackTrace();
-					}finally {
-						try {
-							if(rs != null)
-								rs.close();
-						}catch(SQLException e) {
-							System.out.println(e.getMessage());
-						}try {
-							if(pstmt != null)
-								pstmt.close();
-						}catch(SQLException e) {
-							System.out.println(e.getMessage());
-						}
-						try {
-							if(conn != null)
-								conn.close();}
-						catch(Exception e) {					
-							System.out.println(e.getMessage());
-						}
-			}
-			return profileimg;
-			}
+		
 
 
 			//게시글 삭제

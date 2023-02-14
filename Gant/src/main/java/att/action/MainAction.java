@@ -114,7 +114,7 @@ public class MainAction implements Action {
 					attdao.insert(id);	
 					request.setAttribute("work_week","00:00:00");
 					request.setAttribute("checkbutton","false");
-					
+					request.setAttribute("work_week_hours","00");
 				}else if(select == 1) {
 					att = attdao.getselect(id); // AttendanceDAO의 메서드를 이용하여 DB에 저장되어있는 정보를 가져온다.
 					

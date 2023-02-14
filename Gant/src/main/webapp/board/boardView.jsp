@@ -43,7 +43,7 @@
 		    </thead>
 		    <tr>
 		       <td id="member" colspan="2">
-		       <img src="memberupload/${profileimg}" id="memberfile" alt="memberfile">        
+		       <img src="memberupload/${boarddata.id_profileimg}" id="memberfile" alt="memberfile">        
 		       <div id="board_name">${boarddata.board_name}</div>
 		       </td>
                <td></td>

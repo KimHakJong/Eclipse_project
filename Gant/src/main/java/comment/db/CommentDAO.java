@@ -143,42 +143,90 @@ private DataSource ds;
        
 	
 	
-	//댓글 삭제
-	public int commentsDelete(int num) {
-		 Connection conn = null;
-		 PreparedStatement pstmt = null;
-		 int result = 0;
-		 String sql = "delete com where num=? ";			 
-				
-		 try {
-			    conn = ds.getConnection();
-			    pstmt = conn.prepareStatement(sql);			   
-			    pstmt.setInt(1,num);
-			    result = pstmt.executeUpdate();
-			    
-			    if(result == 1) {
-			    	System.out.println("데이터가 삭제 되었습니다.");
-			    }
-			    
-				}catch(Exception ex) {
-					ex.printStackTrace();
-					System.out.println("commentsDelete() 에러 :" + ex);;
-				}finally {
-					try {
-						if(pstmt != null)
-							pstmt.close();
-					}catch(SQLException e) {
-						e.printStackTrace();
-					}try {
-						if(conn != null)
-							conn.close();}
-					catch(SQLException e) {
-						e.printStackTrace();
+						//댓글 삭제
+						public int commentsDelete(int num) {    
+						Connection conn = null;
+						PreparedStatement pstmt = null,pstmt2 = null ;
+						ResultSet rs = null;
+					    int result_check = 0;
+						String select_sql = "select comment_re_ref , comment_re_lev , comment_re_seq "
+								          + "  from com "
+								          + "  where num=? ";
+								         
+						// 원문글의 경우 답변글포함 삭제 , 답변글의 경우 답변의 답변도 삭제한다.
+						String board_delete_sql =  "delete from com "
+								    +" where comment_re_ref = ? " 
+								    +" and comment_re_lev >= ? "
+								    +" and comment_re_seq >= ? "
+								    +" and comment_re_seq <=( nvl((select min(comment_re_seq)-1 "
+								    +"                     from com "
+								    +"                    where comment_re_ref = ? "
+								    +"                     and comment_re_lev = ? "
+								    +"                     and comment_re_seq > ?) , "
+								    +"                     (select max(comment_re_seq) "
+								    +"                      from com "
+								    +"                     where comment_re_ref = ?)) "
+								    +"                    )";
+					
+						
+						  
+						  
+					  try {
+							
+						    conn = ds.getConnection();
+							pstmt = conn.prepareStatement(select_sql);
+							pstmt.setInt(1, num);
+							rs = pstmt.executeQuery();
+							if(rs.next()) {
+						 pstmt2 = conn.prepareStatement(board_delete_sql);
+						 pstmt2.setInt(1,rs.getInt("comment_re_ref"));
+						 pstmt2.setInt(2,rs.getInt("comment_re_lev"));
+						 pstmt2.setInt(3,rs.getInt("comment_re_seq"));
+						 pstmt2.setInt(4,rs.getInt("comment_re_ref"));
+						 pstmt2.setInt(5,rs.getInt("comment_re_lev"));
+						 pstmt2.setInt(6,rs.getInt("comment_re_seq"));
+						 pstmt2.setInt(7,rs.getInt("comment_re_ref"));
+							}
+							
+							int count = pstmt2.executeUpdate();
+							
+							if(count >= 1) {
+								result_check = 1;
+								System.out.println("데이터가 삭제 되었습니다.");
+							}
+					
+							}catch(Exception ex) {
+								ex.printStackTrace();
+								System.out.println("boardDelete() 에러 :" + ex);;
+							}finally {
+								try {
+									if(rs != null)
+										rs.close();
+								}catch(SQLException e1) {
+									e1.printStackTrace();
+								}try {
+									if(pstmt != null)
+										pstmt.close();
+								}catch(SQLException e) {
+									e.printStackTrace();
+								}try {
+									if(pstmt2 != null)
+										pstmt2.close();
+								}catch(SQLException e) {
+									e.printStackTrace();
+								}
+								try {
+									if(conn != null)
+										conn.close();}
+								catch(SQLException e) {
+									e.printStackTrace();
+								}
 					}
-		}
-		 return result;
-			}   //commentsDelete end
-    
+						return result_check;
+					}// boardDelete 
+						
+	
+	
 	
 	
 	// 댓글 내용 insert
