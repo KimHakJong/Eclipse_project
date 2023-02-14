@@ -17,21 +17,23 @@ public class CalendarDeleteAction implements Action {
 			throws ServletException, IOException {
 
 		boolean result = false;
-		boolean usercheck = false;
+		//boolean usercheck = false;
 
-		String name = (request.getParameter("name"));
-		String id = (request.getParameter("id"));
+		String name = request.getParameter("id");
+	//    HttpSession session = request.getSession();
+	  //  String id  = (String) session.getAttribute("id");
 
 		CalendarDAO caldao = new CalendarDAO();
 
 		// usercheck = caldao.isWriter(name); 작성자체크
-
-		result = caldao.caldelete(id);
+		System.out.println(name);
+		result = caldao.caldelete(name);
 
 		// 삭제처리 실패한경우
+		System.out.println(result);
 
 		if (result == false) {
-			System.out.println("게시판 삭제 실패");
+			System.out.println("캘린더 db 삭제 실패");
 			ActionForward forward = new ActionForward();
 			forward.setRedirect(false);
 			request.setAttribute("message", "데이터를 삭제하지 못했습니다.");
@@ -39,15 +41,10 @@ public class CalendarDeleteAction implements Action {
 			return forward;
 		}
 
+	
 		// 삭제 성공의 경우
-		System.out.println("게시판 삭제 성공");
-		response.setContentType("text/html;charset=utf-8");
-		PrintWriter out = response.getWriter();
-		out.println("<script>");
-		out.println("alert('삭제되었습니다.')");
-		out.println("location.href='Main.bo';");
-		out.println("</script>");
-		out.close();
+		System.out.println("캘린더 db 삭제");
+
 		return null;
 
 	}

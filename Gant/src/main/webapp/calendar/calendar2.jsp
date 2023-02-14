@@ -8,9 +8,6 @@ request.setCharacterEncoding("utf-8");
 String sessionId = (String) (session.getAttribute("id"));
 
 
-
-//sessionId = "id";//임시로 id설정
-
 System.out.println(sessionId);
 
 
@@ -59,9 +56,11 @@ body {
 	padding: 0;
 	font-size: 14px;
 }
-.fc-toolbar-title{
+
+.fc-toolbar-title {
 	font-size: 20px !important;
 }
+
 #calendar {
 	max-width: 3000px;
 	margin: 0 auto;
@@ -76,6 +75,10 @@ body {
 .fc-day-sat a {
 	color: blue !important;
 	text-decoration: none;
+}
+
+.fc-event-title.fc-sticky {
+	white-space: normal;
 }
 </style>
 
@@ -98,26 +101,35 @@ var g_arg;	//이벤트 글로벌 변수(모달창에서 호출하는 함수에�
                 $('#calendarModal').modal('hide');
             })
             
-            /*$('#deleteCalendar').on('click', function(){
-                alert("정말 삭제하시겠습니까?");
-                deletedata()
-         
-            })*/
- 
+  
 
 
 			var all_events = null;
            var calendarEl = document.getElementById('calendar');
 
+
 		all_events = loadingEvents();
 		
+		
+		//넘어오는 글제목 title
+		//admin
 
+
+		
+		console.log("sessionId");
 		console.log("<%=sessionId%>");
+		
+		var loginid = "<%=sessionId%>";
+		
+		console.log("loginId");
+		console.log(loginid);
+		
 
 
 
 	    calendar = new FullCalendar.Calendar(calendarEl, {
 	    	
+
 
 	    
 	    
@@ -145,12 +157,15 @@ var g_arg;	//이벤트 글로벌 변수(모달창에서 호출하는 함수에�
                       click : function(){ 
                     	  // 버튼 클릭 시 이벤트 추가
                     	  
-
+						$('#calendarModal #addCalendar')
+                		.css('display', 'inline');
                     	  
                           $("#calendarModal").modal("show"); // modal 나타내기
 
+                  		
                           $('#calendarModal #modifyCalendar').css('display', 'none');
             				$('#calendarModal #deleteCalendar').css('display', 'none');
+            				$('#calendar_title').val('');
                           $('#calendar_content').val('');
                           $('#calendar_start_date').val('');
                           $('#calendar_end_date').val('');
@@ -159,6 +174,7 @@ var g_arg;	//이벤트 글로벌 변수(모달창에서 호출하는 함수에�
                         	  
 
                         	  
+                        	  var title = $("#calendar_title").val();
                               var content = $("#calendar_content").val();
                               var start_date = $("#calendar_start_date").val();
                               
@@ -172,6 +188,9 @@ var g_arg;	//이벤트 글로벌 변수(모달창에서 호출하는 함수에�
                               //내용 입력 여부 확인
                               if(content == null || content == ""){
                                   alert("내용을 입력하세요.");
+                              }else if( title == null || title == ""){
+                            	  alert("제목을 입력하세요.");
+                               
                               }else if(start_date == "" || end_date ==""){
                                   alert("날짜를 입력하세요.");
                               }else if(new Date(end_date)- new Date(start_date) < 0){ // date 타입으로 변경 후 확인
@@ -209,7 +228,9 @@ var g_arg;	//이벤트 글로벌 변수(모달창에서 호출하는 함수에�
                            
                            var obj = 
                            {
-                        "name" : "<%=sessionId%>",
+                        			"id" : title,
+                        			"name" : loginid,
+
 																			"title" : content,
 																			"start" : start_date,
 																			"end" : m_end_dt,
@@ -222,11 +243,13 @@ var g_arg;	//이벤트 글로벌 변수(모달창에서 호출하는 함수에�
 																				.log('obj = '
 																						+ obj);
 																		adddata(obj);
-																		if(obj != null) i++;
+																		
+																		if (obj != null)
+																			i++;
 
 																		calendar
 																				.addEvent({
-																					id: i,		
+																					id : title,
 																					title : content,
 																					start : start_date,
 																					end : m_end_dt,
@@ -272,15 +295,16 @@ var g_arg;	//이벤트 글로벌 변수(모달창에서 호출하는 함수에�
 									dayMaxEvents : true,
 									locale : 'ko',
 									events : all_events,
-									 buttonText: {
-							              today: '오늘',
-							              month: '달력',
-							              list: '일정'
+									buttonText : {
+										today : '오늘',
+										month : '달력',
+										list : '일정'
 
-							          },
+									},
 
 									eventAdd : function(obj) {
 
+										console.log(obj);
 										console.log('추가');
 
 									},
@@ -299,10 +323,36 @@ var g_arg;	//이벤트 글로벌 변수(모달창에서 호출하는 함수에�
 												.css('display', 'inline');
 										$('#calendarModal #deleteCalendar')
 												.css('display', 'inline');
+										
+										var arg_admin, arg_name; 
+										
+										for(var i=0;i<all_events.length;i++)
+										{
+											
+											if(all_events[i].title == arg.event.title)
+											{
+												arg_admin = all_events[i].admin;
+												arg_name = all_events[i].name;
+												//admin을 calendar 테이블에 입력하는게 아니라
+												//로그인 한 아이디의 admin 여부를 판별해야함
+		
+											}	
+										}
+										
+		
+										console.log("arg_admin");
+										console.log(arg_admin);
+										
+										console.log("arg_name");
+										console.log(arg_name);
+										
+										console.log("arg_id");
+										console.log(arg_id);
+										
+										console.log("loginid");
+										console.log(loginid);
 
-
-										insertModalOpen(arg);//이벤트 클릭 시 모달 호출
-
+										insertModalOpen(arg, arg_admin, arg_name, loginid);//이벤트 클릭 시 모달 호출
 
 									}
 
@@ -342,10 +392,11 @@ var g_arg;	//이벤트 글로벌 변수(모달창에서 호출하는 함수에�
 			type : 'POST',
 			url : '${pageContext.request.contextPath}/add.calendar',
 			data : jsondata,
-			dataType : "json",
+			dataType : "text",
 			async : true,
 			success : function(rdata) {
 				console.log('db 저장 완료.');
+				document.location.reload();
 			},
 			error : function(request, status, error) {
 			},
@@ -353,91 +404,191 @@ var g_arg;	//이벤트 글로벌 변수(모달창에서 호출하는 함수에�
 			}
 		})
 	}
+
+	function updatedata(arg) {
+
+		var title = $("#calendar_title").val();
+		var content = $("#calendar_content").val();
+		var start_date = $("#calendar_start_date").val();
+
+		var end_date = $("#calendar_end_date").val();
+
+		console.log("start_date");
+		console.log(start_date);
+
+		//내용 입력 여부 확인
+		if (content == null || content == "") {
+			alert("내용을 입력하세요.");
+		} else if (title == null || title == "") {
+			alert("제목을 입력하세요.");
+
+		} else if (start_date == "" || end_date == "") {
+			alert("날짜를 입력하세요.");
+		} else if (new Date(end_date) - new Date(start_date) < 0) { // date 타입으로 변경 후 확인
+			alert("종료일이 시작일보다 먼저입니다.");
+		} else { // 정상적인 입력 시
+
+			var m_end = new Date(end_date.substr(0, 4),
+					end_date.substr(5, 2) - 1, end_date.substr(8, 2));
+
+			m_end.setDate(m_end.getDate() + 1);
+
+			console.log(end_date);
+			console.log(m_end);
+			console.log(m_end.getFullYear());
+			console.log(m_end.getMonth() + 1);
+
+			if (m_end.getMonth() + 1 < 10 && m_end.getDate() < 10) {
+				var m_end_dt = m_end.getFullYear() + '-0'
+						+ (m_end.getMonth() + 1) + '-0' + m_end.getDate();
+			} else if (m_end.getMonth() + 1 < 10 && m_end.getDate() >= 10) {
+				var m_end_dt = m_end.getFullYear() + '-0'
+						+ (m_end.getMonth() + 1) + '-' + m_end.getDate();
+			} else if (m_end.getMonth() + 1 >= 10 && m_end.getDate() < 10) {
+				var m_end_dt = m_end.getFullYear() + '-'
+						+ (m_end.getMonth() + 1) + '-0' + m_end.getDate();
+			} else if (m_end.getMonth() + 1 >= 10 && m_end.getDate() >= 10) {
+				var m_end_dt = m_end.getFullYear() + '-'
+						+ (m_end.getMonth() + 1) + '-' + m_end.getDate();
+			}
+		}
+
+		var data = {
+
+			"title" : content,
+			"id" : title,
+			"start" : start_date,
+			"end" : m_end_dt,
+			"allDay" : true
+		};
+
+		console.log(data);
+
+		$.ajax({
+			url : "${pageContext.request.contextPath}/update.calendar",
+			type : "POST",
+			data : data,
+			dataType : "text",
+
+			success : function(data) {
+
+				$('#calendarModal').modal('hide');
+				document.location.reload();
+				console.log("event 수정 완료");
+				
+
+				g_arg = null;
+				
+			},
+			error : function(data) {
+				//alert(xhr.responseText);
+				alert('일정 수정 실패, 새로고침 후 재시도 해주세요');
+			}
+		});
 	
-	function insertModalOpen(arg){
+	}
+
+	function insertModalOpen(arg, admin, name, loginid) {
+
+		$('#calendarModal #addCalendar').css('display', 'none');
+
+		console.log("admin");
+		console.log(admin);
 		
+		console.log("name");
+		console.log(name);
+		
+		console.log("loginid");
+		console.log(loginid);
+		
+		//관리자 admin은 나중에 추가
+		
+		if(name != loginid)
+		{
+            $('#calendarModal #modifyCalendar').css('display', 'none');
+			$('#calendarModal #deleteCalendar').css('display', 'none');
+		}
+
+			
 
 		g_arg = arg;
+		console.log("arg");
+		console.log(arg);
+		
+		
 
+		
+		var m_end = new Date(g_arg.event.endStr.substr(0, 4),
+				g_arg.event.endStr.substr(5, 2) - 1, g_arg.event.endStr.substr(8, 2));
+		
+		m_end.setDate(m_end.getDate()-1);
+
+		console.log(m_end);
+		console.log(m_end.getFullYear());
+		console.log(m_end.getMonth() + 1);
+
+		if (m_end.getMonth() + 1 < 10 && m_end.getDate() < 10) {
+			var m_end_dt = m_end.getFullYear() + '-0'
+					+ (m_end.getMonth() + 1) + '-0' + m_end.getDate();
+		} else if (m_end.getMonth() + 1 < 10 && m_end.getDate() >= 10) {
+			var m_end_dt = m_end.getFullYear() + '-0'
+					+ (m_end.getMonth() + 1) + '-' + m_end.getDate();
+		} else if (m_end.getMonth() + 1 >= 10 && m_end.getDate() < 10) {
+			var m_end_dt = m_end.getFullYear() + '-'
+					+ (m_end.getMonth() + 1) + '-0' + m_end.getDate();
+		} else if (m_end.getMonth() + 1 >= 10 && m_end.getDate() >= 10) {
+			var m_end_dt = m_end.getFullYear() + '-'
+					+ (m_end.getMonth() + 1) + '-' + m_end.getDate();
+		}
+		
+		console.log("m_end_dt");
+		console.log(m_end_dt);
+		
+		//console.log(g_arg.event.start.getHours()+':'+g_arg.event.start.getMinutes());
 		//값이 있는경우 세팅
-		if(g_arg.event != undefined){
+		if (g_arg.event != undefined) {
+
 			
+			$('#calendarModal #calendar_title').val(g_arg.event.id);
 			$('#calendarModal #calendar_content').val(g_arg.event.title);
 			$('#calendarModal #calendar_start_date').val(g_arg.event.startStr);
-			$('#calendarModal #calendar_end_date').val(g_arg.event.endStr);
+			$('#calendarModal #calendar_end_date').val(m_end_dt);
 
 		}
 		//모달창 show
 		$('#calendarModal').modal('show');
 
-		$('#calendarModal #calendar_content').focus();
-	  }
-	  
-	  //일정삭제
-	  function deleteSch(modal, arg){
-		if(confirm('일정을 삭제하시겠습니까?')){
-			var data = {"gubun": "delete", "id" : arg.event.id, "allowyn": "0"};
-			//DB 삭제
-			$.ajax({
-			  url: "${pageContext.request.contextPath}/delete.calendar",
-			  type: "POST",
-			  data: JSON.stringify(data),
-			  dataType: "JSON",
-			  traditional: true,
-			  success : function(data, status, xhr){
-				  //alert(xhr.status);
-				  arg.event.remove();
-				  g_arg=null;
-			  },
-			  error : function(xhr, status, error){
-				    //alert(xhr.responseText);
-				  alert('일정 삭제 실패<br>새로고침 후 재시도 해주세요');
-			  }
-			});
-			//
-		}
-	  }
-	
-	/*
-	function deletedata(jsondata) {
-		console.log(jsondata);
-		$.ajax({
-			type : 'POST',
-			url : '${pageContext.request.contextPath}/add.calendar',
-			data : jsondata,
-			dataType : "json",
-			async : true,
-			success : function(rdata) {
-				console.log('db 저장 완료.');
-			},
-			error : function(request, status, error) {
-			},
-			complete : function() {
-			}
-		})
 	}
-	 */
-	 
-	function deletecal(modal, arg) {
+
+	
+	function deletecal(arg) {
 		if (confirm('일정을 삭제하시겠습니까?')) {
 			var data = {
-				"id" : arg.event.id,
+				"title" : arg.event.title,
+				"id" : arg.event.id
 			};
+
+			console.log(arg.event.id);
+
 			//DB 삭제
+
 			$.ajax({
 				url : "${pageContext.request.contextPath}/delete.calendar",
 				type : "POST",
-				data : JSON.stringify(data),
-				dataType : "JSON",
-				traditional : true,
-				success : function(data, status, xhr) {
-					//alert(xhr.status);
+				data : data,
+				dataType : "text",
+
+				success : function(data) {
+
 					arg.event.remove();
-					initModal(modal, arg);
+					$('#calendarModal').modal('hide');
+					console.log("event.remove 완료");
+
+					g_arg = null;
 				},
-				error : function(xhr, status, error) {
+				error : function(data) {
 					//alert(xhr.responseText);
-					alert('일정 삭제 실패<br>새로고침 후 재시도 해주세요');
+					alert('일정 삭제 실패 새로고침 후 재시도 해주세요');
 				}
 			});
 			//
@@ -493,8 +644,11 @@ var g_arg;	//이벤트 글로벌 변수(모달창에서 호출하는 함수에�
 				</div>
 				<div class="modal-body">
 					<div class="form-group">
-						<label for="taskId" class="col-form-label">일정 내용</label> <input
-							type="text" class="form-control" id="calendar_content"
+						<label for="taskId" class="col-form-label">일정 제목</label> <input
+							type="text" class="form-control" id="calendar_title"
+							name="calendar_title"> <label for="taskId"
+							class="col-form-label">일정 내용</label> <input type="text"
+							class="form-control" id="calendar_content"
 							name="calendar_content"> <label for="taskId"
 							class="col-form-label">시작 날짜</label> <input type="date"
 							class="form-control" id="calendar_start_date"
@@ -506,9 +660,10 @@ var g_arg;	//이벤트 글로벌 변수(모달창에서 호출하는 함수에�
 				</div>
 				<div class="modal-footer">
 
-					<button type="button" class="btn btn-success" id="modifyCalendar">수정</button>
+					<button type="button" class="btn btn-success" id="modifyCalendar"
+						onclick="updatedata(g_arg)">수정</button>
 					<button type="button" class="btn btn-danger" id="deleteCalendar"
-						onclick="deletecal('insertModal', g_arg)">삭제</button>
+						onclick="deletecal(g_arg)">삭제</button>
 
 					<button type="button" class="btn btn-secondary" id="addCalendar">추가</button>
 

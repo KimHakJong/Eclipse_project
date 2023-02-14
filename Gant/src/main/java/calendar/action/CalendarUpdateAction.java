@@ -10,7 +10,7 @@ import calendar.db.CalendarBean;
 import calendar.db.CalendarDAO;
 
 
-public class CalendarAddAction implements Action {
+public class CalendarUpdateAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
@@ -18,6 +18,8 @@ public class CalendarAddAction implements Action {
 		
 		CalendarDAO caldao = new CalendarDAO();		
 		CalendarBean cal = new CalendarBean();
+		ActionForward forward = new ActionForward();
+		
 		String ad;
 		int check = 0;
 		
@@ -37,7 +39,7 @@ public class CalendarAddAction implements Action {
 		
 		System.out.println("admin : " + ad);
 		
-		cal.setAdmin(ad);
+
 		cal.setId(id);
 		cal.setName(name);
 		cal.setTitle(title);
@@ -45,12 +47,24 @@ public class CalendarAddAction implements Action {
 		cal.setEnd(end);
 
 		
-		check = caldao.add(cal);
+		check = caldao.update(cal, id);
 		
-		if(check!=0)
-			System.out.println("성공");
+		if(check!=0) {
+			
+			System.out.println("업데이트 성공");
+			forward.setRedirect(true);
+		    forward.setPath("calendar/calendar2.jsp"); 
 
-		return null;
+		}
+		else {
+			System.out.println("캘린더 db 삭제 실패");
+
+			forward.setRedirect(false);
+			request.setAttribute("message", "데이터를 삭제하지 못했습니다.");
+			forward.setPath("error/error.jsp");
+
+		}
+		return forward;
 	}
 
 }

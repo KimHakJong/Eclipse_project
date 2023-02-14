@@ -2,13 +2,14 @@ drop table calendar cascade constraints purge;
 
 create table calendar(
 
-name varchar2(15),
-id varchar2(15),
+
+id  varchar2(15),--references members(id) on delete cascade,
 admin varchar2(15),
 allday varchar2(15) default 'true',
 startday varchar2(30),
 endday varchar2(30),
-title varchar2(15)
+name varchar2(30),
+title varchar2(200)
 
 );
 
