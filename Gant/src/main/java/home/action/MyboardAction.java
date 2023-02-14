@@ -1,6 +1,7 @@
 package home.action;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,11 +24,23 @@ public class MyboardAction implements Action{
 		HttpSession session = request.getSession();
 		String id = (String) session.getAttribute("id");
 		
+		if(id == null) {//session에 id값이 존재하지 않는다면 로그인 화면으로 이동
+			response.setContentType("text/html;charset=utf-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("alert('로그인을 해주세요');"); 
+			out.println("location.href='login.net';");
+			out.println("</script>");
+			out.close();
+			return null;
+			}
+		
+		
 		MypageDAO dao = new MypageDAO();
 		List<Board> boardlist = new ArrayList<Board>();
 		
 		int page = 1;
-		int limit = 10;
+		int limit = 5;
 		if(request.getParameter("page") != null) {
 			page = Integer.parseInt(request.getParameter("page"));
 		}

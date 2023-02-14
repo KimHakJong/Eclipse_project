@@ -44,6 +44,10 @@ public class HomeFrontController extends HttpServlet {
 		case "/myreply.home": // 게시판의 댓글 활동
 			action = new MyReplyAction();
 			break;
+		case "/myboarDelete.home": // 게시판의 댓글 활동
+			action = new MyBoardDeleteAction();
+			break;
+				
 			
 		}
 		
