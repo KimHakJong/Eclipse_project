@@ -199,15 +199,21 @@ height:25px; font-size:16px}
 						    <div>
 <!-- 						    	원문글을 제외한 -->
 <!-- 									답글경우 들여쓰기 하여 표시하기 위한 설정 -->
-						      <c:if test="${b.board_re_lev != 0 }">
-						        <c:forEach var="a" begin="0" end="${b.board_re_lev*2}" step="1">
-						        &nbsp;
-						        </c:forEach>
-						        <img src='image/line.gif'>
+
+						      
+						     <c:if test="${b.board_re_lev != 0 }">
+						      
+						        <c:if test="${b.board_re_lev == 1 }">
+						        	답글*&nbsp;
+						        </c:if>
+						        <c:if test="${b.board_re_lev == 2 }">
+						        	재답글*&nbsp;
+						        </c:if>
+						        
 						      </c:if>
 <!-- 						      	원문글인 경우는 공백하나만 줌 -->
 						      <c:if test="${b.board_re_lev == 0 }">
-						        &nbsp;
+<!-- 						        &nbsp; -->
 						      </c:if>
 						      
 						      <a href="BoardDetailAction.bo?num=${b.board_num }">
