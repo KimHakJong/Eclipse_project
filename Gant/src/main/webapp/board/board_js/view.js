@@ -73,7 +73,7 @@ function getList(state){//현재 선택한 댓글 정렬방식을 저장합니�
 						}   
 					 	output += '    </div>' //comment-info-box
 					
-					if($("#loginid").val()==this.id){
+					if($("#loginid").val()==this.id || 'admin' == this.id){
 					output += ' <div class="comment-tool">'
 					  	   + ' <div title="더보기" class="comment-tool-button">'
 					  	   + '     <div>&#46;&#46;&#46;</div>'
