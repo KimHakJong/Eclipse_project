@@ -9,6 +9,10 @@ String sessionId = (String) (session.getAttribute("id"));
 
 
 System.out.println(sessionId);
+if(sessionId == null || sessionId.equals("null")){	
+	//out.println("<script>alert('로그인 해주세요');location.href='login.net';</script>");
+	response.sendRedirect("login.net");
+}
 
 
 %>
@@ -90,6 +94,7 @@ body {
 var g_arg;	//이벤트 글로벌 변수(모달창에서 호출하는 함수에서 참조하기 위함)
  var calendar = null;
  var i=0;
+ var all_events = null;
  $(document).ready(function() {
 	    	
 
@@ -104,11 +109,13 @@ var g_arg;	//이벤트 글로벌 변수(모달창에서 호출하는 함수에�
   
 
 
-			var all_events = null;
+			
            var calendarEl = document.getElementById('calendar');
 
 
 		all_events = loadingEvents();
+		
+	
 		
 		
 		//넘어오는 글제목 title
@@ -129,7 +136,8 @@ var g_arg;	//이벤트 글로벌 변수(모달창에서 호출하는 함수에�
 
 	    calendar = new FullCalendar.Calendar(calendarEl, {
 	    	
-
+	          editable: false,
+	          droppable: false,
 
 	    
 	    
@@ -142,7 +150,7 @@ var g_arg;	//이벤트 글로벌 변수(모달창에서 호출하는 함수에�
 
              },
 
-	          editable: true,
+
 
 
 			
@@ -169,6 +177,8 @@ var g_arg;	//이벤트 글로벌 변수(모달창에서 호출하는 함수에�
                           $('#calendar_content').val('');
                           $('#calendar_start_date').val('');
                           $('#calendar_end_date').val('');
+                          
+                          $("#calendarModal #calendar_title").attr("readonly",false); 
 
                           $("#addCalendar").off("click").on("click",function(){  // modal의 추가 버튼 클릭 시
                         	  
@@ -179,18 +189,34 @@ var g_arg;	//이벤트 글로벌 변수(모달창에서 호출하는 함수에�
                               var start_date = $("#calendar_start_date").val();
                               
                               var end_date = $("#calendar_end_date").val();
+                              var check = 0; // 조건에 걸리는지 확인
                               
                               console.log("start_date");
                               console.log(start_date);
                               
-                              
-                              
+
+                				
+                          	for(var j=0;j<all_events.length;j++)
+                    		{
+
+                    			if(all_events[j].id == title && all_events[j].id != null)
+                    			{           
+                    				
+                    				check = 1;
+                    				
+                    			}
+                    		}
+
                               //내용 입력 여부 확인
-                              if(content == null || content == ""){
+                              if(check == "1"){
+                    				alert("제목은 중복될 수 없습니다.");
+                    				$('#calendar_title').val('');
+                              }
+                              else if( title == null || title == "" ){
+
                                   alert("내용을 입력하세요.");
-                              }else if( title == null || title == ""){
+                              }else if(content == null || content == ""){
                             	  alert("제목을 입력하세요.");
-                               
                               }else if(start_date == "" || end_date ==""){
                                   alert("날짜를 입력하세요.");
                               }else if(new Date(end_date)- new Date(start_date) < 0){ // date 타입으로 변경 후 확인
@@ -331,16 +357,21 @@ var g_arg;	//이벤트 글로벌 변수(모달창에서 호출하는 함수에�
 											
 											if(all_events[i].title == arg.event.title)
 											{
-												arg_admin = all_events[i].admin;
+												
 												arg_name = all_events[i].name;
+												//admin을 calendar 테이블에 입력하는게 아니라
+												//로그인 한 아이디의 admin 여부를 판별해야함
+												
 												//admin을 calendar 테이블에 입력하는게 아니라
 												//로그인 한 아이디의 admin 여부를 판별해야함
 		
 											}	
 										}
+										console.log("여기까지왔어요");
 										
+										var arg_admin = getadmin(loginid);
 		
-										console.log("arg_admin");
+										
 										console.log(arg_admin);
 										
 										console.log("arg_name");
@@ -410,17 +441,16 @@ var g_arg;	//이벤트 글로벌 변수(모달창에서 호출하는 함수에�
 		var title = $("#calendar_title").val();
 		var content = $("#calendar_content").val();
 		var start_date = $("#calendar_start_date").val();
-
 		var end_date = $("#calendar_end_date").val();
-
+		var check = 0;
+		
 		console.log("start_date");
 		console.log(start_date);
 
-		//내용 입력 여부 확인
-		if (content == null || content == "") {
+ 
+		if( title == null || title == "" ){
+
 			alert("내용을 입력하세요.");
-		} else if (title == null || title == "") {
-			alert("제목을 입력하세요.");
 
 		} else if (start_date == "" || end_date == "") {
 			alert("날짜를 입력하세요.");
@@ -483,6 +513,7 @@ var g_arg;	//이벤트 글로벌 변수(모달창에서 호출하는 함수에�
 			error : function(data) {
 				//alert(xhr.responseText);
 				alert('일정 수정 실패, 새로고침 후 재시도 해주세요');
+				document.location.reload();
 			}
 		});
 	
@@ -491,9 +522,8 @@ var g_arg;	//이벤트 글로벌 변수(모달창에서 호출하는 함수에�
 	function insertModalOpen(arg, admin, name, loginid) {
 
 		$('#calendarModal #addCalendar').css('display', 'none');
+		$("#calendarModal #calendar_title").attr("readonly",true); 
 
-		console.log("admin");
-		console.log(admin);
 		
 		console.log("name");
 		console.log(name);
@@ -503,11 +533,11 @@ var g_arg;	//이벤트 글로벌 변수(모달창에서 호출하는 함수에�
 		
 		//관리자 admin은 나중에 추가
 		
-		/*if(name != loginid)
+		if(name != loginid && admin !="true")
 		{
             $('#calendarModal #modifyCalendar').css('display', 'none');
 			$('#calendarModal #deleteCalendar').css('display', 'none');
-		}*/
+		}
 
 			
 
@@ -588,12 +618,55 @@ var g_arg;	//이벤트 글로벌 변수(모달창에서 호출하는 함수에�
 				},
 				error : function(data) {
 					//alert(xhr.responseText);
+										
 					alert('일정 삭제 실패 새로고침 후 재시도 해주세요');
+					$('#calendarModal').modal('hide');
+					document.location.reload();
 				}
 			});
 			//
 		}
 	}
+	
+	function getadmin(loginid) {
+			var admin2;
+			var data = {
+				"id" : loginid
+			};
+			console.log("admin 정보의 loginid");
+			console.log(loginid);
+
+			
+
+			$.ajax({
+				url : "${pageContext.request.contextPath}/getadmin.calendar",
+				type : "POST",
+				data : data,
+				dataType : "text",
+				async: false,
+
+				success : function(data) {
+
+					admin2 = data;
+					
+					console.log("admin");
+					console.log(admin2);
+					console.log("admin 가져오기 완료");
+
+					
+				},
+				error : function(data) {
+					//alert(xhr.responseText);
+					$('#calendarModal').modal('hide');
+					document.location.reload();
+					alert('admin 생성 실패');
+				}
+			});
+			
+			return admin2;
+
+		}
+	
 </script>
 </head>
 <style>

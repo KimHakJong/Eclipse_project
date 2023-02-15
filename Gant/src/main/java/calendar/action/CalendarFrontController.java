@@ -48,6 +48,9 @@ public class CalendarFrontController extends javax.servlet.http.HttpServlet {
 				action = new CalendarUpdateAction();
 				break;
 				
+			case "/getadmin.calendar":
+				action = new CalendargetAdminAction();
+				break;
 				
 		}//switch end
 				

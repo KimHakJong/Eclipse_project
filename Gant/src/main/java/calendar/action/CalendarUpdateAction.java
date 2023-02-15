@@ -20,7 +20,7 @@ public class CalendarUpdateAction implements Action {
 		CalendarBean cal = new CalendarBean();
 		ActionForward forward = new ActionForward();
 		
-		String ad;
+		
 		int check = 0;
 		
 		String id = request.getParameter("id");
@@ -35,13 +35,9 @@ public class CalendarUpdateAction implements Action {
 		System.out.println("end : " + end);//end
 		System.out.println("title : " + title);//title = content
 	
-		ad = caldao.getadmindate(name); // admin
-		
-		System.out.println("admin : " + ad);
 		
 
-		cal.setId(id);
-		cal.setName(name);
+
 		cal.setTitle(title);
 		cal.setStart(start);
 		cal.setEnd(end);

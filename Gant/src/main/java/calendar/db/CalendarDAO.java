@@ -58,15 +58,17 @@ public class CalendarDAO {
 			se.printStackTrace();
 
 		} finally {
-			if (pstmt != null)
+			
 				try {
+					if (pstmt != null)
 					pstmt.close();
 				} catch (SQLException ex) {
 					ex.printStackTrace();
 				}
 
-			if (conn != null)
+			
 				try {
+					if (conn != null)
 					conn.close();
 
 				} catch (Exception e) {
@@ -120,22 +122,25 @@ public class CalendarDAO {
 			ex.printStackTrace();
 
 		} finally {
-			if (rs != null)
+			
 				try {
+					if (rs != null)
 					rs.close();
 				} catch (SQLException ex) {
 					ex.printStackTrace();
 				}
 
-			if (pstmt != null)
+			
 				try {
+					if (pstmt != null)
 					pstmt.close();
 				} catch (SQLException ex) {
 					ex.printStackTrace();
 				}
 
-			if (con != null)
+			
 				try {
+					if (con != null)
 					con.close();
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -174,15 +179,17 @@ public class CalendarDAO {
 
 		} finally {
 
-			if (pstmt != null)
+
 				try {
+					if (pstmt != null)
 					pstmt.close();
 				} catch (SQLException ex) {
 					ex.printStackTrace();
 				}
 
-			if (conn != null)
+
 				try {
+					if (conn != null)
 					conn.close();
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -191,49 +198,67 @@ public class CalendarDAO {
 		return result;
 	}
 
-	public String getadmindate(String name) {
+	public String getadmindate(String name) 
+	{
+		System.out.println("여기는 getadmindate\nname = " + name);
 
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
+		Connection conn2 = null;
+
+		PreparedStatement pstmt2 = null;
+
+		ResultSet rs2 = null;
 
 		String admin = "";
-
+		
 		try {
 
-			conn = ds.getConnection();
-
-			String sql = "select admin from members where id = ?";
-
-			// PreparedStatement 객체얻기
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, name);
-			rs = pstmt.executeQuery();
+			conn2 = ds.getConnection();
 			
+			String sql2 = "select admin from members where id = ?";
 			
 
-			if (rs.next()) {
-				admin = rs.getString("admin");
-			}
+
+				System.out.println("여기까지왔습니다 id = " + name);
+				
+				pstmt2 = conn2.prepareStatement(sql2);
+				pstmt2.setString(1, name);
+				rs2 = pstmt2.executeQuery();
+	
+				
+				
+				if (rs2.next()) {
+
+					admin = rs2.getString("admin");
+					System.out.println(admin);
+					
+				}
+
+
+			
+
+			
+
 
 		} catch (Exception se) {
 			se.printStackTrace();
 		} finally {
+
 			try {
-				if (rs != null)
-					rs.close();
+				if (rs2 != null)
+					rs2.close();
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+
+			try {
+				if (pstmt2 != null)
+					pstmt2.close();
 			} catch (SQLException e) {
 				System.out.println(e.getMessage());
 			}
 			try {
-				if (pstmt != null)
-					pstmt.close();
-			} catch (SQLException e) {
-				System.out.println(e.getMessage());
-			}
-			try {
-				if (conn != null)
-					conn.close();
+				if (conn2 != null)
+					conn2.close();
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 			}
@@ -250,15 +275,15 @@ public class CalendarDAO {
 		try {
 			conn = ds.getConnection();
 
-			String sql = "update calendar set id = ?, startday = ?, endday = ?, title = ? where name = ?";
+			String sql = "update calendar set startday = ?, endday = ?, title = ? where name = ?";
 
 			pstmt = conn.prepareStatement(sql);
 
-			pstmt.setString(1, cal.getName());
-			pstmt.setString(2, cal.getStart());
-			pstmt.setString(3, cal.getEnd());
-			pstmt.setString(4, cal.getTitle());
-			pstmt.setString(5, id);
+
+			pstmt.setString(1, cal.getStart());
+			pstmt.setString(2, cal.getEnd());
+			pstmt.setString(3, cal.getTitle());
+			pstmt.setString(4, id);
 			
 			
 			
