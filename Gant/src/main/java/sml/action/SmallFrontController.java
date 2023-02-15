@@ -20,8 +20,8 @@ public class SmallFrontController extends HttpServlet {
 		Action action = null;
 		ActionForward forward = null;
 		switch (command) {
-		case "/chat.sml":				//쿠키값 확인, 로그인화면이동
-			action = new ChatAction(); //자동로그인 쿠키값이 있는 경우 세션에 id값저장 후 메인화면 이동
+		case "/chat.sml":				
+			action = new ChatAction(); 
 			break;
 		case "/memo.sml":
 			action = new MemoLoad(); //Id값을 받아 해당 회원의 메모장 내용,배경색,글자색을 불러옴

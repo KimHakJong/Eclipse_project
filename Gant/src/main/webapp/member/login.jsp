@@ -20,6 +20,7 @@
 	#log{margin: 20px 0px 10px 0px; font-size:32px; font-weight:bold}	
 	#id, #password {width:100%; height:50px; margin:15px 0px; border:1px solid #C4C5C8; padding:15px 12px; border-radius: 4px;
 	}
+	
 	#password + img {
     width: 28px;
     height: 28px;
@@ -77,7 +78,19 @@ $(document).ready(function(){
 		  $('#password').attr('type','password');
 		  $(this).attr('src','member/image/showpass.png');
 	  }
-  })
+  });
+  
+  	$('#remember').click(function(){
+		 if($('#remember').is(':checked')==true && $('#autologin').is(':checked')==true ) {
+			 $('#autologin').prop('checked',false);
+		 }
+  	})
+  	
+  	$('#autologin').click(function(){
+		 if($('#remember').is(':checked')==true && $('#autologin').is(':checked')==true ){
+			 $('#remember').prop('checked',false);
+		 }
+ 	})
 });
 </script>
 </head>
