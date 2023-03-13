@@ -110,6 +110,7 @@ $(function(){
 			               <button type="submit" class="btn btn-dark">전송</button>
 			               <button type="button" class="btn btn-dark" data-dismiss="modal">닫기</button>
 			            </form>
+			            
 			         </div>
 			      </div>
 			   </div>
