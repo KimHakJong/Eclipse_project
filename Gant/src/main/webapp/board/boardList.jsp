@@ -93,6 +93,7 @@ $(function(){
 			          </c:if>
 			         </a>[${b.cnt}]		         
 			         	<%-- modal 시작 --%>
+			         	
 			<div class="modal" id="meModal${i.index}">
 			   <div class="modal-dialog">
 			      <div class="modal-content">
@@ -109,6 +110,7 @@ $(function(){
 			               <button type="submit" class="btn btn-dark">전송</button>
 			               <button type="button" class="btn btn-dark" data-dismiss="modal">닫기</button>
 			            </form>
+			            
 			         </div>
 			      </div>
 			   </div>
