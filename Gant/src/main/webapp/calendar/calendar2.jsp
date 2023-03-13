@@ -539,15 +539,8 @@ var g_arg;	//이벤트 글로벌 변수(모달창에서 호출하는 함수에�
 			$('#calendarModal #deleteCalendar').css('display', 'none');
 		}
 
-			
-
 		g_arg = arg;
-		console.log("arg");
-		console.log(arg);
-		
-		
 
-		
 		var m_end = new Date(g_arg.event.endStr.substr(0, 4),
 				g_arg.event.endStr.substr(5, 2) - 1, g_arg.event.endStr.substr(8, 2));
 		

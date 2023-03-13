@@ -39,7 +39,8 @@ public class CalendarDAO {
 		try {
 			conn = ds.getConnection();
 
-			String sql = "insert into calendar (id, name, startday, endday, title, admin) values (?, ?, ?, ?, ?, ?)";
+			String sql = "insert into calendar (id, name, startday, endday, title, admin) "
+					+ "values (?, ?, ?, ?, ?, ?)";
 
 			pstmt = conn.prepareStatement(sql);
 
@@ -275,7 +276,8 @@ public class CalendarDAO {
 		try {
 			conn = ds.getConnection();
 
-			String sql = "update calendar set startday = ?, endday = ?, title = ? where name = ?";
+			String sql = "update calendar set startday = ?, endday = ?, title = ? "
+					+ " where name = ?";
 
 			pstmt = conn.prepareStatement(sql);
 

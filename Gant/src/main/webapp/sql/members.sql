@@ -16,3 +16,4 @@ hiredate    varchar2(8) default to_char(SYSDATE, 'YYYYMMDD') not null -- 입사�
 );
 
 select * from members;
+
