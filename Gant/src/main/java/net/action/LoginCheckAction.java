@@ -27,7 +27,6 @@ public class LoginCheckAction implements Action{
 		if(result == 1) {
 			HttpSession session = request.getSession();
 			session.setAttribute("id", id);
-			
 			String IDStore = request.getParameter("remember");
 			String auto = request.getParameter("autologin");
 			Cookie cookie = new Cookie("id",id); //ID저장 쿠키

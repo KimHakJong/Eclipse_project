@@ -6,12 +6,10 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
-<link href="css/home.css" rel="stylesheet" type="text/css">
 <meta charset="UTF-8">
 <title>GANT</title>
 <style>
@@ -99,10 +97,10 @@ hr{margin:10px;}
 #close:hover{background:white; color:black; border:2px solid black}
 a.page-link{font-family: 'Lato', sans-serif}
 .pagination{ margin-top:40px}
-.page-link {border:none; color:#777777; margin:0px 12px 0px 12px; padding:0px; 
+.page-link {border:none; color:#777777 !important; margin:0px 12px 0px 12px; padding:0px; 
 height:25px; font-size:16px}
 .page-link:focus{box-shadow: none;}
-.page-link:hover{background-color:white;color:#777777;}
+.page-link:hover{background-color:white;color:#777777 !important;}
 .page-item.active .page-link {
     color: #000;
     background-color: white;
@@ -199,17 +197,13 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
-	<header>
-		<jsp:include page="../home/header.jsp" />
-	</header>
+<jsp:include page="../home/side.jsp" />
 
-	<div class="row">
-		<div class="side" style="width:15%">
-			<jsp:include page="../home/left.jsp" />
-		</div>
-		
-		<div class="main" style="width:85%">
-		
+
+<div class="content">
+<jsp:include page="../home/header2.jsp" />
+<div class="container-fluid pt-4 px-4">
+
 <aside>
 <jsp:include page="orgchart.jsp"/>
 </aside>
@@ -406,11 +400,13 @@ $(document).ready(function(){
 	</div>
     </c:if>  
 	</div><%--list end --%>
-  </div><%--main --%>
-  </div><%--row --%>
+</div>
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+</div> <!-- class content -->
 
-	<footer>
-		<jsp:include page="../home/bottom.jsp" />
-	</footer>
+<footer>
+<jsp:include page="../home/bottom.jsp" />
+</footer>
+
 </body>
 </html>

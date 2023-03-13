@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
  <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta charset="UTF-8">
 <style>
@@ -127,7 +128,7 @@ $(document).ready(function(){
 		}
 	});
 	
-	$('#openmemo').click(function(e){
+	$('.openmemo').click(function(e){
 	    e.preventDefault();
 		
 	  	//열려있는 상태에서 또 열면 입력된 데이터가 삭제되고 다시 저장되어 있던 데이터가 불러와짐 방지
