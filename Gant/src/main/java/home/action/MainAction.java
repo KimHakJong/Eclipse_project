@@ -25,10 +25,9 @@ public class MainAction implements Action{
 		
 		MembersDAO mdao = new MembersDAO();
 		mdao.getProfileimg(id);
+		
 		session.setAttribute("profileimg", mdao.getProfileimg(id));
-      
-	   
-	   
+		session.setAttribute("name", mdao.getName(id));
    
       if(id == null) {//session에 id값이 존재하지 않는다면 로그인 화면으로 이동
       response.setContentType("text/html;charset=utf-8");
@@ -113,7 +112,7 @@ public class MainAction implements Action{
       
       ActionForward forward = new ActionForward();
       forward.setRedirect(false);
-      forward.setPath("home/main.jsp");
+      forward.setPath("home/main2.jsp");
       return forward;
       
    }

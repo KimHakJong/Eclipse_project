@@ -64,6 +64,7 @@ public class MembersDAO {
 		}
 		return result;
 	}
+	
 	public int idPassCheck(String id,String pass) { //로그인 아이디비밀번호확인
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -104,6 +105,46 @@ public class MembersDAO {
 			}
 		}
 		return result;
+	}
+	
+	public String getName(String id) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String name = "";
+		try {
+			conn = ds.getConnection();
+			String sql = "select name from members "
+					   + "where id = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				name = rs.getString("name");
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("getName 에러");
+		}finally {
+			try {
+				if(rs!=null)
+					rs.close();
+			}catch(SQLException se) {
+				se.printStackTrace();
+			}try {
+				if(pstmt!=null)
+					pstmt.close();
+			}catch(SQLException se) {
+				se.printStackTrace();
+			}try {
+				if(conn!=null)
+					conn.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return name;
 	}
 	
 	public String getProfileimg(String id) {
