@@ -203,16 +203,16 @@ height:25px; font-size:16px}
 						      <c:if test="${b.comment_re_lev != 0 }">
 						      
 						        <c:if test="${b.comment_re_lev == 1 }">
-						        	재댓글*&nbsp;
+<!-- 						        	재댓글*&nbsp; -->
 						        </c:if>
 						        <c:if test="${b.comment_re_lev == 2 }">
-						        	재재댓글*&nbsp;
+<!-- 						        	재재댓글*&nbsp; -->
 						        </c:if>
 						        
 						      </c:if>
 						      
 						      <c:if test="${b.comment_re_lev == 0 }">
-						        댓글*&nbsp;
+<!-- 						        댓글*&nbsp; -->
 						      </c:if>
 						      
 						      <a href="BoardDetailAction.bo?num=${b.num }">
