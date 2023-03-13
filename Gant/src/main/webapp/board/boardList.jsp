@@ -93,6 +93,7 @@ $(function(){
 			          </c:if>
 			         </a>[${b.cnt}]		         
 			         	<%-- modal 시작 --%>
+			         	
 			<div class="modal" id="meModal${i.index}">
 			   <div class="modal-dialog">
 			      <div class="modal-content">
