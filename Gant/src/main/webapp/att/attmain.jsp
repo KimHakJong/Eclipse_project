@@ -177,16 +177,13 @@
 </script>
 </head>
 <body>
+<jsp:include page="../home/side.jsp" />
 
-	<header>
-		<jsp:include page="../home/header.jsp" />
-	</header>
+<div class="content">
+<jsp:include page="../home/header2.jsp" />
+<div class="container-fluid pt-4 px-4">
 
-	<div class="row">
-		<div class="side">
-			<jsp:include page="../home/left.jsp" />
-		</div>
-		
+
 		<div class="main">
 			<div class="container mt-3">
                
@@ -247,7 +244,8 @@
 		
 		</div> <%-- class main end --%>
 	</div> <%-- class row end --%>
-
+   </div><!-- class content -->
+   
 	<footer>
 		<jsp:include page="../home/bottom.jsp" />
 	</footer>
