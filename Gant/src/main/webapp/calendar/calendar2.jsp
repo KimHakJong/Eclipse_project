@@ -19,22 +19,25 @@ if(sessionId == null || sessionId.equals("null")){
 
 <!DOCTYPE html>
 <html>
+
 <head>
 
 
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+var jq1 = jQuery.noConflict();
+</script>
 
-
-
-
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <!-- bootstrap 4 -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
-<script
-	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+
+
+
 
 <link href="css/home.css" rel="stylesheet" type="text/css">
 <!-- fullcalendar -->
@@ -45,12 +48,6 @@ if(sessionId == null || sessionId.equals("null")){
 	src="${pageContext.request.contextPath}/calendar/lib/main.js"></script>
 
 
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment-with-locales.min.js"
-	integrity="sha512-42PE0rd+wZ2hNXftlM78BSehIGzezNeQuzihiBCvUEB3CVxHvsShF86wBWwQORNxNINlBPuq7rG4WWhNiTVHFg=="
-	crossorigin="anonymous" referrerpolicy="no-referrer">
-
-</script>
 
 <style>
 @import
@@ -60,14 +57,17 @@ body {
 	padding: 0;
 	font-size: 14px;
 }
-
+.fc-button-primary{
+background-color: #009CFF !important;
+border-color: #009CFF !important;
+}
 .fc-toolbar-title {
 	font-size: 20px !important;
 }
 
 #calendar {
 	max-width: 3000px;
-	margin: 0 auto;
+	margin: 100px 100px;
 }
 
 .fc-day-sun a {
@@ -95,15 +95,17 @@ var g_arg;	//이벤트 글로벌 변수(모달창에서 호출하는 함수에�
  var calendar = null;
  var i=0;
  var all_events = null;
- $(document).ready(function() {
+
+
+ jq1(document).ready(function() {
 	    	
 
 	 
-            $('#xbutton').on('click', function(){
-                $('#calendarModal').modal('hide');
+            jq1('#xbutton').on('click', function(){
+                jq1('#calendarModal').modal('hide');
             })
-            $('#sprintSettingModalClose').on('click', function(){
-                $('#calendarModal').modal('hide');
+            jq1('#sprintSettingModalClose').on('click', function(){
+                jq1('#calendarModal').modal('hide');
             })
             
   
@@ -165,36 +167,37 @@ var g_arg;	//이벤트 글로벌 변수(모달창에서 호출하는 함수에�
                       click : function(){ 
                     	  // 버튼 클릭 시 이벤트 추가
                     	  
-						$('#calendarModal #addCalendar')
+						jq1('#calendarModal #addCalendar')
                 		.css('display', 'inline');
                     	  
-                          $("#calendarModal").modal("show"); // modal 나타내기
+                          jq1("#calendarModal").modal("show"); // modal 나타내기
 
                   		
-                          $('#calendarModal #modifyCalendar').css('display', 'none');
-            				$('#calendarModal #deleteCalendar').css('display', 'none');
-            				$('#calendar_title').val('');
-                          $('#calendar_content').val('');
-                          $('#calendar_start_date').val('');
-                          $('#calendar_end_date').val('');
+                          jq1('#calendarModal #modifyCalendar').css('display', 'none');
+            				jq1('#calendarModal #deleteCalendar').css('display', 'none');
+            				jq1('#calendar_title').val('');
+                          jq1('#calendar_content').val('');
+                          jq1('#calendar_start_date').val('');
+                          jq1('#calendar_end_date').val('');
                           
-                          $("#calendarModal #calendar_title").attr("readonly",false); 
+                          jq1("#calendarModal #calendar_title").attr("readonly",false); 
 
-                          $("#addCalendar").off("click").on("click",function(){  // modal의 추가 버튼 클릭 시
+                          jq1("#addCalendar").off("click").on("click",function(){  // modal의 추가 버튼 클릭 시
                         	  
 
                         	  
-                        	  var title = $("#calendar_title").val();
-                              var content = $("#calendar_content").val();
-                              var start_date = $("#calendar_start_date").val();
+                        	  var title = jq1("#calendar_title").val();
+                              var content = jq1("#calendar_content").val();
+                              var start_date = jq1("#calendar_start_date").val();
                               
-                              var end_date = $("#calendar_end_date").val();
+                              var end_date = jq1("#calendar_end_date").val();
                               var check = 0; // 조건에 걸리는지 확인
                               
                               console.log("start_date");
                               console.log(start_date);
                               
 
+                             console.log(all_events.length);
                 				
                           	for(var j=0;j<all_events.length;j++)
                     		{
@@ -210,7 +213,7 @@ var g_arg;	//이벤트 글로벌 변수(모달창에서 호출하는 함수에�
                               //내용 입력 여부 확인
                               if(check == "1"){
                     				alert("제목은 중복될 수 없습니다.");
-                    				$('#calendar_title').val('');
+                    				jq1('#calendar_title').val('');
                               }
                               else if( title == null || title == "" ){
 
@@ -305,7 +308,7 @@ var g_arg;	//이벤트 글로벌 변수(모달창에서 호출하는 함수에�
 																		 */
 
 																	}
-																	$(
+																	jq1(
 																			'#calendarModal')
 																			.modal(
 																					'hide');
@@ -345,9 +348,9 @@ var g_arg;	//이벤트 글로벌 변수(모달창에서 호출하는 함수에�
 
 									},
 									eventClick : function(arg) {
-										$('#calendarModal #modifyCalendar')
+										jq1('#calendarModal #modifyCalendar')
 												.css('display', 'inline');
-										$('#calendarModal #deleteCalendar')
+										jq1('#calendarModal #deleteCalendar')
 												.css('display', 'inline');
 										
 										var arg_admin, arg_name; 
@@ -389,11 +392,11 @@ var g_arg;	//이벤트 글로벌 변수(모달창에서 호출하는 함수에�
 
 								});
 						calendar.render();
-					});
+					});(jQuery);
 
 	function loadingEvents() {
 		var resultdata;
-		$.ajax({
+		jq1.ajax({
 			type : 'POST',
 			url : '${pageContext.request.contextPath}/show.calendar',
 			dataType : "json",
@@ -419,7 +422,7 @@ var g_arg;	//이벤트 글로벌 변수(모달창에서 호출하는 함수에�
 
 	function adddata(jsondata) {
 		console.log(jsondata);
-		$.ajax({
+		jq1.ajax({
 			type : 'POST',
 			url : '${pageContext.request.contextPath}/add.calendar',
 			data : jsondata,
@@ -438,10 +441,10 @@ var g_arg;	//이벤트 글로벌 변수(모달창에서 호출하는 함수에�
 
 	function updatedata(arg) {
 
-		var title = $("#calendar_title").val();
-		var content = $("#calendar_content").val();
-		var start_date = $("#calendar_start_date").val();
-		var end_date = $("#calendar_end_date").val();
+		var title = jq1("#calendar_title").val();
+		var content = jq1("#calendar_content").val();
+		var start_date = jq1("#calendar_start_date").val();
+		var end_date = jq1("#calendar_end_date").val();
 		var check = 0;
 		
 		console.log("start_date");
@@ -494,7 +497,7 @@ var g_arg;	//이벤트 글로벌 변수(모달창에서 호출하는 함수에�
 
 		console.log(data);
 
-		$.ajax({
+		jq1.ajax({
 			url : "${pageContext.request.contextPath}/update.calendar",
 			type : "POST",
 			data : data,
@@ -502,7 +505,7 @@ var g_arg;	//이벤트 글로벌 변수(모달창에서 호출하는 함수에�
 
 			success : function(data) {
 
-				$('#calendarModal').modal('hide');
+				jq1('#calendarModal').modal('hide');
 				document.location.reload();
 				console.log("event 수정 완료");
 				
@@ -521,8 +524,8 @@ var g_arg;	//이벤트 글로벌 변수(모달창에서 호출하는 함수에�
 
 	function insertModalOpen(arg, admin, name, loginid) {
 
-		$('#calendarModal #addCalendar').css('display', 'none');
-		$("#calendarModal #calendar_title").attr("readonly",true); 
+		jq1('#calendarModal #addCalendar').css('display', 'none');
+		jq1("#calendarModal #calendar_title").attr("readonly",true); 
 
 		
 		console.log("name");
@@ -535,8 +538,8 @@ var g_arg;	//이벤트 글로벌 변수(모달창에서 호출하는 함수에�
 		
 		if(name != loginid && admin !="true")
 		{
-            $('#calendarModal #modifyCalendar').css('display', 'none');
-			$('#calendarModal #deleteCalendar').css('display', 'none');
+            jq1('#calendarModal #modifyCalendar').css('display', 'none');
+			jq1('#calendarModal #deleteCalendar').css('display', 'none');
 		}
 
 		g_arg = arg;
@@ -572,14 +575,14 @@ var g_arg;	//이벤트 글로벌 변수(모달창에서 호출하는 함수에�
 		if (g_arg.event != undefined) {
 
 			
-			$('#calendarModal #calendar_title').val(g_arg.event.id);
-			$('#calendarModal #calendar_content').val(g_arg.event.title);
-			$('#calendarModal #calendar_start_date').val(g_arg.event.startStr);
-			$('#calendarModal #calendar_end_date').val(m_end_dt);
+			jq1('#calendarModal #calendar_title').val(g_arg.event.id);
+			jq1('#calendarModal #calendar_content').val(g_arg.event.title);
+			jq1('#calendarModal #calendar_start_date').val(g_arg.event.startStr);
+			jq1('#calendarModal #calendar_end_date').val(m_end_dt);
 
 		}
 		//모달창 show
-		$('#calendarModal').modal('show');
+		jq1('#calendarModal').modal('show');
 
 	}
 
@@ -595,7 +598,7 @@ var g_arg;	//이벤트 글로벌 변수(모달창에서 호출하는 함수에�
 
 			//DB 삭제
 
-			$.ajax({
+			jq1.ajax({
 				url : "${pageContext.request.contextPath}/delete.calendar",
 				type : "POST",
 				data : data,
@@ -604,7 +607,7 @@ var g_arg;	//이벤트 글로벌 변수(모달창에서 호출하는 함수에�
 				success : function(data) {
 
 					arg.event.remove();
-					$('#calendarModal').modal('hide');
+					jq1('#calendarModal').modal('hide');
 					console.log("event.remove 완료");
 
 					g_arg = null;
@@ -613,7 +616,7 @@ var g_arg;	//이벤트 글로벌 변수(모달창에서 호출하는 함수에�
 					//alert(xhr.responseText);
 										
 					alert('일정 삭제 실패 새로고침 후 재시도 해주세요');
-					$('#calendarModal').modal('hide');
+					jq1('#calendarModal').modal('hide');
 					document.location.reload();
 				}
 			});
@@ -631,7 +634,7 @@ var g_arg;	//이벤트 글로벌 변수(모달창에서 호출하는 함수에�
 
 			
 
-			$.ajax({
+			jq1.ajax({
 				url : "${pageContext.request.contextPath}/getadmin.calendar",
 				type : "POST",
 				data : data,
@@ -650,7 +653,7 @@ var g_arg;	//이벤트 글로벌 변수(모달창에서 호출하는 함수에�
 				},
 				error : function(data) {
 					//alert(xhr.responseText);
-					$('#calendarModal').modal('hide');
+					jq1('#calendarModal').modal('hide');
 					document.location.reload();
 					alert('admin 생성 실패');
 				}
@@ -673,22 +676,15 @@ var g_arg;	//이벤트 글로벌 변수(모달창에서 호출하는 함수에�
 </style>
 <body>
 
-	<header>
-		<jsp:include page="../home/header.jsp" />
-
-	</header>
+<jsp:include page="../home/side.jsp" />
 
 
+<div class="content">
+<jsp:include page="../home/header2.jsp" />
+<div class="container-fluid pt-4 px-4">
 
-	<div class="row">
-		<div class="side">
-			<jsp:include page="../home/left.jsp" />
-
-		</div>
-		<br>
 		<div id='calendar'></div>
 
-	</div>
 
 
 
@@ -743,10 +739,12 @@ var g_arg;	//이벤트 글로벌 변수(모달창에서 호출하는 함수에�
 			</div>
 		</div>
 	</div>
+	</div>
+	</div>
 
-	<footer>
-		<jsp:include page="../home/bottom.jsp" />
-	</footer>
+<footer>
+<jsp:include page="../home/bottom.jsp" />
+</footer>
 
 <script>
 
