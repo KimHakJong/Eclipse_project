@@ -1,15 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ include file="../memo/memo.jsp" %>    
+<%@ include file="../memo/memo.jsp" %>
 <!DOCTYPE html>
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
 
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
@@ -48,20 +47,9 @@
     background-color: transparent;  /*스크롤바 뒷 배경 색상*/
 } 
 
-.sidemenu a{font-weight:bold}
     </style>
    <script>
-   $(document).ready(function(){
-	   
-   $( ".memo" ).draggable();
-   
-	$('.chat').click(function(){
-		var win;
-		if(win){
-			win.close();
-			win = window.open('chat.sml', 'chat', 'width=500, height=450, top=170px, left=230px, resizable=no,menubar=no,status=no,titlebar=no,toolbar=no, scrollbars=no,directories=no,location=no');
-		}
-	});
+
 	/*
 	//현재 프로젝트명 뒤 경로
 	let page = window.location.pathname.substring(6);
@@ -79,7 +67,6 @@
 		}
 	}
 	*/
-   })
    
    </script>    
 </head>
@@ -116,8 +103,10 @@
                     </div>
                 </div>
                 <div class="sidemenu navbar-nav w-100">
-                    <a href="main.home" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>메인</a>
+                    <a href="main.home" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>프로젝트</a>
                     <a href="Main.att" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>근태관리</a>
+                    <a href="Main.bo" class="nav-item nav-link"><i class="fa fa-th me-2"></i>게시판</a>
+                    <!-- 
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>프로젝트 게시판</a>
                         <div class="dropdown-menu bg-transparent border-0">
@@ -126,12 +115,12 @@
                             <a href="element.html" class="dropdown-item">Other Elements</a>
                         </div>
                     </div>
-                    <a href="Main.bo" class="nav-item nav-link"><i class="fa fa-th me-2"></i>게시판</a>
+                     -->
                     <a href="main.calendar" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>캘린더</a>
-                    <a href="list.net" class="nav-item nav-link"><i class="fa fa-table me-2"></i>주소록</a>
-                    <a href="chat.sml" 	  onClick="window.open('chat.sml', 'chat', 'width=500, height=450, top=170px, left=230px, resizable=no,menubar=no,status=no,titlebar=no,toolbar=no, scrollbars=no,directories=no,location=no'); return false;" 
-                       class="nav-item nav-link chat"><i class="fa fa-chart-bar me-2"></i>채팅</a>
-                    <a href="javascript:void(0)" class="nav-item nav-link openmemo"><i class="fa fa-chart-bar me-2"></i>메모장</a>
+                    <a href="main.calendar" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>예약</a>
+                    <a href="list.net" class="nav-item nav-link"><i class="fa fa-address-book me-2"></i>주소록</a>
+                    <a href="jjokji" class="nav-item nav-link"><i class="fa fa-table me-2"></i>쪽지</a>
+                    <a href="junja" class="nav-item nav-link"><i class="fa fa-table me-2"></i>전자결재</a>
                 </div>
             </nav>
         </div>

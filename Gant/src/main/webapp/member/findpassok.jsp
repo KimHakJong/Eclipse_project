@@ -12,17 +12,17 @@
    
 #frame{width:520px; margin:0 auto; margin-top:90px;
 	 border-radius:4px; border:1px solid #C4C5C8; padding:20px 40px 40px 40px}
-
+hr{color:#ced4da}
 #text{text-align:center}
 span{font-weight:bold;}
 span:nth-child(2){color:red}
 
 button{height:50px; width:180px; 
-       border-radius:4px; border:none; 
+       border-radius:4px; border:1px solid #009CFF; 
 	   outline:none; font-size:16px; cursor:pointer;
-	   color:white; background:black; display:block; margin:0 auto}
+	   color:white;display:block; margin:0 auto; background:#009CFF}
 	   
-#logbtn:hover{color:black; background:white; border:2px solid black}
+#logbtn:hover{background:#26abff; border:1px solid #26abff; }
 
 </style>
 <script>

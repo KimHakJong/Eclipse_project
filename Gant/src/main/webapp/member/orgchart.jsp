@@ -14,11 +14,11 @@ display:inline-block;
  overflow:auto}
  
 .organization::-webkit-scrollbar {
-           width: 7px; /*스크롤바의 너비*/
+           width: 5px; /*스크롤바의 너비*/
 }
 .organization::-webkit-scrollbar-thumb {
     height: 30%; /* 스크롤바의 길이 */
-    background: black; /* 스크롤바의 색상 */
+    background: #26abff; /* 스크롤바의 색상 */
     
     border-radius: 10px;
 }
@@ -33,6 +33,7 @@ li{list-style-type:none}
 .menu{width:120px; font-size:15px}
 .organization>ul>li>ul>li>ul>li {position:relative; left:30px;}
 .organization>ul>li>ul>li>ul>li>ul>li>ul>li{position:relative; left:30px; font-size:15px}
+.organization a {color:black !important}
 .menu img{width:20px;height:20px; margin:0px 4px 4px 0px}
 .plan>li, .sales>li, .human>li, .it>li, .chong>li, .account>li
 {position:relative; left:60px; width:90px}

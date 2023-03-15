@@ -13,7 +13,7 @@
 		width: 450px;
 		height: 480px;
 		position:fixed;
-		z-index:4;
+		z-index:2000;
 		left: 320px;
   		top: 140px;
 }
