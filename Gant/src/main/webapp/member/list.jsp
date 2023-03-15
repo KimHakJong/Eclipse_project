@@ -166,7 +166,6 @@ $(document).ready(function(){
 <body>
 <jsp:include page="../home/side.jsp" />
 
-
 <div class="content">
 <jsp:include page="../home/header2.jsp" />
 <div class="container-fluid pt-4 px-4">
