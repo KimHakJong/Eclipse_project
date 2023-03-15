@@ -24,27 +24,24 @@ $(function(){
 </head>
 <body>
 
-	<header>
-		<jsp:include page="../home/header.jsp" />
-	</header>
+<jsp:include page="../home/side.jsp" />
 
-	<div class="row">
-		<div class="side" >
-			<jsp:include page="../home/left.jsp" />
-		</div>
-		
-		<div class="main">
-			<div class="container">
+
+<div class="content">
+<jsp:include page="../home/header2.jsp" />
+<div class="container-fluid pt-4 px-4">
+
+<div class="container">
         
- 
 <%-- 게시글이 있는경우 --%>
 <c:if test="${listcount > 0 }">
- <table class="table">
-  <thead class="thead-dark">
+ <div class="table-responsive">
+  <table class="table">
+  <thead>
     <tr>
      <th colspan="4" class="th1"></th>
      <th colspan="2" class="th1">
-       <span>검색한 게시글 수 : ${listcount}</span>
+       <span id="listcount">게시글 수 : ${listcount}</span>
      </th>
    </tr>
    <tr>
@@ -206,7 +203,7 @@ $(function(){
     <%-- 일반게시물  끝--%>
    </tbody>  
  </table>
- 
+</div> 
  <%--테이블 끝 --%>
  
  <div>
@@ -310,9 +307,9 @@ $(function(){
 		</div>
          
            </div><%--  class container end --%>
-		</div> <%-- class main end --%>
 	</div> <%-- class row end --%>
-
+  </div>  <!-- class content -->
+  
 	<footer>
 		<jsp:include page="../home/bottom.jsp" />
 	</footer>

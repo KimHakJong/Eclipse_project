@@ -26,6 +26,19 @@ margin-bottom: 2em;
 display: inline-block;
 }
 
+.main{
+  border:none !important;  
+}
+
+td{
+ font-size : 15px;
+}
+
+.table a{
+ color : #757575	
+}
+
+
 .rows{
 text-align: right;
 }
@@ -64,4 +77,8 @@ border-top : 0px solid #ffffff !important;
 padding-top: 0	;
 }
 
+#listcount{
+color : #757575;
+float : right;	
+}	
 
