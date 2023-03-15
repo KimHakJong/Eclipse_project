@@ -126,7 +126,7 @@
 .sidebar .navbar .navbar-nav .nav-link {
     padding: 7px 20px;
     color: var(--dark);
-    font-weight: 500;
+    font-weight: bold;
     border-left: 3px solid var(--light);
     border-radius: 0 30px 30px 0;
     outline: none;

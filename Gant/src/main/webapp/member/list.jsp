@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -16,7 +17,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
 *{box-sizing:border-box; font-family:"noto sans", sans-serif;}
 
-aside{width:30%; height: 60%; display:inline-block;position:absolute; left:5%; top:20%;}
+aside{width:30%; height: 50%; display:inline-block;position:absolute; left:5%; top:24.9%;}
 
 #searchdiv{ margin-bottom:80px; height:44px; position:relative; top:30px; float:right;
 			vertical-align:middle;  }
@@ -38,23 +39,26 @@ option{background:white;}
 			 border:1px solid #C4C5C8;
 			 top:0px;
 			 }
-#searchfield:focus, #searchword:focus {border:2px solid black; outline:none }
-#searchbtn{width:40px;height:40px; background:#1D1F21; border:1px solidb #1D1F21; outline:none; margin:0; padding:0; position:relative; top:-1.5px}
+#searchfield:focus, #searchword:focus {border:2px solid #26abff; outline:none }
+#searchbtn{width:40px;height:40px; background:#26abff; border:1px solid #26abff; outline:none; margin:0; padding:0; position:relative; top:-1.5px}
 #searchicon{width:23px; height:23px}
-.list{width: 54.5%; position:absolute; right: 5%; top: 6%; display:inline-block}
+.list{width: 54.5%; position:absolute; right: 5%; top: 13%; display:inline-block}
 .explain img {width:17px; height:17px;margin-bottom:4px}
 .explain {position: absolute; top: 15.2%; padding: 10px 10px 0px 0px;}
 .addbook{
     width: 100%; border-collapse: collapse; 
-    border:1px solid #C4C5C8; text-align:left; 
+    text-align:left; 
     margin-bottom:20px;
+    border-collapse: collapse;
 }
-.addbook>thead>tr{border-bottom:2px solid #C4C5C8}
-.addbook>tbody>tr>td{border:1px solid #C4C5C8; padding:10px 10px 10px 20px}
-.addbook>thead>tr>th{background:#1D1F21; color:white;border-right:1px solid #C4C5C8; padding:10px 10px 10px 20px}
-.addbook>thead>tr>th:nth-child(1){width:30%}
+.addbook>thead>tr{ border-bottom: 1px solid #26abff;}
+.addbook>tbody>tr:nth-child(1){border-top:1px solid #26abff}
+.addbook>tbody>tr{border-bottom: 1px solid #ced4da;}
+.addbook>tbody>tr>td{padding:10px 10px 10px 20px; color:black}
+.addbook>thead>tr>th{background: #26abff; color: #fff;padding:10px 10px 10px 20px}
+.addbook>thead>tr>th:nth-child(1){width:30%; border-radius:.4em 0px 0px 0px}
 .addbook>thead>tr>th:nth-child(2){width:28%}
-.addbook>thead>tr>th:nth-child(3){width:42%; border-right:none}
+.addbook>thead>tr>th:nth-child(3){width:42%; border-right:none; border-radius:0px .4em 0px 0px}
 
 .addbook>thead>tr>th:nth-child(4){padding:0px; text-align:center;border-left:none}
 .delete{outline:none; border:none; background:#dc3545; 
@@ -70,52 +74,15 @@ option{background:white;}
 .godetail:hover{color:black; text-docoration:underline}
 .godetail:focus{outline:none}
 #detailForm{padding:20px 15px 0px 15px; height:400px}
-#detailmodal{margin-top:90px}
-.modal-body{height:425px}
-#profileimg {width:100px; height:100px; float:left; border-radius:50%;
-		 border:1px solid #C4C5C8;margin:0px 20px 20px 5px}
-.infodiv {padding: 0px 5px 0px 5px; text-align:left; line-height:25px; height:25px}
-#profileimg + div {width:400px; margin-top:13px}
-b{margin:0px 10px 0px 5px;}
-#profileimg + div + div{margin-top:5px}
-hr{margin:10px;}
-#line1,#line2 {width:300px; position:relative; left:120px}
-#line1 + div > b:last-child{position:relative; left:190px}
-#line2 + div {clear:both}
-#name {margin-left:30px}
-#department {margin-left:14px; margin-right:28px}
-#position{margin-left:25px}
-#birth{margin-left:30px}
-#phone{margin-left:46px}
-#email{margin-left:46px}
-#address{margin-left:60px}
-#close{height:50px; width:100px;display:block; 
-	  font-weight:bold; margin:0 auto; opacity:1;
-      border-radius:4px;height:50px; font-size:16px;
-      background-color:black; color:white; border:none;
-      outline:none; margin-top:23px}
-#close:hover{background:white; color:black; border:2px solid black}
-a.page-link{font-family: 'Lato', sans-serif}
-.pagination{ margin-top:40px}
-.page-link {border:none; color:#777777 !important; margin:0px 12px 0px 12px; padding:0px; 
-height:25px; font-size:16px}
-.page-link:focus{box-shadow: none;}
-.page-link:hover{background-color:white;color:#777777 !important;}
-.page-item.active .page-link {
-    color: #000;
-    background-color: white;
-  	border-bottom:2px solid #000;
-}
-.first {margin:0px 12px 0px 0px;}
-.back {margin:0px 22px 0px 0px;}
-.next {margin:0px 0px 0px 22px;}
-.last {margin:0px 0px 0px 12px;}
+
+
+
 h1 {
   font-size: 2rem;
   text-align:center;
   margin-top:150px;
 }
-.noresult{width:100%; height:350px; margin-top:125px; border:1px solid #C4C5C8}
+.noresult{width:100%; height:350px; margin-top:125px; border:1px solid #ced4da}
 </style>
 <script>
 
@@ -199,7 +166,6 @@ $(document).ready(function(){
 <body>
 <jsp:include page="../home/side.jsp" />
 
-
 <div class="content">
 <jsp:include page="../home/header2.jsp" />
 <div class="container-fluid pt-4 px-4">
@@ -218,7 +184,7 @@ $(document).ready(function(){
 	<option value="phone_num">휴대폰</option>
 </select>
 <input type="text" name="searchword" id="searchword" value="${searchword}">
-<button type="submit" id="searchbtn"><img id="searchicon" src="member/image/searchicon2.png"></button>
+<button type="submit" id="searchbtn"><img id="searchicon" src="member/image/searchicon.png"></button>
 </div>
 </form>
 
@@ -252,6 +218,35 @@ $(document).ready(function(){
 		</c:forEach>
 	</tbody>
 </table>
+
+<style>
+#detailmodal{margin-top:90px}
+.modal-body{height:425px}
+#profileimg {width:100px; height:100px; float:left; border-radius:50%;
+		 border:1px solid #C4C5C8;margin:0px 20px 20px 5px}
+.infodiv {padding: 0px 5px 0px 5px; text-align:left; line-height:25px; height:25px}
+#profileimg + div {width:400px; margin-top:13px}
+b{margin:0px 10px 0px 5px; color:black}
+#profileimg + div + div{margin-top:5px}
+hr{margin:10px;}
+#line1,#line2 {width:300px; position:relative; left:120px}
+#line1 + div > b:last-child{position:relative; left:190px}
+#line2 + div {clear:both}
+.infodiv span{color:black}
+#name {margin-left:30px;}
+#department {margin-left:14px; margin-right:28px}
+#position{margin-left:25px}
+#birth{margin-left:30px}
+#phone{margin-left:46px}
+#email{margin-left:46px}
+#address{margin-left:60px}
+#close{height:50px; width:100px;display:block; 
+	  font-weight:bold; margin:0 auto; opacity:1;
+      border-radius:4px;height:50px; font-size:16px;
+      background-color:#009CFF; color:white; border:none;
+      outline:none; margin-top:23px}
+#close:hover{background:#26abff;}
+</style>
 
 <%--모달 창 --%>
 <div class="modal" id="detailmodal">
@@ -293,8 +288,26 @@ $(document).ready(function(){
 		</div>
 	</div>
 	<%--모달 끝 --%>
+<style>
+a.page-link{font-family: 'Lato', sans-serif}
+.pagination{ margin-top:40px}
+.page-link {border:none; color:#26abff; margin:0px 12px 0px 12px !important; padding:0px; 
+height:25px; font-size:16px}
+.page-link:focus{box-shadow: none; color:#009CFF}
+.page-link:hover{background-color:white;color:#009CFF !important;}
+.page-item.active .page-link {
+    color: #009CFF;
+    background-color: white;
+  	border-bottom:2px solid #009CFF;
+}
+.page-item:hover
+.first {margin:0px 12px 0px 0px !important;}
+.back {margin:0px 22px 0px 0px !important;}
+.next {margin:0px 0px 0px 22px !important;}
+.last {margin:0px 0px 0px 12px !important;}
+</style>
 <div>
-	<ul class="pagination justify-content-center">
+	<ul class="listpage pagination justify-content-center">
 	  <%-- 1페이지이전: 작동X, 안보임 --%>
 	  <c:if test="${page<=1}">
 	    <li class="paga-item" style="display:none">

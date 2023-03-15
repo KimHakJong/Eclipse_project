@@ -10,15 +10,15 @@
 <style>
 * {font-family:"noto sans", sans-serif;
    box-sizing: border-box}
-    body > div > div{margin-top:30px; text-align:center}
-    img{width:150px}
+    .logo{margin-top:60px; margin-bottom:30px; text-align:center}
+    img{width:250px}
 	h1{font-family:"Lora"; text-align:center; margin-bottom:20px; font-weight:bold; font-size:40px; color:#006CFF}
 	
-	form{width:500px; margin:0 auto; border:1px solid #C4C5C8; padding:20px 40px; border-radius: 4px;
+	form{width:500px; margin:0 auto; border:1px solid #ced4da; padding:20px 40px; border-radius: 4px;
 		margin-bottom:50px;}
 		
-	#log{margin: 20px 0px 10px 0px; font-size:32px; font-weight:bold}	
-	#id, #password {width:100%; height:50px; margin:15px 0px; border:1px solid #C4C5C8; padding:15px 12px; border-radius: 4px;
+	#log{margin: 20px 0px 10px 0px; font-size:28px;}	
+	#id, #password {width:100%; height:50px; margin:15px 0px; border:1px solid #ced4da; padding:15px 12px; border-radius: 4px;
 	}
 	
 	#password + img {
@@ -30,9 +30,9 @@
 	}
 	
 	#log + div + div {height:80px}
-	#id:focus, #password:focus{border:3px solid black; outline:none}
+	#id:focus, #password:focus{border:2px solid #009CFF; outline:none}
 	label{cursor:pointer}
-	#check1, #check2 {margin:5px 0px; accent-color:black}
+	#check1, #check2 {margin:5px 0px;}
 	span {position:relative; margin-left:6px}
 	#remember + span {
     position: relative;
@@ -52,10 +52,11 @@
 	border:none;
 	}
 	 
-	#joinbtn{background-color:black}
-	#submitbtn {background-color: white; color: black; border: 1px solid black;}
+	#submitbtn {background-color: #009CFF; color: white; border: 1px solid #009CFF;}
+	#submitbtn:hover {background-color:#26abff; border:1px solid #26abff;}
 	#submitbtn:hover, #joinbtn:hover {cursor:pointer}
-	#submitbtn:hover {background-color:black; color:white}
+	#joinbtn{background-color:white; color:black; border:1px solid #ced4da;}
+	#joinbtn:hover {background-color:#33C43C; color:white; opacity:0.9}
 </style>
 <script>
 $(document).ready(function(){
@@ -96,7 +97,7 @@ $(document).ready(function(){
 </head>
 <body>
 <div>
-	<div><img src="member/image/logoblack.png"></div>
+	<div class="logo"><img src="image/logo.png"></div>
 	<form action="logincheck.net" method="post">
 		<div id="log">LOGIN</div>
 		<div>
