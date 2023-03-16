@@ -6,6 +6,11 @@ body{
 font-family: Roboto;
 }
 
+.main{
+  border:none !important;  
+}
+
+
 #swa_app > section{
 	padding: 20px 25px;
 }
@@ -36,7 +41,7 @@ text-align: center;
 
 
 .swa_dial{
-    background: white;
+    background: #31b4f1;
 	position: relative;
 	display: inline-block;
 	height: 150px;
@@ -134,7 +139,7 @@ font-size: 10px;
 font-weight: 700;
 }
 
-h6{
+#my_vacation,#my_week{
 margin-top: 10px;
 margin-bottom: 10px;
 font-size: 14px;
@@ -154,7 +159,10 @@ font-size:20px;
 margin-top: 12px;		
 }
 
-#work_week,#work_today,#overtime,.watch_name,#my_vacation,#my_week{
-color:black	
+#work_week,#work_today,#overtime{
+color:white	
 }
 
+.watch_name,#my_vacation,#my_week{
+	color:#000000
+}
