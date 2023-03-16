@@ -42,7 +42,7 @@ body>div>table>tbody tr:last-child {
 	width: 60%
 }
 
-/* í¬ê¸° ì¡°ì ˆ ê³ ì •*/
+/* Ã­ÂÂ¬ÃªÂ¸Â° Ã¬Â¡Â°Ã¬Â Ë† ÃªÂ³Â Ã¬Â â€¢*/
 textarea.form-control {
 	resize: none
 }
@@ -212,7 +212,7 @@ textarea.comment-write-area-text {
 }
 
 button, textarea {
-	font-family: Apple SD Gothic Neo, ë§‘ì€ ê³ ë”•, Malgun Gothic, ë‹ì›€, dotum,
+	font-family: Apple SD Gothic Neo, Ã«Â§â€˜Ã¬Ââ‚¬ ÃªÂ³Â Ã«â€â€¢, Malgun Gothic, Ã«Ââ€¹Ã¬â€ºâ‚¬, dotum,
 		sans-serif;
 }
 
@@ -360,7 +360,7 @@ float:left;
 float:right;	
 }
 
-/* 좋아요버튼 */
+/* ì¢‹ì•„ìš”ë²„íŠ¼ */
 
 		.fas,.far,.fa{
 			font-family: "fontawesome";
@@ -384,8 +384,8 @@ float:right;
 			margin: 0  !important;
 			border-radius: 5px;
 			font-size: 17px;
-			background:#0d1317 !important;
-			border : 1px solid  !important;
+			background:#009CFF !important;
+			border : 1px solid #009CFF !important;
 		}
 		.contain button:hover{
 			background: #999494;
@@ -467,6 +467,15 @@ float:right;
 
 	  .comment-area{
 	   padding-bottom: 20px;
+	   }
+	   
+	   thead{
+		 background-color:#4da7ed;
+		 color: #fff 
+	   }
+	   
+	   .container-fluid.pt-4.px-4{
+		   margin-top:30px;
 	   }
 		
 

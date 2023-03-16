@@ -3,7 +3,7 @@
 <html>
 <head>
 <title>게시판 - 상세</title>
-<link rel="stylesheet" href="board/board_css/view.css" type="text/css"> 
+
 <link href="css/home.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
@@ -12,6 +12,7 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
 	<script src="board/board_js/view.js"></script>
+	<link rel="stylesheet" href="board/board_css/view.css" type="text/css"> 
 </head>
 <body>
 
@@ -31,7 +32,7 @@
 		<%-- view.js 에서 사용하기 위해 추가 끝--%>
 		<div class="container">
 		  <table class="table">
-		  <thead class="thead-dark">
+		  <thead>
 		     <tr>
 		        <th colspan="2">공지/자유게시판</th>
 		        <th id="date"><div id="board_date">${boarddata.board_date}</div></th>
@@ -119,11 +120,11 @@
 		           <button class="btn btn-danger" id="bodelete">삭제</button>		            
 		          </c:if>
 		         <a href="Main.bo">
-		           <button class="btn btn-dark">목록</button>
+		           <button class="btn btn-primary">목록</button>
 		         </a>
 		         <c:if test="${boarddata.board_notice == 'false'}">
 		         <a href="BoardReplyView.bo?num=${boarddata.board_num}">
-		           <button class="btn btn-dark">답글쓰기</button>
+		           <button class="btn btn-primary">답글쓰기</button>
 		         </a>
 		         </c:if>
 		      </div>
