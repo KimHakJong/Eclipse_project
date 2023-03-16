@@ -23,7 +23,7 @@ button{background-color:black; color:white}
 }
 
 #menuOutline {
- 	border: 1px solid gray;
+ 	
     width: 70%;
     height: 95%;
     margin: 0 auto;
@@ -49,7 +49,6 @@ button{background-color:black; color:white}
 
 
 .col-sm-3, .col-sm-8 {
-	border: 1px solid #444444;
 	height: 640px;
     margin-top: -21px;
 }
@@ -111,28 +110,27 @@ height:25px; font-size:16px}
     background-color: white;
      border-bottom:2px solid #000;
 }
-
+.main{
+		border-color: white !important;
+}
 </style>
 
 </head>
 <body>
 
-<header>
-	<jsp:include page="header.jsp"/>
-</header>
+<jsp:include page="../home/side.jsp" />
+
+<div class="content">
+<jsp:include page="../home/header2.jsp" />
+<div class="container-fluid pt-4 px-4">
 
 
 	<div class="row">
-	
-		<div class="side" style="width:15%">
-			<jsp:include page="left.jsp" />
-		</div>
+
 		
 		<div class="main" style="width:85%; height:640px;">
-		
 			<div class="mymenu">
 				<a href="update.home">개인정보 수정</a>
-				<a href="schedule.home">개인 일정</a>
 				<a href="myboard.home">게시판 활동</a>
 			</div>
 			
@@ -366,7 +364,8 @@ height:25px; font-size:16px}
 	  </div> <!-- end menuOutline  -->
 	</div> <!-- end main -->
 </div> <!-- end row -->
-
+</div>
+</div>
 <footer>
 	<jsp:include page="bottom.jsp"/>
 </footer>

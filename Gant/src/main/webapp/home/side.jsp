@@ -103,9 +103,9 @@
                     </div>
                 </div>
                 <div class="sidemenu navbar-nav w-100">
-                    <a href="main.home" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>프로젝트</a>
-                    <a href="Main.att" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>근태관리</a>
-                    <a href="Main.bo" class="nav-item nav-link"><i class="fa fa-th me-2"></i>게시판</a>
+                    <a href="main.home" class="nav-item nav-link active"><i class="fas fa-folder-open me-2"></i>프로젝트</a>
+                    <a href="Main.att" class="nav-item nav-link"><i class="fas fa-user-clock me-2"></i>근태관리</a>
+                    <a href="Main.bo" class="nav-item nav-link"><i class="fas fa-th-list me-2"></i>게시판</a>
                     <!-- 
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>프로젝트 게시판</a>
@@ -116,11 +116,11 @@
                         </div>
                     </div>
                      -->
-                    <a href="main.calendar" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>캘린더</a>
-                    <a href="main.calendar" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>예약</a>
+                    <a href="main.calendar" class="nav-item nav-link"><i class="far fa-calendar-alt me-2"></i>캘린더</a>
+                    <a href="main.calendar" class="nav-item nav-link"><i class="fas fa-clock me-2"></i>예약</a>
                     <a href="list.net" class="nav-item nav-link"><i class="fa fa-address-book me-2"></i>주소록</a>
-                    <a href="jjokji" class="nav-item nav-link"><i class="fa fa-table me-2"></i>쪽지</a>
-                    <a href="junja" class="nav-item nav-link"><i class="fa fa-table me-2"></i>전자결재</a>
+                    <a href="jjokji" class="nav-item nav-link"><i class="far fa-envelope me-2"></i>쪽지</a>
+                    <a href="junja" class="nav-item nav-link"><i class="fas fa-file me-2"></i>전자결재</a>
                 </div>
             </nav>
         </div>
