@@ -54,8 +54,9 @@ var jq1 = jQuery.noConflict();
 	url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
 
 body {
-	padding: 0;
 	font-size: 14px;
+	background-color: white;
+	
 }
 .fc-button-primary{
 background-color: #009CFF !important;
@@ -66,8 +67,9 @@ border-color: #009CFF !important;
 }
 
 #calendar {
-	max-width: 3000px;
-	margin: 100px 100px;
+	
+	margin: 50px 300px 500px 150px;
+	
 }
 
 .fc-day-sun a {
@@ -81,9 +83,6 @@ border-color: #009CFF !important;
 	text-decoration: none;
 }
 
-.fc-event-title.fc-sticky {
-	white-space: normal;
-}
 </style>
 
 
@@ -666,24 +665,24 @@ var g_arg;	//이벤트 글로벌 변수(모달창에서 호출하는 함수에�
 </script>
 </head>
 <style>
-.row {
-	border: 1px solid black !important;
-}
 
-#logo {
-	margin-top: 5% !important;
-}
+
 </style>
 <body>
 
 <jsp:include page="../home/side.jsp" />
 
 
+
 <div class="content">
 <jsp:include page="../home/header2.jsp" />
+<div id='calendar'></div>
 <div class="container-fluid pt-4 px-4">
 
-		<div id='calendar'></div>
+		
+
+	</div>
+	</div>
 
 
 
@@ -738,8 +737,6 @@ var g_arg;	//이벤트 글로벌 변수(모달창에서 호출하는 함수에�
 
 			</div>
 		</div>
-	</div>
-	</div>
 	</div>
 
 <footer>

@@ -19,24 +19,27 @@
 </script>
 <style>
 *{box-sizing:border-box; font-family:"noto sans", sans-serif;}
-body>div{margin-top:6em; margin-bottom:4em}
 form>div {font-size:32px; font-weight:bold; text-align:center; margin:0px 0px 40px 0px}
 
-form{width:600px; margin:0 auto; border:1px solid lightgray; border-radius:4px;
+form{width:600px; margin:0 auto; border:1px solid #ced4da; border-radius:4px;
 	 padding: 60px 90px 30px 90px}
-	 
+#showImage > img {border-radius:50%}
 span { font-size: 13px;}
-
-label{font-size:14px; font-weight:bold; display:block;margin-top:20px; cursor:pointer;}
+#menuOutline{padding-bottom:50px !important}
+#menuOutline div {color:black}
+#menuOutline label {color:black}
+#menuOutline input {color:black}
+.check{margin-top:10px}
+label{font-size:14px; font-weight:bold; display:block !important;margin-top:20px !important; cursor:pointer; }
 select, input, button { height:50px; margin:10px 0px 0px 0px; 
 						border-radius:4px; cursor:pointer;
-						border:1px solid lightgray; background-color:white}
-input:focus {border:3px solid black; outline:none}
+						border:1px solid #ced4da; background-color:white}
+input:focus {border:3px solid #009CFF; outline:none}
 input, button {width:100%;  padding:15px 12px}
 select {background:white;}
 
 button:disabled{background:#AEAEAE; border:none}
-button:enabled {opacity:0.8}
+button:enabled {background:#009CFF; border:1px solid #009CFF; opacity:0.9}
 button:enabled:hover{opacity:1}
 
 #password {margin-bottom:0px;}
@@ -47,15 +50,14 @@ button:enabled:hover{opacity:1}
 #phone1, #phone2, #phone3 {width:30%}
 #phone2 {float: center;}
 #phone3 { float:right;}
-#email, #domain {width:30%}
+#email, #domain {width:35%}
 #domain {width:28%}
-#certsend{float:right; width:35%;}
+#certsend{float:right; width:30%; font-size:13.3px}
 
-#certnum {width:63%}
-#certcheck{float:right; width:35%; font-size: 16px;}
-
+#certnum {width:63%; float:left}
+#certcheck{float:right; width:35%; font-size: 13.3px;}
 #post{width:68%}
-#spost{width:30%; float:right}
+#spost{width:30%; float:right; font-size:13.3px}
 
 #address + div, #address + div + div {display:inline-block; width:49%}
 #address + div > label {float:left}
@@ -71,18 +73,20 @@ button:enabled:hover{opacity:1}
 button{background-color:black; color:white}
 button[type=submit],[type=reset]{
 	display:inline-block;
-	font-weight:bold; font-size:22px; color:white;
+	font-weight:bold; font-size:18px; color:white;
 	background-color:black; 
-	height:60px; width:150px;
+	height:55px; width:150px;
 	border:none; outline:none
 	}
 button[type=reset]{
-	background-color:red; 
+	background-color:white; color:black; border:1px solid #ced4da; 
 	}
 button[type=submit]{
-	background-color:green; 
+	background-color:#009CFF; 
 	}
-
+button[type=reset]:hover{
+	background-color:
+}
 
 .mymenu > a {
 	border: 1px solid black;
@@ -101,7 +105,10 @@ button[type=submit]{
 input[type=file] {
 		display : none;
 	}
-
+.clearfix {
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
 
 </style>
 </head>
@@ -125,22 +132,16 @@ input[type=file] {
 });
 </script>
 
-<header>
-	<jsp:include page="header.jsp"/>
-</header>
+<jsp:include page="../home/side.jsp" />
 
-	<div class="row">
-	
-		<div class="side" style="width:15%">
-		<!-- 업데이트 레프트 인클루드 -->
-			<jsp:include page="left.jsp" />
-		</div>
-		
-		<div class="main" style="width:85%;">
+<div class="content">
+<jsp:include page="../home/header2.jsp" />
+<div class="container-fluid pt-4 px-4">
+
 
 			<div class="mymenu">
 				<a href="update.home">개인정보 수정</a>
-				<a href="schedule.home">개인 일정</a>
+				
 				<a href="myboard.home">게시판 활동</a>
 			</div>
 			
@@ -201,7 +202,7 @@ input[type=file] {
 					<input type="text" name="phone3" id="phone3" maxLength="4"
 						value="${info.phone_num.substring(9,13) }">
 					<span id="phone_message"></span>
-					
+					<b></b>
 				<label for="email">이메일</label>
 					<input type="text" name="email" id="email" 
 							value='${info.email.split("@")[0]}'> @ 
@@ -259,8 +260,7 @@ input[type=file] {
 			</form>
 		  </div> <!-- end menuOutline  -->
 		</div> <!-- end main -->
-	</div> <!-- end row -->
-	
+	</div>
 
   <footer>
 	<jsp:include page="bottom.jsp"/>
