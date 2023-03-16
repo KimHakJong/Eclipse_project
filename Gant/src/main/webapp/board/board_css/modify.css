@@ -4,8 +4,6 @@ label{font-weight: bold;}
 
 img{width: 20px}
 
-
-
 .fileRegiBtn label {
 	display: inline-block; 
 	padding: .5em .75em; 
@@ -20,7 +18,7 @@ img{width: 20px}
 	border-radius: .25em;
 }
 
-/*파일선택시 선택된 파일명이 붙는것을 가려준다*/
+/*íŒŒì¼ì„ íƒì‹œ ì„ íƒëœ íŒŒì¼ëª…ì´ ë¶™ëŠ”ê²ƒì„ ê°€ë ¤ì¤€ë‹¤*/
 .fileRegiBtn input[type="file"]{
 	position: absolute; 
 	width: 1px; 
@@ -73,9 +71,9 @@ margin-left:-3px;
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
 
-#fontColor{
-    margin-top : 5px;
-    margin-bottom:5px
+#fontColor,#fontWeight,#fontSize{
+    margin-top : 5px; 
+	height : 21px;
 }
 
 #board_content{
@@ -99,13 +97,24 @@ margin-left:-3px;
     line-height: 1.5;
     border-radius: 0.25rem;
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-        color: #fff;
+    color: #fff;
     background-color: #343a40;
     border-color: #343a40;
-    float : right;
-    margin : 3px;
+	margin : 3px;
 }
 
 #container{
 margin-top: 20px
+}
+
+.container-fluid.pt-4.px-4{
+  margin-bottom : 40px;
+  height : 100%px;
+  width : 55%;	
+}
+
+#button{
+ padding-bottom: 20px;
+ display: flex;
+ justify-content: flex-end;
 }

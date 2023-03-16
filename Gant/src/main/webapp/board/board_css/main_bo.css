@@ -4,21 +4,6 @@ font-family:"noto sans", sans-serif;
 
 
 @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
-.pagination{font-family: 'Lato', sans-serif; margin-top:40px}
-
-.page-link {border:none; color:#777777; margin:0px 12px 0px 12px; padding:0px; 
-height:25px; font-size:16px}
-.page-link:focus{box-shadow: none;}
-.page-link:hover{background-color:white;color:#777777;}
-.page-item.active .page-link {
-    color: #000;
-    background-color: white;
-     border-bottom:2px solid #000;
-}
-.first {margin:0px 12px 0px 0px;}
-.back {margin:0px 22px 0px 0px;}
-.next {margin:0px 0px 0px 22px;}
-.last {margin:0px 0px 0px 12px;}
 
 select.form-control{
 width: auto;
@@ -35,8 +20,11 @@ td{
 }
 
 .table a{
- color : #757575	
+ color :  #2d2b2b	
 }
+
+th,td{color :  #2d2b2b	
+} 	
 
 
 .rows{
@@ -44,7 +32,7 @@ text-align: right;
 }
 
 .gray {
- color: gray;
+ color: #2d2b2b;
 }
 
 #th1{width:8%}
@@ -77,8 +65,8 @@ border-top : 0px solid #ffffff !important;
 padding-top: 0	;
 }
 
-#listcount{
-color : #757575;
-float : right;	
-}	
+
+#search{
+margin-left : 180px;
+}
 

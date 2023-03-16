@@ -30,18 +30,27 @@ $(function(){
 <div class="content">
 <jsp:include page="../home/header2.jsp" />
 <div class="container-fluid pt-4 px-4">
-
 <div class="container">
-        
+
+
+		        
 <%-- 게시글이 있는경우 --%>
 <c:if test="${listcount > 0 }">
  <div class="table-responsive">
   <table class="table">
   <thead>
     <tr>
-     <th colspan="4" class="th1"></th>
-     <th colspan="2" class="th1">
-       <span id="listcount">게시글 수 : ${listcount}</span>
+     <th colspan="6" class="th1">
+     
+     <form action="Main.bo" method="post" id="search">
+		   <div class="input-group mb-3">
+		  <input type="text" class="form-control" name="search_name" placeholder="제목을 검색하세요">
+		  <div class="input-group-append">
+		   <button class="btn btn-dark" type="submit">🔍︎</button>
+		  </div>
+		</div>
+		
+		</form>
      </th>
    </tr>
    <tr>
@@ -205,6 +214,24 @@ $(function(){
  </table>
 </div> 
  <%--테이블 끝 --%>
+
+<style>
+.pagination{font-family: 'Lato', sans-serif; margin-top:40px}
+
+.page-link {border:none; color:#777777; margin:0px 12px 0px 12px; padding:0px; 
+height:25px; font-size:16px}
+.page-link:focus{box-shadow: none;}
+.page-link:hover{background-color:white;color:#777777;}
+.page-item.active .page-link {
+    color: #000;
+    background-color: white;
+     border-bottom:2px solid #000;
+}
+.first {margin:0px 12px 0px 0px;}
+.back {margin:0px 22px 0px 0px;}
+.next {margin:0px 0px 0px 22px;}
+.last {margin:0px 0px 0px 12px;}
+</style>
  
  <div>
 	<ul class="pagination justify-content-center">
@@ -291,16 +318,6 @@ $(function(){
  <h3 style="text-align: center">등록된 글이 없습니다.</h3>
 </c:if> 
 
-
-		
-		<form action="Main.bo" method="post">
-		   <div class="input-group mb-3">
-		  <input type="text" class="form-control" name="search_name" placeholder="제목을 검색하세요">
-		  <div class="input-group-append">
-		   <button class="btn btn-dark" type="submit">🔍︎</button>
-		  </div>
-		</div>
-		</form>
 		
           <div>
 		<button type="button" class="btn btn-dark float-right" id="board_write">글쓰기</button>

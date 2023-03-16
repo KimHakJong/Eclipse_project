@@ -457,6 +457,18 @@ float:right;
 			transform: translate(-22px,-47px);
 			font-size: 16px;
 		}
+		
+		
+	  .container-fluid.pt-4.px-4{
+	  margin-bottom : 40px;
+	  height : 100%px;
+	  width : 80%;	
+	      }
+
+	  .comment-area{
+	   padding-bottom: 20px;
+	   }
+		
 
 
 
