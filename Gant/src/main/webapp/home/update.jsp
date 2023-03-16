@@ -138,13 +138,6 @@ input[type=file] {
 <jsp:include page="../home/header2.jsp" />
 <div class="container-fluid pt-4 px-4">
 
-
-			<div class="mymenu">
-				<a href="update.home">개인정보 수정</a>
-				
-				<a href="myboard.home">게시판 활동</a>
-			</div>
-			
 		  <div id="menuOutline">
 			<form action="updateProcess.home" method="post" enctype="multipart/form-data">
 				<div>개인정보</div>

@@ -86,6 +86,7 @@ h1 {
   margin-top:150px;
 }
 .noresult{width:100%; height:350px; margin-top:125px; border:1px solid #ced4da}
+.noresult > h2 {margin-top:19%; font-weight:normal; text-align:center}
 </style>
 <script>
 
@@ -413,7 +414,7 @@ height:25px; font-size:16px}
     $('.explain').attr('display','none');
     </script>
 	<div class="noresult">
-      <h1>검색된 회원은 존재하지 않습니다.</h1>
+      <h2>검색된 회원은 존재하지 않습니다.</h2>
 	</div>
     </c:if>  
 	</div><%--list end --%>
