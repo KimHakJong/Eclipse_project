@@ -27,7 +27,7 @@
 /* button:enabled:hover{opacity:1} */
 
 
-
+/*
 button{background-color:black; color:white}
 
 #menuOutline {
@@ -74,7 +74,7 @@ sup {
     font-size: small;
 }
 
-
+*/
 </style>
 </head>
 <body>
