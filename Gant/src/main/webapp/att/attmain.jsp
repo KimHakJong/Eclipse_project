@@ -220,7 +220,7 @@
           
            <div id="work">  
           <%-- <button  type="button" class="btn btn-primary " id="overtime_request">초과근무신청</button> --%> 
-            <h6 id="my_week">나의 주간 근무 현황</h6>
+            <h5 id="my_week">나의 주간 근무 현황</h5>
 		      <div class="progress">
 		       <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="50"
 		        id="work_percent" aria-valuemin="0" aria-valuemax="100" >
@@ -231,7 +231,7 @@
           
            <div id="work" class="vacationbox">  
          <%--   <button  type="button" class="btn btn-primary " id="vacation_request">휴가신청</button> --%> 
-            <h6 id="my_vacation">나의 휴가 현황</h6>
+            <h5 id="my_vacation">나의 휴가 현황</h5>
 		      <div class="progress">
 		       <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="50"
 		       id="vacation_percent"  aria-valuemin="0" aria-valuemax="100" >
