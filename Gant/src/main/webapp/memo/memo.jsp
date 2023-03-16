@@ -18,6 +18,16 @@
   		top: 140px;
 }
 
+.memolist{
+	background-size: 100% 100%;
+		width: 450px;
+		height: 480px;
+		position:fixed;
+		z-index:2000;
+		left: 320px;
+  		top: 140px;
+}
+
 .btnChange {
     width: 200px;
     height: 30px;
@@ -216,6 +226,7 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
+
 <div class="memo" style="background-image: url('memo/image/memo-yellow.png')">
 	<div class="btnChange"><img src='memo/image/change.png'>
 		<span class='back_colors'>

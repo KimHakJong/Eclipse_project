@@ -68,7 +68,7 @@ border-color: #009CFF !important;
 
 #calendar {
 	
-	margin: 50px 300px 500px 150px;
+	margin: 50px 300px 50px 150px;
 	
 }
 
