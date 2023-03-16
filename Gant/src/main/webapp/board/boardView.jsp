@@ -15,16 +15,12 @@
 </head>
 <body>
 
-<header>
-		<jsp:include page="../home/header.jsp" />
-	</header>
+<jsp:include page="../home/side.jsp" />
 
-	<div class="row">
-		<div class="side" >
-			<jsp:include page="../home/left.jsp" />
-		</div>
-		
-		<div class="main">
+
+<div class="content">
+<jsp:include page="../home/header2.jsp" />
+<div class="container-fluid pt-4 px-4">
 		<%-- view.js 에서 사용하기 위해 추가--%>
 		<input type="hidden" id="loginid" value="${id}" name="loginid"> 
 		<input type="hidden" name="num" value="${boarddata.board_num}" id="comment_board_num">
@@ -165,9 +161,7 @@
 				</div><%--comment-write end--%>
 			</div><%-- comment-area end--%>
 			
-			
-			
-		        
+	        
 		</div> <%-- class="container" end --%>
 	</div> <%-- class main end --%>
 </div> <%-- class row end --%>

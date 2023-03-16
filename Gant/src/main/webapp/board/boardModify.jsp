@@ -9,7 +9,6 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
-
 <script>
 $(document).ready(function(){
 	
@@ -209,7 +208,7 @@ $(document).ready(function(){
 		      <textarea name="board_content" id="board_content"   
 		                rows="10" class="form-control" >${boarddata.board_content}</textarea>
 		   </div>
-		   
+		    
 		   <c:if test="${admin == 'true'}">
 		   <div class="form-group">
 		   <label for="noticebox" style="color:orange;">공지글 설정&nbsp;&nbsp;
@@ -217,16 +216,15 @@ $(document).ready(function(){
 		   </div>
 		   
 		  </c:if>
-		    <div class="form-group">
+		      <div id="button">
 		    <button type="button" class="button" id="cancel">취소</button>
 		    <button type="submit" class="button" id="submit">수정</button>
-		    </div>
+		      </div>
 		  </form>
 		</div> <%-- contain--%>
 	</div> 
   </div> 
-
-     
+    
 	<footer>
 		<jsp:include page="../home/bottom.jsp" />
 	</footer> 

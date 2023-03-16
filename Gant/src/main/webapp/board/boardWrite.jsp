@@ -7,120 +7,7 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-
-<style>
-
-.container{width: 60%}
-label{font-weight: bold;}
-
-img{width: 20px}
-
-
-
-.fileRegiBtn label {
-	display: inline-block; 
-	padding: .5em .75em; 
-	color: #ffffff; 
-	font-size: inherit; 
-	line-height: normal; 
-	vertical-align: middle; 
-	background-color: #0d0d0d; 
-	cursor: pointer; 
-	border: 1px solid #ebebeb; 
-	border-bottom-color: #e2e2e2; 
-	border-radius: .25em;
-}
-
-/*파일선택시 선택된 파일명이 붙는것을 가려준다*/
-.fileRegiBtn input[type="file"]{
-	position: absolute; 
-	width: 1px; 
-	height: 1px; 
-	padding: 0; 
-	margin: -1px; 
-	overflow: hidden; 
-	clip:rect(0,0,0,0); 
-	border: 0;
-}
-
-#filelabel{
-    display:block
-}
-
-.fileRegiBtn{
-width:130px; 
-display:inline;
-margin-left:-3px;	
-}
-
-.fileName:disabled, .fileName[readonly] {
-    background-color: #e9ecef;
-    opacity: 1;
-}
-.fileName {
-	margin-right:-4px;
-    width: 40%;
-    height: calc(1.5em + 0.75rem + 2px);
-    padding: 0.375rem 0.75rem;
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.5;
-    color: #495057;
-    background-color: #fff;
-    background-clip: padding-box;
-    border: 1px solid #ced4da;
-    border-radius: 0.25rem;
-    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-}
-
-.board_style{
-    padding-left : 10px ;
-    font-size : 13px;
-    color: #495057;
-    background-color: #fff;
-    background-clip: padding-box;
-    border: 1px solid #ced4da;
-    border-radius: 0.25rem;
-    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-}
-
-#fontColor{
-    margin-top : 5px;
-    margin-bottom:5px
-}
-
-#board_content{
- resize: none;
-
-}
-
-.button {
-    display: inline;
-    font-weight: 400;
-    text-align: center;
-    vertical-align: middle;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    background-color: transparent;
-    border: 1px solid transparent;
-    padding: 0.375rem 0.75rem;
-    font-size: 1rem;
-    line-height: 1.5;
-    border-radius: 0.25rem;
-    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-        color: #fff;
-    background-color: #343a40;
-    border-color: #343a40;
-    float : right;
-    margin : 3px;
-}
-
-#container{
-margin-top: 20px
-}
-</style>
+<link href="board/board_css/modify.css" rel="stylesheet" type="text/css">
 
 <script>
 $(document).ready(function(){
@@ -236,16 +123,12 @@ $(document).ready(function(){
 </head>
 <body>
 
-	<header>
-		<jsp:include page="../home/header.jsp" />
-	</header>
+<jsp:include page="../home/side.jsp" />
 
-	<div class="row">
-		<div class="side" >
-			<jsp:include page="../home/left.jsp" />
-		</div>
-		
-		<div class="main"> 
+	<div class="content">
+	<jsp:include page="../home/header2.jsp" />
+	<div class="container-fluid pt-4 px-4"> 
+	
          <div class="container" id="container">
 		  <form action="BoardAddAction.bo" method="post" enctype="multipart/form-data" name="boardform">
 		   
@@ -316,7 +199,7 @@ $(document).ready(function(){
 		   </div>
 		   
 		  </c:if>
-		    <div class="form-group">
+		    <div id="button">
 		    <button type="button" class="button" id="cancel">취소</button>
 		    <button type="submit" class="button" id="submit">등록</button>
 		    </div>
