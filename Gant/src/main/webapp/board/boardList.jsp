@@ -46,7 +46,7 @@ $(function(){
 		   <div class="input-group mb-3">
 		  <input type="text" class="form-control" name="search_name" placeholder="제목을 검색하세요">
 		  <div class="input-group-append">
-		   <button class="btn btn-dark" type="submit">🔍︎</button>
+		   <button class="btn btn-dark" type="submit" id="search_btn">🔍︎</button>
 		  </div>
 		</div>
 		
@@ -320,7 +320,7 @@ height:25px; font-size:16px}
 
 		
           <div>
-		<button type="button" class="btn btn-dark float-right" id="board_write">글쓰기</button>
+		<button type="button" class="btn btn-primary m-2 float-right" id="board_write">글쓰기</button>
 		</div>
          
            </div><%--  class container end --%>

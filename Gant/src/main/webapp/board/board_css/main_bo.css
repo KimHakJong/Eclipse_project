@@ -70,3 +70,16 @@ padding-top: 0	;
 margin-left : 180px;
 }
 
+	
+#search_btn{
+ background-color : #009CFF;
+ border:none;	
+}
+
+
+ thead{
+		 background-color:#4da7ed;
+	   }
+ .th2{
+	  color: #fff 
+ }

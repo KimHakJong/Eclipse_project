@@ -161,8 +161,8 @@ $(document).ready(function(){
 		   </div>
 
 		    <div id="button">
-		    <button type="button" class="button" id="cancel">취소</button>
-		    <button type="submit" class="button" id="submit">등록</button>
+		    <button type="button" class="btn btn-primary m-2" id="cancel">취소</button>
+		    <button type="submit" class="btn btn-primary m-2" id="submit">등록</button>
 		    </div>
 		  </form>
 		</div> <%-- contain--%>
