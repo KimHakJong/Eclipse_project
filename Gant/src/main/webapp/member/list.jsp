@@ -10,7 +10,7 @@
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-
+<link href="css/home.css" rel="stylesheet">
 <meta charset="UTF-8">
 <title>GANT</title>
 <style>
@@ -40,7 +40,9 @@ option{background:white;}
 			 top:0px;
 			 }
 #searchfield:focus, #searchword:focus {border:2px solid #26abff; outline:none }
-#searchbtn{width:40px;height:40px; background:#26abff; border:1px solid #26abff; outline:none; margin:0; padding:0; position:relative; top:-1.5px}
+#searchbtn{width:40px;height:40px; background:#26abff; border:1px solid #26abff; outline:none; 
+margin:0; padding:0; position:relative; top:1.5px; color:white; font-size:21px; border-radius:0px .3em .3em 0px;}
+
 #searchicon{width:23px; height:23px}
 .list{width: 54.5%; position:absolute; right: 5%; top: 13%; display:inline-block}
 .explain img {width:17px; height:17px;margin-bottom:4px}
@@ -58,7 +60,8 @@ option{background:white;}
 .addbook>thead>tr>th{background: #26abff; color: #fff;padding:10px 10px 10px 20px}
 .addbook>thead>tr>th:nth-child(1){width:30%; border-radius:.4em 0px 0px 0px}
 .addbook>thead>tr>th:nth-child(2){width:28%}
-.addbook>thead>tr>th:nth-child(3){width:42%; border-right:none; border-radius:0px .4em 0px 0px}
+.addbook>thead>tr>th:nth-child(3){width:42%; border-right:none;}
+.addbook>thead>tr>th:last-child{border-radius:0px .4em 0px 0px}
 
 .addbook>thead>tr>th:nth-child(4){padding:0px; text-align:center;border-left:none}
 .delete{outline:none; border:none; background:#dc3545; 
@@ -184,7 +187,8 @@ $(document).ready(function(){
 	<option value="phone_num">휴대폰</option>
 </select>
 <input type="text" name="searchword" id="searchword" value="${searchword}">
-<button type="submit" id="searchbtn"><img id="searchicon" src="member/image/searchicon.png"></button>
+<button type="submit" id="searchbtn">🔍︎</button>
+<!-- <img id="searchicon" src="member/image/searchicon.png"> -->
 </div>
 </form>
 
